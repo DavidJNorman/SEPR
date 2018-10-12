@@ -1,3 +1,6 @@
 This is Benjamin Hassell testing the GitKraken remote functionality
 
 I have to learn how to commit, push and pull.
+
+
+Success, I have successfully uploaded, commited and pushed this file. I will now pull
