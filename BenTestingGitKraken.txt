@@ -1,0 +1,3 @@
+This is Benjamin Hassell testing the GitKraken remote functionality
+
+I have to learn how to commit, push and pull.
