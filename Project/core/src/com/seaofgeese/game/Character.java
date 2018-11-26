@@ -13,16 +13,16 @@ public abstract class Character {
 
     private IDs id;
 
-    private int gold,
-            xPos,
-            yPos,
-            sailHealth,
-            cannonHealth,
-            structureHealth,
-            maxSailHealth,
-            maxCannonHealth,
-            maxStructureHealth,
-            movePoints;
+    private int gold;
+    private int xPos;
+    private int yPos;
+    private int sailHealth;
+    private int cannonHealth;
+    private int structureHealth;
+    private int maxSailHealth;
+    private int maxCannonHealth;
+    private int maxStructureHealth;
+    private int movePoints;
 
     private Map<String, Integer> ammunition;
 
@@ -82,6 +82,30 @@ public abstract class Character {
 
     public void setStructureHealth(int structureHealth) {
         this.structureHealth = structureHealth;
+    }
+
+    public int getMaxSailHealth() {
+        return maxSailHealth;
+    }
+
+    public void setMaxSailHealth(int maxSailHealth) {
+        this.maxSailHealth = maxSailHealth;
+    }
+
+    public int getMaxCannonHealth() {
+        return maxCannonHealth;
+    }
+
+    public void setMaxCannonHealth(int maxCannonHealth) {
+        this.maxCannonHealth = maxCannonHealth;
+    }
+
+    public int getMaxStructureHealth() {
+        return maxStructureHealth;
+    }
+
+    public void setMaxStructureHealth(int maxStructureHealth) {
+        this.maxStructureHealth = maxStructureHealth;
     }
 
     public int getMovePoints() {
