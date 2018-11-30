@@ -33,7 +33,7 @@ public abstract class Character {
         this.sailHealth = maxSailHealth;
         this.cannonHealth = maxCannonHealth;
         this.structureHealth = maxStructureHealth;
-        this.ammunition = new HashMap<>();
+        //this.ammunition = new HashMap<>();
     }
 
     public int getGold() {
