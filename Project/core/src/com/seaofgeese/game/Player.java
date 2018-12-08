@@ -14,11 +14,4 @@ public class Player extends Character {
         return (this.xPos == npc.getxPos() && this.yPos == npc.getyPos());
     }
 
-    // TODO public void startCombat()
-
-    // TODO public void startShop()
-
-    // possibly merge above two methods with environment methods?
-
-
 }

@@ -1,6 +1,6 @@
 package com.seaofgeese.game;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+//import com.sun.javaws.exceptions.InvalidArgumentException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 public abstract class Character {
 
     public enum IDs {
-        PLAYER, FRIENDLY, ENEMY, NEUTRAL;
+        PLAYER, FRIENDLY, ENEMY, NEUTRAL
     } // NOTE THIS DOWN - CHANGED FROM A1
 
-    private IDs id;
+    protected IDs id;
 
-    private int gold;
-    private int xPos;
-    private int yPos;
-    private int sailHealth;
-    private int cannonHealth;
-    private int structureHealth;
-    private int maxSailHealth;
-    private int maxCannonHealth;
-    private int maxStructureHealth;
-    private int movePoints;
+    protected int gold;
+    protected int xPos;
+    protected int yPos;
+    protected int sailHealth;
+    protected int cannonHealth;
+    protected int structureHealth;
+    protected int maxSailHealth;
+    protected int maxCannonHealth;
+    protected int maxStructureHealth;
+    protected int movePoints;
 
-    private Map<String, Integer> ammunition;
+    protected Map<String, Integer> ammunition;
 
     protected Character() {
         this.maxSailHealth = 100;
