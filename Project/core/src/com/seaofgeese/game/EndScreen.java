@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 public class EndScreen implements Screen {
     private MainGame parent;
     public EndScreen(MainGame mainGame){
+
         parent = mainGame;
     }
     @Override

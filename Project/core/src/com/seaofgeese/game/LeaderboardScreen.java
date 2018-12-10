@@ -4,7 +4,9 @@ import com.badlogic.gdx.Screen;
 
 public class LeaderboardScreen implements Screen {
     private MainGame parent;
+
     public LeaderboardScreen(MainGame mainGame){
+
         parent = mainGame;
     }
     @Override
@@ -14,7 +16,8 @@ public class LeaderboardScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        parent.changeScreen(MainGame.MENU);
+
+
     }
 
     @Override

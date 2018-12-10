@@ -3,8 +3,9 @@ package com.seaofgeese.game;
 import com.badlogic.gdx.Screen;
 
 public class LoadingScreen implements Screen {
-    private MainGame parent;
+    private MainGame parent; //a field to store out orchestrator
     public LoadingScreen(MainGame mainGame){
+
         parent = mainGame;
     }
     @Override
@@ -14,7 +15,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+        parent.changeScreen(MainGame.MENU);
     }
 
     @Override
