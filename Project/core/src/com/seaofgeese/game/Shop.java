@@ -14,7 +14,7 @@ public class Shop {
     // DIFFERENCE - "not enough gold" error abstracted to method
 
     private void notEnoughGoldError() {
-        throw new IllegalStateException("Player does not have enough gold")
+        throw new IllegalStateException("Player does not have enough gold");
     }
 
     // DIFFERENCE - public instead of private

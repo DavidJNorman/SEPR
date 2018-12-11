@@ -1,6 +1,6 @@
 package com.seaofgeese.game;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+//import com.sun.javaws.exceptions.InvalidArgumentException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public abstract class Character {
         this.sailHealth = maxSailHealth;
         this.cannonHealth = maxCannonHealth;
         this.structureHealth = maxStructureHealth;
-        this.ammunition = new HashMap<>();
+        //this.ammunition = new HashMap<>();
     }
 
     public int getGold() {
