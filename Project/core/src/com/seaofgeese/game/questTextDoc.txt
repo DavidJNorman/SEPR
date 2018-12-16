@@ -1,0 +1,45 @@
+You should be able to recieve a quest from a location or NPC by interacting with a NPC or notification.
+
+The Quest should have a title
+The Quest should have an ID - so they cant take the same quest twice at the same time.
+The Quest should have a gold reward
+The Quest should have a point reward
+The Quest should have a description so users know what to do
+The Quest should have a location to turn it in
+The Quest should have a location to tell the user where to go to do it
+The Quest should have a tally to tell them how far they've progressed
+The Quest should have a variable to tell you if it's repeatable
+
+
+There should be a list of completed quests by ID
+There should be a list of active quests by ID		- Quests they currently have active
+There should be a list of inactive quests by ID 	- Quests they haven't taken
+
+There should be dependencies for some quests, so some can only be accepted if others are completed(This works as it's own game state) - New File of it's own.
+
+Quest should be accepted by:
+If by talking to an NPC, we can have it go through dialogue and then if the user doesn't have the quest in active set the ID to active (by using a gamestate by quest ID's we can check easier, if it depends on previous quests or not)
+
+
+
+
+
+
+QUESTSTATE CONTROLLER:
+Has access to the lists of quests
+Has access to the lists of quest IDs
+Has quest dependencies saved in a dictionary/hashtable from int ID to a set of IDs?
+Initialises all quests on load up, it will need to store the lists somewhere.
+
+Controls dependencies for quests
+should be able to see if quests are repeatable or not repeatable
+
+we could have dependencies ordered in a hash table?
+e.g. hashset[questID] = {13, 5, 3, 7};
+to signify that at the given questID you'd have it dependant on the quests stored within
+
+
+Do we have the quests in a file which pre-loads when it starts up loading all quests? Yes because the queststate controller needs to be able to see if a quest is active or inactive
+-So just have a file that initialises like... all the quests? Yeah sure that works tbh.
+
+So if the user is in combat mode and they lets say have 5/8 bandit kills, and they kill 4 bandits
