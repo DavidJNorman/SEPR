@@ -26,24 +26,31 @@ If by talking to an NPC, we can have it go through dialogue and then if the user
 
 
 QUEST STATE CONTROLLER:
-Has access to the lists of quests
-Has access to the lists of quest IDs
-Has quest dependencies saved in a dictionary/hashtable from int ID to a set of IDs?
-Initialises all quests on load up, it will need to store the lists somewhere.
 
-Controls dependencies for quests
-should be able to see if quests are repeatable or not repeatable
+>Start game
+>Quests loaded from a text file into the unbegunQuests variable aside from the starting Quest ID 001 which goes to activeQuests.
 
-we could have dependencies ordered in a hash table?
-e.g. hash set[questID] = {13, 5, 3, 7};
-to signify that at the given questID you'd have it dependant on the quests stored within
+>Load to the HUD,
+find a way to load active quests into the HUD
+
+>In Battle mode, 
+we need a way to get the enemy Target's ID
+we need a way to compare it to all activeQuests values(objects), and their variables (TargetID)
+we then need to use incCurrentAmount() for all Objects with the TargetID matched to the target that are in activeQuests
+-The currentAmount for the quest should never exceed the Target amount
+
+>In Sailing mode,
+we need a way for the user to accept non storyline quests, and more than once IF the quest's isRepeatable variable is true, but only one at a time.
+we need a way for the user to turn in Storyline quests and IMMEDIATELY be presented with a new quest
+we need it set up so the user cant accept quests if the dependencies are ALL not within isComplete
 
 
+
+
+
+More info:
 Do we have the quests in a file which pre-loads when it starts up loading all quests? Yes because the quest state controller needs to be able to see if a quest is active or inactive
 -So just have a file that initialises like... all the quests? Yeah sure that works tbh.
-
-So if the user is in combat mode and they lets say have 5/8 bandit kills, and they kill 4 bandits
-
 
 
 !!!!!!!

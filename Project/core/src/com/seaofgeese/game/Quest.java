@@ -1,24 +1,31 @@
 package com.seaofgeese.game;
 
-class Quest {						//TODO you made this class package private, learn what that will mean for this
+import java.util.Set;
 
-	private String questTitle;		//e.g. Take the Sails
-	private String questDesc;		//Sink 5 pirate ships
-	private int questID;				//Simple number system,
-	private int goldReward;			//e.g. 600 gold
-	private int pointsReward;		//e.g. 300 points
-	private int targetAmount;		//8       -Ships destroyed
-	private int currentAmount;		//5       -Ships destroyed
-	private boolean isComplete;		//Is the Quest completed? (for active quests only)
-	private boolean isRepeatable;	//Can the Quest be redone? (So you can take it even after completion)
+class Quest {
 
-	private float returnLocation;
-	private float targetLocation;
+	private final String questTitle;			//e.g. Take the Sails
+	private final String questDesc;				//Sink 5 pirate ships
+	private final int targetID;
+	private final int goldReward;				//e.g. 600 gold
+	private final int pointsReward;				//e.g. 300 points
+	private final int targetAmount;				//8       -Ships destroyed
+	private int currentAmount;					//5       -Ships destroyed
 
-	public Quest(String questTitle, String questDesc, int questID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, float returnLocation, float targetLocation) {
+	private boolean isComplete;					//Is the Quest completed? (for active quests only)
+	private final boolean isRepeatable;			//Can the Quest be redone? (So you can take it even after completion)
+
+	private final float returnLocation;
+	private final float targetLocation;
+
+	private final Set<Integer> dependencies;	//The set of dependencies No Duplication, order unnecessary, only check will be if all are complete
+
+
+
+	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, float returnLocation, float targetLocation, Set<Integer> dependencies) {
 		this.questTitle = questTitle;
 		this.questDesc = questDesc;
-		this.questID = questID;
+		this.targetID = targetID;
 		this.goldReward = goldReward;
 		this.pointsReward = pointsReward;
 		this.targetAmount = targetAmount;
@@ -27,91 +34,34 @@ class Quest {						//TODO you made this class package private, learn what that w
 		this.isRepeatable = isRepeatable;
 		this.returnLocation = returnLocation;
 		this.targetLocation = targetLocation;
+		this.dependencies = dependencies;
 	}
 
-	//TODO Do we even need half of the setters? we need the getters sure, but most just have initially set values, no?
+	public String getQuestTitle() {return this.questTitle;}
 
-	public String getQuestTitle() { return this.questTitle; }
+	public String getQuestDesc() {return this.questDesc;}
 
-	public void setQuestTitle(String questTitle) {
-		this.questTitle = questTitle;
-	}
+	public int getTargetID() {return this.targetID;}
 
-	public String getQuestDesc() {
-		return this.questDesc;
-	}
+	public int getGoldReward() {return this.goldReward;}
 
-	public void setQuestDesc(String questDesc) {
-		this.questDesc = questDesc;
-	}
+	public int getPointsReward() {return this.pointsReward;}
 
-	public int getQuestID() {
-		return this.questID;
-	}
-
-	public void setQuestID(int questID) {
-		this.questID = questID;
-	}
-
-	public int getGoldReward() {
-		return this.goldReward;
-	}
-
-	public void setGoldReward(int goldReward) {
-		this.goldReward = goldReward;
-	}
-
-	public int getPointsReward() {
-		return this.pointsReward;
-	}
-
-	public void setPointsReward(int pointsReward) {
-		this.pointsReward = pointsReward;
-	}
-
-	public int getTargetAmount() {
-		return this.targetAmount;
-	}
-
-	public void setTargetAmount(int targetAmount) {
-		this.targetAmount = targetAmount;
-	}
+	public int getTargetAmount() {return this.targetAmount;}
 
 	public int getCurrentAmount(){return this.currentAmount;}
 
-	public void setCurrentAmount(int currentAmount) {  //TODO we set it initially sure, but technically we only need to increment it after a battle for this current system
-		this.currentAmount = currentAmount;
-	}
+	public void incCurrentAmount() {this.currentAmount = this.currentAmount + 1;} //We set it initially, but technically we only need to increment it after a battle for this current quest ID
 
-	public boolean getIsComplete() {
-		return this.isComplete;
-	}
+	public boolean getIsComplete() {return this.isComplete;}
 
-	public void setIsComplete(Boolean isComplete) {
-		this.isComplete = isComplete;
-	}
+	public void setIsComplete(Boolean isComplete) {this.isComplete = isComplete;} //The Quests controller will do the comparisons and then set this to true when currentAmount == targetAmount
 
-	public boolean getIsRepeatable() {
-		return this.isRepeatable;
-	}
+	public boolean getIsRepeatable() {return this.isRepeatable;}
 
-	public void setIsRepeatable(Boolean isRepeatable) {
-		this.isRepeatable = isRepeatable;
-	}
+	public float getReturnLocation() {return this.returnLocation;}
 
-	public float getReturnLocation() {
-		return this.returnLocation;
-	}
+	public float getTargetLocation() {return this.targetLocation;}
 
-	public void setReturnLocation(float returnLocation) {
-		this.returnLocation = returnLocation;
-	}
-
-	public float getTargetLocation() {
-		return this.targetLocation;
-	}
-
-	public void setTargetLocation(float targetLocation) {
-		this.targetLocation = targetLocation;
-	}
+	public Set<Integer> getDependencies() {return this.dependencies;}
 }

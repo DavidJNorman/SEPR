@@ -1,14 +1,25 @@
 package com.seaofgeese.game;
 
-import com.badlogic.gdx.Gdx;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class QueststateController {
 
 
-    private ArrayList<Integer> completedQuests;
-    private ArrayList<Integer> activeQuests;
-    private ArrayList<Integer> unbegunQuests;
+    private HashMap<Integer, Quest> completedQuests;         //There should only be one instance for each ID
+    private HashMap<Integer, Quest> activeQuests;
+    private HashMap<Integer, Quest> unbegunQuests;
+
+
+    public QueststateController() {
+
+    }
+
+
+
+
+    //TODO load active quests into HUD function
+    //TODO link system into battle function - (1). Find out what function GETS target's ID (2). If active quest becomes completed, set Complete and move to completedQuests
 
     //TODO INIT function to set up quest instances
     //TODO code to load quests into unbegun quests with the starter quest loaded into activeQuests
