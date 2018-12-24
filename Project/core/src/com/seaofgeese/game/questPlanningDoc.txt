@@ -57,3 +57,5 @@ Do we have the quests in a file which pre-loads when it starts up loading all qu
 For different types of quests, if we wanna do fetch quests, lets say, missions with difference necessities, we could use subclasses of the overall quest
 E.G. Kill quests use a number system, like 5/8 kills, but another system E.G. guarding, would just access the target's health and compare it to zero, maybe have a live updater.
 This isn't necessary, but it's useful if we need a different framework for each type of quest.
+
+Changed Dependencies to be mainDependency - Due to the basic and linear setup of the game, the story missions follow a linear pathing and all optional missions rely on story missions, therefore you only need one main dependency - this saves coding time and complexity

@@ -18,11 +18,11 @@ class Quest {
 	private final float returnLocation;
 	private final float targetLocation;
 
-	private final Set<Integer> dependencies;	//The set of dependencies No Duplication, order unnecessary, only check will be if all are complete
+	private final int mainDependency;	//The set of dependencies No Duplication, order unnecessary, only check will be if all are complete
 
 
 
-	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, float returnLocation, float targetLocation, Set<Integer> dependencies) {
+	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, float returnLocation, float targetLocation, int mainDependency) {
 		this.questTitle = questTitle;
 		this.questDesc = questDesc;
 		this.targetID = targetID;
@@ -34,7 +34,7 @@ class Quest {
 		this.isRepeatable = isRepeatable;
 		this.returnLocation = returnLocation;
 		this.targetLocation = targetLocation;
-		this.dependencies = dependencies;
+		this.mainDependency = mainDependency;
 	}
 
 	public String getQuestTitle() {return this.questTitle;}
@@ -63,5 +63,5 @@ class Quest {
 
 	public float getTargetLocation() {return this.targetLocation;}
 
-	public Set<Integer> getDependencies() {return this.dependencies;}
+	public int getMainDependency() {return this.mainDependency;}
 }
