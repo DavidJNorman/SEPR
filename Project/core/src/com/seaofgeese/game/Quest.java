@@ -1,8 +1,6 @@
 package com.seaofgeese.game;
 
-import java.util.Set;
-
-class Quest {
+public class Quest {
 
 	private final String questTitle;			//e.g. Take the Sails
 	private final String questDesc;				//Sink 5 pirate ships
@@ -15,14 +13,14 @@ class Quest {
 	private boolean isComplete;					//Is the Quest completed? (for active quests only)
 	private final boolean isRepeatable;			//Can the Quest be redone? (So you can take it even after completion)
 
-	private final float returnLocation;
-	private final float targetLocation;
+	private final double returnLocation;
+	private final double targetLocation;
 
 	private final int mainDependency;	//The set of dependencies No Duplication, order unnecessary, only check will be if all are complete
 
 
 
-	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, float returnLocation, float targetLocation, int mainDependency) {
+	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, double returnLocation, double targetLocation, int mainDependency) {
 		this.questTitle = questTitle;
 		this.questDesc = questDesc;
 		this.targetID = targetID;
@@ -59,9 +57,9 @@ class Quest {
 
 	public boolean getIsRepeatable() {return this.isRepeatable;}
 
-	public float getReturnLocation() {return this.returnLocation;}
+	public double getReturnLocation() {return this.returnLocation;}
 
-	public float getTargetLocation() {return this.targetLocation;}
+	public double getTargetLocation() {return this.targetLocation;}
 
 	public int getMainDependency() {return this.mainDependency;}
 }

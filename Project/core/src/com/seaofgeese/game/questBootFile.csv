@@ -1,15 +1,15 @@
 # - ID - Title - Description - EnemyID - Gold - Points - Current - Goal - isComplete - isRepeatable - ReturnLoc - TargetLoc - Dependencies
-1, "Take the sails!", "Battle Vanbrugh college 3 times.", "", 300, 300, 0, 3, false, false, 0.00, 0.00, null
-2, "Stop the tyrant!", "Beat the Vanbrugh college Boss!", "", 500, 600, 0, 1, false, false, 0.00, 0.00, 1
-3, "Saltwater Bay fight club!", "Battle James college 3 times.", "", 500, 500, 0, 3, false, false, 0.00, 0.00, 2
-4, "Salty Depths", "Beat the James college Boss!", "", 700, 800, 0, 1, false, false, 0.00, 0.00, 3
-5, "Murkwater's Territory!", "Battle Halifax college 3 times.", "", 700, 700, 0, 3, false, false, 0.00, 0.00, 4
-6, "Capt'n Murkwater", "Beat the Halifax college Boss!", "", 900, 1000, 0, 1, false, false, 0.00, 0.00, 5
-7, "Bandit Beaches", "Defeat 5 pirate ships.", "", 200, 200, 0, 5, false, true,  0.00, 0.00, null
-8, "Buckaneer's Bay", "Defeat 7 pirate ships.", "", 280, 280, 0, 7, false, true,  0.00, 0.00, 2
-9, "Brigg's Boardwalk", "Defeat 10 pirate ships.", "", 400, 400, 0, 10, false, true,  0.00, 0.00, 4
-10, "A tall tale", "Defeat 1 Lake Monsters.", "", 300, 300, 0, 1, false, true,  0.00, 0.00, null
-11, "Salted Depths", "Defeat 2 Lake Monsters.", "", 620, 620, 0, 2, false, true,  0.00, 0.00, 2
-12, "The Beast", "Defeat 3 Lake Monsters.", "", 950, 950, 0, 3, false, true,  0.00, 0.00, 6
-13, "Like water like stone", "Battle the Physics Department.", "", 300, 300, 0, 1, false, true,  0.00, 0.00, null
-14, "Shot through the heart", "Battle the Biology Department.", "", 300, 300, 0, 1, false, true,  0.00, 0.00, null
+1, "Take the sails!", "Battle Vanbrugh college 3 times.", 0, 300, 300, 0, 3, false, false, 0.00, 0.00, 0
+2, "Stop the tyrant!", "Beat the Vanbrugh college Boss!", 0, 500, 600, 0, 1, false, false, 0.00, 0.00, 1
+3, "Saltwater Bay fight club!", "Battle James college 3 times.", 0, 500, 500, 0, 3, false, false, 0.00, 0.00, 2
+4, "Salty Depths", "Beat the James college Boss!", 0, 700, 800, 0, 1, false, false, 0.00, 0.00, 3
+5, "Murkwater's Territory!", "Battle Halifax college 3 times.", 0, 700, 700, 0, 3, false, false, 0.00, 0.00, 4
+6, "Capt'n Murkwater", "Beat the Halifax college Boss!", 0, 900, 1000, 0, 1, false, false, 0.00, 0.00, 5
+7, "Bandit Beaches", "Defeat 5 pirate ships.", 0, 200, 200, 0, 5, false, true,  0.00, 0.00, 0
+8, "Buckaneer's Bay", "Defeat 7 pirate ships.", 0, 280, 280, 0, 7, false, true,  0.00, 0.00, 2
+9, "Brigg's Boardwalk", "Defeat 10 pirate ships.", 0, 400, 400, 0, 10, false, true,  0.00, 0.00, 4
+10, "A tall tale", "Defeat 1 Lake Monsters.", 0, 300, 300, 0, 1, false, true,  0.00, 0.00, 0
+11, "Salted Depths", "Defeat 2 Lake Monsters.", 0, 620, 620, 0, 2, false, true,  0.00, 0.00, 2
+12, "The Beast", "Defeat 3 Lake Monsters.", 0, 950, 950, 0, 3, false, true,  0.00, 0.00, 6
+13, "Like water like stone", "Battle the Physics Department.", 0, 300, 300, 0, 1, false, true,  0.00, 0.00, 0
+14, "Shot through the heart", "Battle the Biology Department.", 0, 300, 300, 0, 1, false, true,  0.00, 0.00, 0

@@ -38,6 +38,11 @@ we need a way to get the enemy Target's ID
 we need a way to compare it to all activeQuests values(objects), and their variables (TargetID)
 we then need to use incCurrentAmount() for all Objects with the TargetID matched to the target that are in activeQuests
 -The currentAmount for the quest should never exceed the Target amount
+>>Battle End do CheckActiveQuests():
+	for(key: ActiveQuests.keySet()):
+		When ActiveQuests.get(key).isComplete() == true:
+			CompleteQuest.put(key, ActiveQuests.get(key));
+
 
 >In Sailing mode,
 we need a way for the user to accept non storyline quests, and more than once IF the quest's isRepeatable variable is true, but only one at a time.
@@ -59,3 +64,6 @@ E.G. Kill quests use a number system, like 5/8 kills, but another system E.G. gu
 This isn't necessary, but it's useful if we need a different framework for each type of quest.
 
 Changed Dependencies to be mainDependency - Due to the basic and linear setup of the game, the story missions follow a linear pathing and all optional missions rely on story missions, therefore you only need one main dependency - this saves coding time and complexity
+
+
+We have code to check for all quests if any are complete, if so it could save the keys to an array list, then if any quests in unbegun quests 
