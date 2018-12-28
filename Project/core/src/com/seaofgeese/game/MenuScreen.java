@@ -67,6 +67,7 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 parent.changeScreen(MainGame.APPLICATION);
+                stage.clear();
             }
         });
 

@@ -2,6 +2,7 @@ package com.seaofgeese.game;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class MainGame extends Game {
@@ -13,6 +14,11 @@ public class MainGame extends Game {
 	private LeaderboardScreen leaderboardScreen;
 	private PreferencesScreen preferencesScreen;
 	private AppPreferences preferences;
+
+	public SpriteBatch batch;
+
+	public static final int V_WIDTH = 400;
+	public static final int V_HEIGHT = 208;
 
 
 
@@ -28,6 +34,8 @@ public class MainGame extends Game {
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
 		preferences = new AppPreferences();
+		batch = new SpriteBatch();
+
 	}
 
 	public void changeScreen(int screen){
@@ -58,4 +66,10 @@ public class MainGame extends Game {
 	public AppPreferences getPreferences(){
 		return this.preferences;
 	}
+	@Override
+	public void dispose(){
+		batch.dispose();
+	}
 }
+
+
