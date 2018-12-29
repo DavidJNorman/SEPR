@@ -1,6 +1,6 @@
 package com.seaofgeese.game;
 
-public class Quest {
+class Quest {
 
 	private final String questTitle;			//e.g. Take the Sails
 	private final String questDesc;				//Sink 5 pirate ships
@@ -13,14 +13,16 @@ public class Quest {
 	private boolean isComplete;					//Is the Quest completed? (for active quests only)
 	private final boolean isRepeatable;			//Can the Quest be redone? (So you can take it even after completion)
 
-	private final double returnLocation;
-	private final double targetLocation;
+	private final double returnX;
+	private final double returnY;
+	private final double targetX;
+	private final double targetY;
 
 	private final int mainDependency;	//The set of dependencies No Duplication, order unnecessary, only check will be if all are complete
 
 
 
-	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, double returnLocation, double targetLocation, int mainDependency) {
+	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, double returnX, double returnY, double targetX, double targetY, int mainDependency) {
 		this.questTitle = questTitle;
 		this.questDesc = questDesc;
 		this.targetID = targetID;
@@ -30,9 +32,18 @@ public class Quest {
 		this.currentAmount = currentAmount;
 		this.isComplete = isComplete;
 		this.isRepeatable = isRepeatable;
-		this.returnLocation = returnLocation;
-		this.targetLocation = targetLocation;
+		this.returnX = returnX;
+		this.returnY = returnY;
+		this.targetX = targetX;
+		this.targetY = targetY;
 		this.mainDependency = mainDependency;
+	}
+
+	@Override
+	public String toString() {
+		return "Title:" + this.questTitle + "\n" + "Description:" + this.questDesc + "\n"+ "Target to kill ID:" + this.targetID + "\n" + "Gold Reward: $" + this.goldReward + "\n"
+				+ "Point Reward: P" + this.pointsReward + "\n" + "No. to Kill: $" + this.targetAmount + "\n" + "No. Killed: $" + this.currentAmount + "\n"
+				+ "Quest Complete?: " + this.isComplete + "\n" + "Is quest repeatable?: " + this.isRepeatable + "\n" + "return Location: " + this.isComplete + "\n";
 	}
 
 	public String getQuestTitle() {return this.questTitle;}
@@ -57,9 +68,23 @@ public class Quest {
 
 	public boolean getIsRepeatable() {return this.isRepeatable;}
 
-	public double getReturnLocation() {return this.returnLocation;}
+	private double getReturnX()
+	{return this.returnX;}
 
-	public double getTargetLocation() {return this.targetLocation;}
+	private double getReturnY()
+	{return this.returnY;}
+
+	public double[] getReturnLocation() {
+		return new double[]{getReturnX(), getReturnY()};}
+
+	public double[] getTargetLocation() {
+		return new double[]{getTargetX(), getTargetY()};}
+
+	private double getTargetX()
+	{return this.targetX;}
+
+	private double getTargetY()
+	{return this.targetY;}
 
 	public int getMainDependency() {return this.mainDependency;}
 }
