@@ -1,5 +1,7 @@
 package com.seaofgeese.game;
 
+import java.util.Arrays;
+
 class Quest {
 
 	private final String questTitle;			//e.g. Take the Sails
@@ -43,7 +45,8 @@ class Quest {
 	public String toString() {
 		return "Title:" + this.questTitle + "\n" + "Description:" + this.questDesc + "\n"+ "Target to kill ID:" + this.targetID + "\n" + "Gold Reward: $" + this.goldReward + "\n"
 				+ "Point Reward: P" + this.pointsReward + "\n" + "No. to Kill: $" + this.targetAmount + "\n" + "No. Killed: $" + this.currentAmount + "\n"
-				+ "Quest Complete?: " + this.isComplete + "\n" + "Is quest repeatable?: " + this.isRepeatable + "\n" + "return Location: " + this.isComplete + "\n";
+				+ "Quest Complete?: " + this.isComplete + "\n" + "Is quest repeatable?: " + this.isRepeatable + "\n" + "return Location: " + Arrays.toString(getReturnLocation()) + "\n"
+				+ "return Location: " + Arrays.toString(getTargetLocation()) + "\n" + "Main Dependency: " + this.mainDependency + "\n";
 	}
 
 	public String getQuestTitle() {return this.questTitle;}

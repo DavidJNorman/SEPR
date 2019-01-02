@@ -37,20 +37,21 @@ public class QueststateController {
         if(lineBuffer[0].equals("#")) {						//If the ID token is a '#' ignore it
             return;
         }
-
-        System.out.println(Arrays.toString(lineBuffer)); 	//[1] - I noticed if there was a leading whitespace it wouldn't read in type properly for int types only, I made some code to test values of each type but as it was unnecessary work I simply removed them manually
-
-        activeQuests.put(Integer.parseInt(lineBuffer[0]), new Quest(lineBuffer[1], lineBuffer[2], Integer.parseInt(lineBuffer[3]), Integer.parseInt(lineBuffer[4]), Integer.parseInt(lineBuffer[5]), Integer.parseInt(lineBuffer[6]), Integer.parseInt(lineBuffer[7]), Boolean.parseBoolean(lineBuffer[8]), Boolean.parseBoolean(lineBuffer[9]), Double.parseDouble(lineBuffer[10]), Double.parseDouble(lineBuffer[11]), Double.parseDouble(lineBuffer[12]), Double.parseDouble(lineBuffer[13]), Integer.parseInt(lineBuffer[14])));
-        System.out.println(activeQuests.get(1).getQuestTitle().getClass().getName());
-        System.out.println(String.class.getName());
-        //System.out.println(activeQuests.get(1).toString());
+        if(lineBuffer[0].equals("1")) {						//If the ID token is a '#' ignore it
+            activeQuests.put(Integer.parseInt(lineBuffer[0]), new Quest(lineBuffer[1], lineBuffer[2], Integer.parseInt(lineBuffer[3]), Integer.parseInt(lineBuffer[4]), Integer.parseInt(lineBuffer[5]), Integer.parseInt(lineBuffer[6]), Integer.parseInt(lineBuffer[7]), Boolean.parseBoolean(lineBuffer[8]), Boolean.parseBoolean(lineBuffer[9]), Double.parseDouble(lineBuffer[10]), Double.parseDouble(lineBuffer[11]), Double.parseDouble(lineBuffer[12]), Double.parseDouble(lineBuffer[13]), Integer.parseInt(lineBuffer[14])));
+        }
+        //System.out.println(Arrays.toString(lineBuffer)); 	//[1] - I noticed if there was a leading whitespace it wouldn't read in type properly for int types only, I made some code to test values of each type but as it was unnecessary work I simply removed them manually
+        //System.out.println(activeQuests.get(1).getQuestTitle().getClass().getName());
+        //System.out.println(String.class.getName());
+        unbegunQuests.put(Integer.parseInt(lineBuffer[0]), new Quest(lineBuffer[1], lineBuffer[2], Integer.parseInt(lineBuffer[3]), Integer.parseInt(lineBuffer[4]), Integer.parseInt(lineBuffer[5]), Integer.parseInt(lineBuffer[6]), Integer.parseInt(lineBuffer[7]), Boolean.parseBoolean(lineBuffer[8]), Boolean.parseBoolean(lineBuffer[9]), Double.parseDouble(lineBuffer[10]), Double.parseDouble(lineBuffer[11]), Double.parseDouble(lineBuffer[12]), Double.parseDouble(lineBuffer[13]), Integer.parseInt(lineBuffer[14])));
     }
 
-    public static boolean QuestCompletionChecker() {
+    public static boolean QuestCompletionUpdater() {                        //Iterates through activeQuests at the end of a battle TODO after the battle quest updater (updates currentAmount)
         boolean anyCompletions = false;
         for(int key: activeQuests.keySet()) {
             if(activeQuests.get(key).getIsComplete()) {
                 completedQuests.put(key, activeQuests.get(key));			//TODO look at the bottom of planning document
+                activeQuests.remove(key);
                 anyCompletions = true;
             }
         }
@@ -60,10 +61,7 @@ public class QueststateController {
 
     public Map<Integer, Quest> getActiveQuests() {return activeQuests;}
 
-    public Map<Integer, Quest> getUnbegunQuests() {return unbegunQuests;}
-
-
-
+    //public Map<Integer, Quest> getUnbegunQuests() {return unbegunQuests;}
 
 
 
@@ -73,21 +71,22 @@ public class QueststateController {
         //unbegunQuests.put(1, new Quest("Take the sails!", "Battle Vanbrugh college 3 times.", 0, 300, 300, 0, 3, false, false, 0.00, 0.00, 0));
         //activeQuests.put(1, Q001);
         //System.out.println(unbegunQuests.get(1).getQuestDesc());
-
-
         //if(QuestCompletionChecker()) {
         //activeQuests.get(1).setIsComplete();  //TODO If quest is complete then get the object, do isComplete
         //}
 
         fileReader();
+        System.out.println(activeQuests.get(1).toString());
+        for(int index = 2; index<(unbegunQuests.size()+1); index++)
+        { System.out.println("Quest ID: " + index + "\n" + unbegunQuests.get(index).toString());}
     }
 
 
 
     //Okay I can read in files, lets say I have a line and can let's say assign it
     //I need to:
-    //TODO 1) Make a new object with all of it's information correctly
-    //TODO 2) Map it using a key to an ID
+    //1) Make a new object with all of it's information correctly.  [COMPLETE]
+    //2) Map it using a key to an ID.                               [COMPLETE]
     //TODO Load starter quest by new function
 
 
