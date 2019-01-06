@@ -14,8 +14,8 @@ class QuestClassesTesting {
         newInst.fileReader();
         //System.out.println(newInst.getActiveQuests().get(1).getQuestTitle());
 
-        assertEquals("Check Title unaltered is a string", String.class.getName(), newInst.getActiveQuests().get(1).getQuestTitle().getClass().getName()); //Tests Title is a string
-        assertEquals("Check Description unaltered is a string", String.class.getName(), newInst.getActiveQuests().get(1).getQuestDesc().getClass().getName()); //Tests Title is a string
+        assertEquals(String.class.getName(), newInst.getActiveQuests().get(1).getQuestTitle().getClass().getName(), "Check Title unaltered is a string"); //Tests Title is a string
+        assertEquals(String.class.getName(), newInst.getActiveQuests().get(1).getQuestDesc().getClass().getName(),"Check Description unaltered is a string"); //Tests Title is a string
 
 
 
