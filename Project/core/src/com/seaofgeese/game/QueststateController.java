@@ -88,7 +88,7 @@ public class QueststateController {
 
 
 
-
+/*
 
     //BATTLE
     public void EndOfBattleFunction(){ //Pass ID into parameters and run our updates after battle.
@@ -145,7 +145,7 @@ public class QueststateController {
         else {ThePlayerInstance.setGold(UpdatedGold);}
     }
 
-
+*/
 
 
     //ACCESSORS
