@@ -1,5 +1,7 @@
 package com.seaofgeese.game;
 
+//Author: Benjamin Hassell
+
 import java.util.Arrays;
 
 class Quest {
@@ -63,7 +65,9 @@ class Quest {
 
 	public int getCurrentAmount(){return this.currentAmount;}
 
-	public void incCurrentAmount() {this.currentAmount = this.currentAmount + 1;} //We set it initially, but technically we only need to increment it after a battle for this current quest ID
+	public void IncCurrentAmount() {this.currentAmount = this.currentAmount + 1;} //We set it initially, but technically we only need to increment it after a battle for this current quest ID
+
+	public void SetCurrentAmount(int newAmount) {this.currentAmount = newAmount;} //We set it initially, but technically we only need to increment it after a battle for this current quest ID
 
 	public boolean getIsComplete() {return this.isComplete;}
 

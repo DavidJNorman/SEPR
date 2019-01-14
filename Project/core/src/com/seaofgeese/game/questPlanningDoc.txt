@@ -39,10 +39,6 @@ we need a way to compare it to all activeQuests values(objects), and their varia
 we then need to use incCurrentAmount() for all Objects with the TargetID matched to the target that are in activeQuests
 -The currentAmount for the quest should never exceed the Target amount
 >>Battle End do CheckActiveQuests():
-	for(key: ActiveQuests.keySet()):
-		When ActiveQuests.get(key).isComplete() == true:
-			CompleteQuest.put(key, ActiveQuests.get(key));
-
 
 >In Sailing mode,
 we need a way for the user to accept non storyline quests, and more than once IF the quest's isRepeatable variable is true, but only one at a time.
