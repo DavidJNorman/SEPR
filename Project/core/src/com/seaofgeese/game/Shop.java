@@ -1,4 +1,4 @@
-package com.seaofgeese.game;
+/*package com.seaofgeese.game;
 
 public class Shop {
 
@@ -94,3 +94,4 @@ public class Shop {
 
     // TODO add minigame???
 }
+*/
