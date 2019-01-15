@@ -52,7 +52,7 @@ public class CombatScreen implements Screen {
         table.setDebug(true);
         stage.addActor(table);
         table.add(phlabel);
-
+        table.add().width(800);
        // sound.play();
 
 
