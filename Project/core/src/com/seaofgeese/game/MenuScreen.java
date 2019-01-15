@@ -3,12 +3,12 @@ package com.seaofgeese.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -47,13 +47,14 @@ public class MenuScreen implements Screen {
         TextButton exit = new TextButton("Exit", skin);
 
 
-        table.add(newGame).fillX().uniformX();
-        table.row().pad(10,0,10,0);
-        table.add(leaderboard).fillX().uniformX();
+
+        table.add(newGame).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
+        table.row().pad(20,0,20,0);
+        table.add(leaderboard).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row();
-        table.add(preferences).fill().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(exit).fillX().uniformX();
+        table.add(preferences).fill().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
+        table.row().pad(20, 0, 20, 0);
+        table.add(exit).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
 
         //Create button listeners
         exit.addListener(new ChangeListener() {
@@ -81,7 +82,7 @@ public class MenuScreen implements Screen {
         preferences.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(MainGame.PREFERENCES);
+                parent.changeScreen(MainGame.COMBAT);
             }
         });
     }

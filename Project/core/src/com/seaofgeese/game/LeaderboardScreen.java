@@ -75,7 +75,7 @@ public class LeaderboardScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -95,6 +95,6 @@ public class LeaderboardScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }

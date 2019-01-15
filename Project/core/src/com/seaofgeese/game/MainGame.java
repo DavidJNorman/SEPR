@@ -20,6 +20,7 @@ public class MainGame extends Game {
 	private LeaderboardScreen leaderboardScreen;
 	private PreferencesScreen preferencesScreen;
 	private AppPreferences preferences;
+	private CombatScreen combatScreen;
 
 
 
@@ -35,6 +36,7 @@ public class MainGame extends Game {
 	public final static int APPLICATION = 2;
 	public final static int ENDGAME = 3;
 	public final static int PREFERENCES = 4;
+	public final static int COMBAT = 5;
 
 
 	public static final short DEFAULT_BIT = 1;
@@ -86,6 +88,10 @@ public class MainGame extends Game {
 			case PREFERENCES:
 				if(preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
+				break;
+			case COMBAT:
+				if(combatScreen == null) combatScreen = new CombatScreen(this);
+				this.setScreen(combatScreen);
 				break;
 		}
 	}

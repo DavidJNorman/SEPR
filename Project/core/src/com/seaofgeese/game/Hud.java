@@ -11,8 +11,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import com.seaofgeese.game.MainGame;
-
 
 public class Hud implements Disposable{
 
@@ -23,9 +21,9 @@ public class Hud implements Disposable{
     private float timeCount;
     private Integer score;
 
-    private Label countdownLabel;
+    private Label goldLabel;
     private Label scoreLabel;
-    private Label timeLabel;
+    private Label moneyLabel;
     private Label Empty;
 
     private Label worldLabel;
@@ -44,20 +42,20 @@ public class Hud implements Disposable{
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        goldLabel = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("MAIN  WORLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        moneyLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("QUEST", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel1 = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(scoreLabel1).expandX().padTop(10);
         table.add(worldLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        table.add(moneyLabel).expandX().padTop(10);
 
         table.row();
         table.add(scoreLabel).expandX();
         table.add(Empty).expandX();
-        table.add(countdownLabel).expandX();
+        table.add(goldLabel).expandX();
 
 
         stage.addActor(table);
