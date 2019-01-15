@@ -33,8 +33,8 @@ public class Ship extends Enemy {
 
     }
 
-    public Ship(MainScreen screen, float x, float y) {
-        super(screen, x, y);
+    public Ship(MainGame game, float x, float y) {
+        super(game, x, y);
         defineEnemy();
     }
 }

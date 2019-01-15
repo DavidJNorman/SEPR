@@ -14,7 +14,7 @@ public class Player extends Character {
     public World world;
     public Body b2body;
 
-    public Player(MainScreen screen){
+    public Player(MainGame game){
         //player attribute
         super();
         this.id = IDs.PLAYER;
@@ -25,7 +25,7 @@ public class Player extends Character {
 
 
 
-        this.world = screen.getWrold();
+        this.world = game.getWorld();
         //define player box2d
         definePlayer();
     }
@@ -47,13 +47,9 @@ public class Player extends Character {
         b2body.createFixture(fixtureDef).setUserData("Player");
 
 
-        FixtureDef fixtureDef = new FixtureDef();
-        CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(6);
-        fixtureDef.shape =circleShape;
-        b2body.createFixture(fixtureDef);
-    }
 
     }
+
+
 
 }

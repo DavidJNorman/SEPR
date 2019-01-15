@@ -38,6 +38,8 @@ public class MainScreen implements Screen {
     private Ship ship;
 
 
+
+
     public MainScreen(MainGame mainGame) {
 
         parent = mainGame;
@@ -50,14 +52,14 @@ public class MainScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
         gamecam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
-        world = new World(new Vector2(0, 0), true);
+        world = parent.getWorld();
         debugRenderer = new Box2DDebugRenderer();
 
 
         world.setContactListener(new GameContactListener());
 
-        player = new Player(this);
-        ship = new Ship(this, 60, 60);
+        player = parent.getPlayer();
+//        ship = new Ship(this, 60, 60);
         
 
         new WorldCollisionCreator(this);
@@ -65,6 +67,9 @@ public class MainScreen implements Screen {
 
 
     }
+
+
+
         public void update(float delta){
             world.step(Gdx.graphics.getDeltaTime(), 6,2);
 
@@ -120,6 +125,8 @@ public class MainScreen implements Screen {
         debugRenderer.render(world, gamecam.combined);
         parent.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
+
+
     }
 
     @Override

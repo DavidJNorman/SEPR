@@ -9,15 +9,15 @@ import com.seaofgeese.game.MainScreen;
 
 public abstract class Enemy extends Character {
     protected World world;
-    protected MainScreen screen;
+
     public Body b2body;
 
-    public Enemy(MainScreen screen, float x, float y){
+    public Enemy(MainGame mainGame, float x, float y){
         super();
         this.gold = 100;
         this.id = IDs.ENEMY;
-        this.screen = screen;
-        this.world = screen.getWrold();
+
+        this.world = mainGame.getWorld();
         setPosition(x, y);
     }
     protected abstract void defineEnemy();

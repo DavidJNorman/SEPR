@@ -3,6 +3,12 @@ package com.seaofgeese.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 
 
 public class MainGame extends Game {
@@ -14,6 +20,8 @@ public class MainGame extends Game {
 	private LeaderboardScreen leaderboardScreen;
 	private PreferencesScreen preferencesScreen;
 	private AppPreferences preferences;
+
+
 
 	public SpriteBatch batch;
 
@@ -36,12 +44,24 @@ public class MainGame extends Game {
 
 
 
+	private World world;
+
+	private Player player;
+	private Ship ship;
+
+
 	@Override
 	public void create() {
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
 		preferences = new AppPreferences();
 		batch = new SpriteBatch();
+
+		world = new World(new Vector2(0, 0), true);
+
+		player = new Player(this);
+		ship = new Ship(this,60,60);
+
 
 	}
 
@@ -68,6 +88,17 @@ public class MainGame extends Game {
 				this.setScreen(preferencesScreen);
 				break;
 		}
+	}
+	public World getWorld(){
+		return world;
+	}
+
+	public Player getPlayer(){
+		return player;
+	}
+
+	public Ship getShip(){
+		return ship;
 	}
 
 
