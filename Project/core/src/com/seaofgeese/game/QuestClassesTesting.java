@@ -1,4 +1,4 @@
-package com.seaofgeese.game;
+package com.maingame.game;
 
 
 import org.junit.jupiter.api.Test;
