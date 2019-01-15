@@ -26,14 +26,14 @@ class Quest {
 
 
 
-	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int targetAmount, int currentAmount, boolean isComplete, boolean isRepeatable, double returnX, double returnY, double targetX, double targetY, int mainDependency) {
+	Quest(String questTitle, String questDesc, int targetID, int goldReward, int pointsReward, int currentAmount, int targetAmount, boolean isComplete, boolean isRepeatable, double returnX, double returnY, double targetX, double targetY, int mainDependency) {
 		this.questTitle = questTitle;
 		this.questDesc = questDesc;
 		this.targetID = targetID;
 		this.goldReward = goldReward;
 		this.pointsReward = pointsReward;
-		this.targetAmount = targetAmount;
 		this.currentAmount = currentAmount;
+		this.targetAmount = targetAmount;
 		this.isComplete = isComplete;
 		this.isRepeatable = isRepeatable;
 		this.returnX = returnX;
@@ -44,11 +44,9 @@ class Quest {
 	}
 
 	@Override
-	public String toString() {
-		return "Title:" + this.questTitle + "\n" + "Description:" + this.questDesc + "\n"+ "Target to kill ID:" + this.targetID + "\n" + "Gold Reward: $" + this.goldReward + "\n"
-				+ "Point Reward: P" + this.pointsReward + "\n" + "No. to Kill: $" + this.targetAmount + "\n" + "No. Killed: $" + this.currentAmount + "\n"
-				+ "Quest Complete?: " + this.isComplete + "\n" + "Is quest repeatable?: " + this.isRepeatable + "\n" + "return Location: " + Arrays.toString(getReturnLocation()) + "\n"
-				+ "return Location: " + Arrays.toString(getTargetLocation()) + "\n" + "Main Dependency: " + this.mainDependency + "\n";
+	public String toString() {	//So it can be displayed from HUD
+		return "Title:" + this.questTitle + "\n" + "Description:" + this.questDesc + "\n" + "Gold Reward: $" + this.goldReward + "\n" +
+				"Progress: " + this.currentAmount + "/" + this.targetAmount + "\n" + "target Location: " + Arrays.toString(getTargetLocation()) + "\n";
 	}
 
 	public String getQuestTitle() {return this.questTitle;}

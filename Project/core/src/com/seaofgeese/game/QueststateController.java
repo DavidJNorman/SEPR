@@ -2,7 +2,6 @@ package com.seaofgeese.game;
 
 //Author: Benjamin Hassell
 
-import java.security.InvalidKeyException;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.BufferedReader;
@@ -12,10 +11,10 @@ import java.io.IOException;
 /*
 TODO You should be able to:
     Read Quests into the Quest System                                                                                           [COMPLETE]
-    Accept Quests when provided as long as they fit criteria                                                                    [IN PROGRESS]
-    Complete Quests: Handing it in.                                                                                             [IN PROGRESS]
-    Update Quests: Update the values within the quests AND accept new unbegun quests with that as the main dependency           [IN PROGRESS]
-    HUD Updater?                                                                                                                [Unsure]
+    Accept Quests when provided as long as they fit criteria                                                                    [COMPLETE]
+    Complete Quests: Handing it in.                                                                                             [COMPLETE]
+    Update Quests: Update the values within the quests AND accept new unbegun quests with that as the main dependency           [COMPLETE] *Does need Player and Enemy object callers.
+    HUD Updater?                                                                                                                [UNBEGUN]
 
 
 */
@@ -27,9 +26,10 @@ public class QueststateController {
 
 
     //FILE HANDLING
-    public static void fileReader() {   //COMPLETE | TESTED
+    public void fileReader() {   //COMPLETE | TESTED
         BufferedReader reader;
-        final String dir = System.getProperty("user.dir");
+        final String workingDir = System.getProperty("user.dir");
+        final String dir = workingDir.replace("core\\assets", "");
         try {
             reader = new BufferedReader(new FileReader(dir + "\\core\\src\\com\\seaofgeese\\game\\questBootFile.csv"));
             String line = reader.readLine();
@@ -43,7 +43,7 @@ public class QueststateController {
         }
     }
 
-    private static void varAssignment(String line) {   //COMPLETE | TESTED
+    private void varAssignment(String line) {   //COMPLETE | TESTED
         String[] lineBuffer = line.split(",");
         if(lineBuffer[0].equals("#")) {						//If the ID token is a '#' ignore it
             return;
@@ -58,7 +58,7 @@ public class QueststateController {
     }
 
     //ACCEPT QUESTS
-    public void AcceptDependantQuests(int CompletedKey){
+    private void AcceptDependantQuests(int CompletedKey){    //Accepts the quests dependant on the one we just completed
         for(int newKey : unbegunQuests.keySet()){
             if(unbegunQuests.get(newKey).getMainDependency() == CompletedKey){
                 activeQuests.put(newKey, unbegunQuests.get(newKey));
@@ -69,11 +69,14 @@ public class QueststateController {
 
     //[ARCHIVED CODE:ACCEPT QUESTS] This code would be useful if you spoke to NPCs to accept quests, however for time management we use an auto accept system
     /*
-    private void AcceptQuest(int QuestID) throws InvalidKeyException {                                               //TODO Link this to Sailing
+    private void AcceptQuest(int QuestID) throws IndexOutOfBoundsException { //A general class that will accept quests                                               //TODO Link this to Sailing
         if(activeQuests.containsKey(QuestID)) { System.out.println("Quest already accepted!"); }
-        else if(unbegunQuests.containsKey(QuestID)) { activeQuests.put(QuestID, unbegunQuests.get(QuestID)); }
+        else if(unbegunQuests.containsKey(QuestID)) {
+            activeQuests.put(QuestID, unbegunQuests.get(QuestID));
+            unbegunQuests.remove(QuestID);
+            }
         else if(completedQuests.containsKey(QuestID)) { ReloadRepeatableQuest(QuestID); }
-        else throw new InvalidKeyException("Key not found in Unbegun quests or in Completed Quests");
+        else throw new IndexOutOfBoundsException("Key not found in Unbegun quests or in Completed Quests");
     }
 
     private void ReloadRepeatableQuest(int idToLoad){               //Called if you try to accept a repeatable Quest
@@ -88,8 +91,7 @@ public class QueststateController {
 
 
 
-/*
-
+    /*
     //BATTLE
     public void EndOfBattleFunction(){ //Pass ID into parameters and run our updates after battle.
         final int targetID = Combat.getEnemyID;
@@ -100,20 +102,27 @@ public class QueststateController {
         UpdatePoints(targetPointVal);       //Updates Points from this one battle
     }
 
-    public void IncrementCurrentAmount(int TargetID, int keyIndex){ //Changes
-        if((activeQuests.get(keyIndex).getTargetID() == TargetID) && activeQuests.get(keyIndex).getIsComplete()){
-            activeQuests.get(keyIndex).IncCurrentAmount();
+    private void IncrementCurrentAmount(int TargetID, int keyIndex){ //Changes
+        Quest testedQuest = activeQuests.get(keyIndex);
+        if((testedQuest.getTargetID() == TargetID) && !(testedQuest.getIsComplete())){
+            testedQuest.IncCurrentAmount();
+            if(testedQuest.getCurrentAmount() >= testedQuest.getTargetAmount()){
+                testedQuest.setIsComplete(true);
+            }
         }
     }
 
-    public void HandInQuests(int Key){
-        completedQuests.put(Key, activeQuests.get(Key));			//TODO look at the bottom of planning document
-        UpdateGold(activeQuests.get(Key).getGoldReward());          //Gives user Gold Reward
-        UpdatePoints(activeQuests.get(Key).getPointsReward());      //Gives user Point Reward
-        activeQuests.remove(Key);                                   //Removes Quest from active Quest
+    private void HandInQuests(int Key){ //Removes Quest from active Quest
+        Quest currentQuest = activeQuests.get(Key);
+        if(currentQuest.getIsComplete()){
+            UpdateGold(currentQuest.getGoldReward());          //Gives user Gold Reward
+            UpdatePoints(currentQuest.getPointsReward());      //Gives user Point Reward
+            completedQuests.put(Key, currentQuest);
+            activeQuests.remove(Key);
+        }
     }
 
-    public void UpdateQuests(int CombatTargetID) {                        //Iterates through activeQuests at the end of a battle TODO after the battle quest updater (updates currentAmount)
+    private void UpdateQuests(int CombatTargetID) {                        //Iterates through activeQuests at the end of a battle TODO after the battle quest updater (updates currentAmount)
         for(int key: activeQuests.keySet()) {
             IncrementCurrentAmount(CombatTargetID, key);
             if(activeQuests.get(key).getIsComplete()) {
@@ -123,7 +132,7 @@ public class QueststateController {
         }
     }
 
-    private void UpdatePoints(int PointReward){                 //Updates the player points by the value passed in
+    private void UpdatePoints(int PointReward){                 //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
         int CurrentPoints = ThePlayerInstance.getPoints();
         int UpdatedPoints = CurrentPoints + PointReward;
 
@@ -134,7 +143,7 @@ public class QueststateController {
         else {ThePlayerInstance.setPoints(UpdatedPoints);}
     }
 
-    private void UpdateGold(int GoldReward){                    //Updates the gold by the value passed in
+    private void UpdateGold(int GoldReward){                    //Updates the gold by the value passed in TODO Check if this should be in the combat system instead of here
         int CurrentGold = ThePlayerInstance.getGold();
         int UpdatedGold = CurrentGold + GoldReward;
 
@@ -144,8 +153,8 @@ public class QueststateController {
         }
         else {ThePlayerInstance.setGold(UpdatedGold);}
     }
+    */
 
-*/
 
 
     //ACCESSORS
@@ -160,38 +169,36 @@ public class QueststateController {
 
 
     public static void main(String[] args) {
-        fileReader();
+        QueststateController testInst = new QueststateController();
+        testInst.fileReader();
 
         System.out.println("Active Quests\n----------------------");
-        for(int keyIndex : activeQuests.keySet())
-        { System.out.println("Quest ID: " + keyIndex + "\n" + activeQuests.get(keyIndex).toString());}
+        for(int keyIndex : testInst.getActiveQuests().keySet())
+        { System.out.println("Quest ID: " + keyIndex + "\n" + testInst.getActiveQuests().get(keyIndex).toString());}
 
         System.out.println("Unbegun Quests\n----------------------");
-        for(int keyIndex : unbegunQuests.keySet())
-        { System.out.println("Quest ID: " + keyIndex + "\n" + unbegunQuests.get(keyIndex).toString());}
+        for(int keyIndex : testInst.getUnbegunQuests().keySet())
+        { System.out.println("Quest ID: " + keyIndex + "\n" + testInst.getUnbegunQuests().get(keyIndex).toString());}
 
-        //activeQuests.get(1).
     }
 
 
 
-    //Okay I can read in files, lets say I have a line and can let's say assign it
-    //I need to:
-    //1) Make a new object with all of it's information correctly.  [COMPLETE]
-    //2) Map it using a key to an ID.                               [COMPLETE]
-    //3) Load starter quest by new function                         [COMPLETE]
+    /*
+    I need to:
+        1) Make a new object with all of it's information correctly.  [COMPLETE]
+        2) Map it using a key to an ID.                               [COMPLETE]
+        3) Load starter quest by new function                         [COMPLETE]
+        TODO 4) load active quests into HUD function - Should be as simple as the HUD loading it in, no need for it to be in here  [INCOMPLETE]
+        TODO 5) link system into battle function - Find out what function returns the enemy we're battling  [INCOMPLETE]
+        6) If active quest becomes completed, set Complete and move to completedQuests                    [COMPLETE]
+        7) INIT function to set up quest instances                                                        [COMPLETE]
+        8) code to load quests into unbegun quests with the starter quest loaded into activeQuests        [COMPLETE]
+        TODO 9) code gameplay features, like how it functions, calling from ID and setting it up.         [INCOMPLETE]
+        10) code dependencies - Make the HashSet? or some other hash thing                                [COMPLETE]
+        11) set up isComplete to change if CurrentAmount hits target amount and once it's complete we don't need to increment it any more   [COMPLETE]
+    */
 
-
-    //TODO 4) load active quests into HUD function
-    //TODO 5) link system into battle function - (1). Find out what function GETS target's ID  [INCOMPLETE]
-    //6) If active quest becomes completed, set Complete and move to completedQuests [COMPLETE]
-
-    //7) INIT function to set up quest instances                    [COMPLETE]
-    //8) code to load quests into unbegun quests with the starter quest loaded into activeQuests        [COMPLETE]
-    //TODO code gameplay features, like how it functions, calling from ID and setting it up.
-    //10) code dependencies - Make the HashSet? or some other hash thing                                [COMPLETE]
-
-    //TODO set up isComplete to change if CurrentAmount hits target amount and once it's complete we don't need to increment it any more
 
 }
 
