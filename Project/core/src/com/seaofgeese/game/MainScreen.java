@@ -1,4 +1,4 @@
-package com.maingame.game;
+package com.seaofgeese.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
