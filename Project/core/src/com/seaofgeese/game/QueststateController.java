@@ -27,19 +27,18 @@ public class QueststateController {
 
     //FILE HANDLING
     public void fileReader() {   //COMPLETE | TESTED
-        BufferedReader reader;
         final String workingDir = System.getProperty("user.dir");
         final String dir = workingDir.replace("core\\assets", "");
         try {
-            reader = new BufferedReader(new FileReader(dir + "\\core\\src\\com\\seaofgeese\\game\\questBootFile.csv"));
-            String line = reader.readLine();
-            while (line != null) {
-                varAssignment(line);
-                line = reader.readLine();
+            BufferedReader readerVar = new BufferedReader(new FileReader(dir + "\\core\\src\\com\\seaofgeese\\game\\questBootFile.csv"));
+            String line = readerVar.readLine();         //Reads first line
+            while (line != null) {                      //Whilst lines remain
+                varAssignment(line);                    //Assign vars in CSV line to a quest
+                line = readerVar.readLine();            //Read next line in
             }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            readerVar.close();                          //Close the reader once finished so we don't keep reading
+        } catch (IOException myException) {             //Catch any problems with the file and reading from it
+            myException.printStackTrace();              //Print result
         }
     }
 
