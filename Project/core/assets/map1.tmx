@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="34" height="42" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="71">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="34" height="42" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="55">
  <tileset firstgid="1" source="grass_biome.tsx"/>
  <layer id="7" name="Kachelebene 1" width="34" height="42">
   <data encoding="csv">
@@ -122,18 +122,9 @@
   <object id="45" x="304" y="176" width="32" height="16"/>
   <object id="47" x="336" y="192" width="30" height="14"/>
   <object id="48" x="368" y="208" width="16" height="16"/>
-  <object id="66" x="0" y="0" width="16" height="672"/>
-  <object id="67" x="16" y="0" width="528" height="18"/>
-  <object id="68" x="16" y="656" width="528" height="16"/>
-  <object id="69" x="528" y="16" width="16" height="640"/>
-  <object id="70" x="786" y="117"/>
- </objectgroup>
- <objectgroup id="9" name="monster">
-  <object id="55" x="432" y="112" width="16" height="16"/>
-  <object id="56" x="464" y="80" width="16" height="16"/>
-  <object id="57" x="368" y="64" width="16" height="16"/>
-  <object id="58" x="272" y="64" width="16" height="16"/>
-  <object id="59" x="464" y="240" width="16" height="16"/>
-  <object id="60" x="432" y="288" width="16" height="16"/>
+  <object id="51" x="0" y="0" width="544" height="16"/>
+  <object id="52" x="0" y="16" width="16" height="656"/>
+  <object id="53" x="16" y="656" width="528" height="16"/>
+  <object id="54" x="528" y="19" width="14" height="637"/>
  </objectgroup>
 </map>

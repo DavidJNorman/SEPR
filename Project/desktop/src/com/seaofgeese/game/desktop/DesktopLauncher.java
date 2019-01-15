@@ -2,11 +2,12 @@ package com.seaofgeese.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.SeaOfGeese;
+import com.seaofgeese.game.MainGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new SeaOfGeese(), config);
+		config.foregroundFPS = 60;
+		new LwjglApplication(new MainGame(), config);
 	}
 }
