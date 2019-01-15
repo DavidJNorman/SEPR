@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="34" height="42" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="55">
+
  <tileset firstgid="1" source="grass_biome.tsx"/>
  <layer id="7" name="Kachelebene 1" width="34" height="42">
   <data encoding="csv">

@@ -1,4 +1,5 @@
-package com.seaofgeese.game;
+package com.maingame.game;
+
 
 
 import com.badlogic.gdx.physics.box2d.Body;
@@ -46,6 +47,12 @@ public class Player extends Character {
         b2body.createFixture(fixtureDef).setUserData("Player");
 
 
+        FixtureDef fixtureDef = new FixtureDef();
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(6);
+        fixtureDef.shape =circleShape;
+        b2body.createFixture(fixtureDef);
+    }
 
     }
 

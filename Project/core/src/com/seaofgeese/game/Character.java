@@ -1,8 +1,10 @@
-package com.seaofgeese.game;
+package com.maingame.game;
 
 //import com.sun.javaws.exceptions.InvalidArgumentException;
 
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
 
 import java.util.HashMap;
 import java.util.Map;

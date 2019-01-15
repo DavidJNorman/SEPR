@@ -1,4 +1,4 @@
-package com.seaofgeese.game;
+package com.maingame.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -34,7 +34,9 @@ public class MainScreen implements Screen {
     private Box2DDebugRenderer debugRenderer;
 
     private Player player;
+
     private Ship ship;
+
 
     public MainScreen(MainGame mainGame) {
 
@@ -51,6 +53,7 @@ public class MainScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         debugRenderer = new Box2DDebugRenderer();
 
+
         world.setContactListener(new GameContactListener());
 
         player = new Player(this);
@@ -58,6 +61,7 @@ public class MainScreen implements Screen {
         
 
         new WorldCollisionCreator(this);
+
 
 
     }
@@ -72,7 +76,6 @@ public class MainScreen implements Screen {
             gamecam.update();
 
             renderer.setView(gamecam);
-
 
 
         }
@@ -96,6 +99,7 @@ public class MainScreen implements Screen {
 
     }
 
+
     public World getWrold(){
         return world;
     }
@@ -103,8 +107,6 @@ public class MainScreen implements Screen {
     public TiledMap getMap(){
         return map;
     }
-
-
 
     @Override
     public void render(float delta) {
