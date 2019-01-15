@@ -2,10 +2,12 @@ package com.seaofgeese.game;
 
 //import com.sun.javaws.exceptions.InvalidArgumentException;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Character {
+public abstract class Character extends Sprite {
 
     public enum IDs {
         PLAYER, FRIENDLY, ENEMY, NEUTRAL

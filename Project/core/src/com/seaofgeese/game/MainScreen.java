@@ -55,8 +55,10 @@ public class MainScreen implements Screen {
 
         player = new Player(this);
         ship = new Ship(this, 60, 60);
+        
 
         new WorldCollisionCreator(this);
+
 
     }
         public void update(float delta){
@@ -70,6 +72,8 @@ public class MainScreen implements Screen {
             gamecam.update();
 
             renderer.setView(gamecam);
+
+
 
         }
         public void handleInput(float delta){
