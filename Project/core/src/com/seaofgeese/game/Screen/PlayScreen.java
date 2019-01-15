@@ -22,6 +22,8 @@ import com.mygdx.game.Scene.Hud;
 import com.mygdx.game.SeaOfGeese;
 import com.mygdx.game.Sprites.Player;
 import com.mygdx.game.Sprites.WorldCollisionCreator;
+import com.seaofgeese.game.Sprites.GameContactListener;
+import com.seaofgeese.game.Sprites.Ship;
 
 public class PlayScreen implements Screen {
     private SeaOfGeese game;
@@ -40,6 +42,9 @@ public class PlayScreen implements Screen {
 
     private Player player;
 
+    private Ship ship;
+
+
 
 
     public PlayScreen(SeaOfGeese game) {
@@ -57,10 +62,13 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         debugRenderer = new Box2DDebugRenderer();
 
-        player = new Player(world);
+        player = new Player(this);
+        ship = new Ship(this, 60, 60);
 
 
-        new WorldCollisionCreator(world,map);
+        new WorldCollisionCreator(this);
+
+        world.setContactListener(new GameContactListener());
 
     }
 
@@ -92,6 +100,14 @@ public class PlayScreen implements Screen {
             player.b2body.applyLinearImpulse(new Vector2(10, 0), player.b2body.getWorldCenter(), true);
         }
 
+    }
+
+    public TiledMap getMap(){
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
     }
 
     @Override

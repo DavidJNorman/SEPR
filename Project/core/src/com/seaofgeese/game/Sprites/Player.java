@@ -1,18 +1,20 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
+
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.Screen.PlayScreen;
+import com.mygdx.game.SeaOfGeese;
 
 public class Player {
     public World world;
     public Body b2body;
 
-    public Player(World world){
-        this.world = world;
+    public Player(PlayScreen screen){
+        this.world = screen.getWorld();
         definePlayer();
     }
 
@@ -26,7 +28,13 @@ public class Player {
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(6);
         fixtureDef.shape =circleShape;
-        b2body.createFixture(fixtureDef);
+        fixtureDef.filter.categoryBits = SeaOfGeese.PLAYER_BIT;
+        fixtureDef.filter.maskBits = SeaOfGeese.DEFAULT_BIT | SeaOfGeese.ENEMY_BIT;
+
+        b2body.createFixture(fixtureDef).setUserData("Player");
+
+
+
     }
 
 }
