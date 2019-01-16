@@ -50,11 +50,7 @@ public class MainGame extends Game {
 
 	private Player player;
 	private Ship ship;
-	private Building VanbrughCollege;
-	private Building JamesCollege;
-	private Building HalifaxCollege;
-	private Building PhysicsDepartment;
-	private Building BiologyDepartment;
+	private Building VanbrughCollege,JamesCollege, HalifaxCollege, PhysicsDepartment, BiologyDepartment;
 	protected Building[] BuildingArray;
 
 	@Override
@@ -67,7 +63,13 @@ public class MainGame extends Game {
 		world = new World(new Vector2(0, 0), true);
 
 		player = new Player(this);
-		ship = new Ship(this,50,100, 50, 100);
+    ship = new Ship(this,50,100, 50, 100);
+    VanbrughCollege = new Building(this);
+		JamesCollege = new Building(this);
+		HalifaxCollege = new Building(this);
+		PhysicsDepartment = new Building(this);
+		BiologyDepartment = new Building(this);
+
 		VanbrughCollege.setVanbrughBoss();
 		JamesCollege.setJamesBoss();
 		HalifaxCollege.setHalifaxBoss();
