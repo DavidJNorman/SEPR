@@ -16,12 +16,12 @@ public class Player extends Character {
 
     public Player(MainGame game){
         //player attribute
-        super();
+        super(game);
         this.id = IDs.PLAYER;
         this.gold = 50;
         this.xPos = 50;
         this.yPos = 50;
-        this.movePoints = 10;
+//        this.movePoints = 10;
         this.idCode = 0;
 
 
@@ -30,8 +30,8 @@ public class Player extends Character {
         definePlayer();
     }
 
-    private void UpdatePoints(int PointReward){                 //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
-        int CurrentPoints = this.getPoints();   //TODO change it because the gold caps at 999 anyway
+    private void UpdatePoints(int PointReward){  //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
+        int CurrentPoints = this.getPoints();
         int UpdatedPoints = CurrentPoints + PointReward;
 
         if(UpdatedPoints > 999999){

@@ -141,4 +141,13 @@ public class CombatScreen implements Screen {
     public void dispose() {
 
     }
+
+
+    public void enemyAttack(){
+
+    }
+
+    public void playerAttack(){
+
+    }
 }

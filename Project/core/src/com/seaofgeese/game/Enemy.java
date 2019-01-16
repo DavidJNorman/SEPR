@@ -13,10 +13,12 @@ public abstract class Enemy extends Character {
     public Body b2body;
 
     public Enemy(MainGame mainGame, float x, float y){
-        super();
-        this.gold = 100;
+        super(mainGame);
+        this.gold = 75;
         this.id = IDs.ENEMY;
-
+        this.points = 100;
+        this.idCode = 7;
+        this.noOfCannons = 1;
         this.world = mainGame.getWorld();
         setPosition(x, y);
     }
@@ -25,25 +27,6 @@ public abstract class Enemy extends Character {
     public abstract void startBattle(MainGame mainGame);
 
 
-    /*Building
-    public class Building extends Enemy {
 
-        public Building(){
-            super();
-            //TODO find out: do I need several subclasses for each building?
-        }
-
-
-        @Override
-        protected void defineEnemy() {
-
-        }
-
-        @Override
-        public void startBattle() {
-
-        }
-    }
-    */
 
 }

@@ -23,13 +23,18 @@ TODO You should be able to:
 
 */
 public class QueststateController {
+    //private MainGame maingame;
     private int winningQuest = 1;
     private boolean GameWon = false;
     private static Map<Integer, Quest> completedQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> activeQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> unbegunQuests = new HashMap<Integer, Quest>();
 
-
+/*
+    public QueststateController(MainGame myGame){
+        this.maingame = myGame;
+    }
+*/
     //FILE HANDLING
     public void fileReader() {   //COMPLETE | TESTED
         final String workingDir = System.getProperty("user.dir");
@@ -102,8 +107,8 @@ public class QueststateController {
         final int targetPointVal = Combat.getEnemyPointVal();
         final int targetGoldVal = Combat.getEnemyGoldVal();
         UpdateQuests(targetID);             //Runs the main quest updater
-        MainGame.getPlaer().UpdateGold(targetGoldVal);          //Updates Gold from this one battle TODO figure this shit out
-        MainGame.getPlaer().UpdatePoints(targetPointVal);       //Updates Points from this one battle
+        this.maingame.getPlayer().UpdateGold(targetGoldVal);          //Updates Gold from this one battle TODO figure this shit out
+        this.maingame.getPlayer().UpdatePoints(targetPointVal);       //Updates Points from this one battle
     }
 
 
@@ -120,8 +125,8 @@ public class QueststateController {
     private void HandInQuests(int Key){ //Removes Quest from active Quest
         Quest currentQuest = activeQuests.get(Key);
         if(currentQuest.getIsComplete()){
-            MainGame.getPlaer().UpdateGold(currentQuest.getGoldReward());          //Gives user Gold Reward
-            MainGame.getPlaer().UpdatePoints(currentQuest.getPointsReward());      //Gives user Point Reward
+            this.maingame.getPlayer().UpdateGold(currentQuest.getGoldReward());          //Gives user Gold Reward
+            this.maingame.getPlayer().UpdatePoints(currentQuest.getPointsReward());      //Gives user Point Reward
             completedQuests.put(Key, currentQuest);
             activeQuests.remove(Key);
             if(Key == winningQuest){
