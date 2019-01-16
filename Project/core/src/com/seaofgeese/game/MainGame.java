@@ -50,7 +50,12 @@ public class MainGame extends Game {
 
 	private Player player;
 	private Ship ship;
-
+	private Building VanbrughCollege;
+	private Building JamesCollege;
+	private Building HalifaxCollege;
+	private Building PhysicsDepartment;
+	private Building BiologyDepartment;
+	protected Building[] BuildingArray;
 
 	@Override
 	public void create() {
@@ -63,9 +68,15 @@ public class MainGame extends Game {
 
 		player = new Player(this);
 		ship = new Ship(this,60,60);
-
+		VanbrughCollege.setVanbrughBoss();
+		JamesCollege.setJamesBoss();
+		HalifaxCollege.setHalifaxBoss();
+		PhysicsDepartment.setPhysicsDepartment();
+		BiologyDepartment.setBiologyDepartment();
+		//BuildingArray =
 
 	}
+
 
 	public void changeScreen(int screen){
 		switch(screen){

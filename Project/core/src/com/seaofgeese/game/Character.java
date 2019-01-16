@@ -69,6 +69,14 @@ public abstract class Character extends Sprite {
         this.points = pointsToSet;
     }
 
+    public int getNoOfCannons() {
+        return noOfCannons;
+    }
+
+    public void setNoOfCannons(int noOfCannons) {
+        this.noOfCannons = noOfCannons;
+    }
+
     public int getxPos() {
         return xPos;
     }
@@ -105,18 +113,8 @@ public abstract class Character extends Sprite {
         int newhealth = this.structureHealth - damagetaken;
         if (newhealth <= 0) {
             this.structureHealth = 0;
-            CombatScreenChange();
         }
         else{this.structureHealth = newhealth;}
-    }
-
-    private void CombatScreenChange(){
-        if(this.id == IDs.PLAYER) {
-            mainGame.changeScreen(mainGame.ENDGAME);
-        }
-        if(this.id == IDs.ENEMY || this.id == IDs.ENEMY){
-            mainGame.changeScreen(mainGame.ENDGAME);
-        }
     }
 
 
