@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import java.util.Random;
 
 public class Ship extends Character {
     protected World world;
@@ -33,7 +34,7 @@ public class Ship extends Character {
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public Ship(MainGame game, float x, float y) {
+    public Ship(MainGame game, int lowerx, int upperx, int lowery, int uppery) {
         super(game);
         this.gold = 100;
         this.id = IDs.ENEMY;
@@ -42,7 +43,18 @@ public class Ship extends Character {
         this.idCode = 7;
         this.noOfCannons = 1;
         this.world = game.getWorld();
-        setPosition(x, y);
+        setPosition(genCoordinate(lowerx,upperx), genCoordinate(lowery,uppery));
         defineEnemy();
     }
+
+    public float genCoordinate(int lower, int upper)
+    {
+        int temp;
+        float coordinate;
+        Random r = new Random();
+        temp = r.nextInt(upper-lower) + lower;
+        coordinate = (float)temp;
+        return coordinate;
+    }
+
 }
