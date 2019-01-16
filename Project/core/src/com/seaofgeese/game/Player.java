@@ -21,6 +21,7 @@ public class Player extends Character {
         this.gold = 50;
         this.xPos = 50;
         this.yPos = 50;
+        this.structureHealth = 10;
 //        this.movePoints = 10;
         this.idCode = 0;
 

@@ -124,10 +124,10 @@ public class CombatScreen implements Screen {
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                phealth = phealth-10;
+                parent.getPlayer().structureHealth = parent.getPlayer().getStructureHealth()-10;
                 stage.clear();
                 parent.changeScreen(MainGame.APPLICATION);
-
+                healthcheck();
 
             }
         });
@@ -136,9 +136,9 @@ public class CombatScreen implements Screen {
 
     //}
 
-    public void healthcheck(Player player){
-        if (player.getStructureHealth()<=0){
-            player.structureHealth = 0;
+    public void healthcheck(){
+        if (parent.getPlayer().getStructureHealth()<=0){
+            parent.getPlayer().setStructureHealth(0);
             parent.changeScreen(MainGame.ENDGAME);
         }
     }
