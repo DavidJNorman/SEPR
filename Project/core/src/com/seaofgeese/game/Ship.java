@@ -14,6 +14,7 @@ public class Ship extends Character {
 
     public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
+        mainGame.changeScreen(MainGame.COMBAT);
     }
 
     protected void defineEnemy() {
@@ -36,6 +37,7 @@ public class Ship extends Character {
         super(game);
         this.gold = 100;
         this.id = IDs.ENEMY;
+        this.structureHealth = 100;
         this.points = 100;
         this.idCode = 7;
         this.noOfCannons = 1;

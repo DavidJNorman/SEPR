@@ -1,9 +1,13 @@
 package com.seaofgeese.game;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class EndScreen implements Screen {
     private MainGame parent;
+    private Stage stage;
+    Texture end;
     public EndScreen(MainGame mainGame){
 
         parent = mainGame;

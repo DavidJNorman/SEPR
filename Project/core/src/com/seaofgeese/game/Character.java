@@ -35,9 +35,9 @@ public abstract class Character extends Sprite {
 
     protected Character(MainGame mainGame) {
         this.mainGame = mainGame;
-        this.gold = 0;
+        this.gold = 50;
         this.points = 0;
-        this.noOfCannons = 1;
+        this.noOfCannons = 3;
         this.maxStructureHealth = 100;
         this.structureHealth = maxStructureHealth;
         //this.maxSailHealth = 100;

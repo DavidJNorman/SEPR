@@ -68,11 +68,11 @@ public class MainGame extends Game {
 
 		player = new Player(this);
 		ship = new Ship(this,60,60);
-		VanbrughCollege.setVanbrughBoss();
-		JamesCollege.setJamesBoss();
-		HalifaxCollege.setHalifaxBoss();
-		PhysicsDepartment.setPhysicsDepartment();
-		BiologyDepartment.setBiologyDepartment();
+//		VanbrughCollege.setVanbrughBoss();
+//		JamesCollege.setJamesBoss();
+//		HalifaxCollege.setHalifaxBoss();
+//		PhysicsDepartment.setPhysicsDepartment();
+//		BiologyDepartment.setBiologyDepartment();
 		//BuildingArray =
 
 	}

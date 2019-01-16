@@ -32,12 +32,13 @@ public class Hud implements Disposable{
 
     private Label QuestLabel;
     private Label scoreLabel1;
+    MainGame mainGame;
 
-    public Hud(SpriteBatch sb){
+    public Hud(SpriteBatch sb, MainGame mainGame){
         gold = 0;
         timeCount = 0;
         score = 0;
-
+        this.mainGame = mainGame;
 
         viewport = new FitViewport(MainGame.V_WIDTH, MainGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -71,11 +72,13 @@ public class Hud implements Disposable{
     public void update(float delta){
         timeCount += delta;
         if(timeCount >= 1){
-            score += 1;
+            mainGame.getPlayer().setPoints(mainGame.getPlayer().getPoints()+1);
             timeCount = 0;
         }
 
-        scoreLabel.setText(String.format("%06d", score));
+        //scoreLabel.setText(String.format("%06d", score));
+        scoreLabel.setText(String.format("%06d", mainGame.getPlayer().getPoints()));
+        goldLabel.setText(String.format("%03d", mainGame.getPlayer().getGold()));
     }
 
     @Override

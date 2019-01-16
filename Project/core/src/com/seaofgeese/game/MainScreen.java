@@ -46,7 +46,7 @@ public class MainScreen implements Screen {
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MainGame.V_WIDTH, MainGame.V_HEIGHT, gamecam);
 
-        hud = new Hud(parent.batch);
+        hud = new Hud(parent.batch, parent);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("map1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
@@ -60,7 +60,7 @@ public class MainScreen implements Screen {
 
         player = parent.getPlayer();
         ship = parent.getShip();
-        
+
 
         new WorldCollisionCreator(this);
 

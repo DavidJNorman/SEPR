@@ -27,6 +27,8 @@ public class CombatScreen implements Screen {
     //private Label title;
     private Label phlabel;
     private Label ehlabel;
+    private Label ehtitle;
+    private Label ptitle;
 
     Texture playerimg;
     Texture enemy;
@@ -47,6 +49,7 @@ public class CombatScreen implements Screen {
     }
     @Override
     public void show() {
+        stage.clear();
         Skin skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
         Gdx.input.setInputProcessor(stage);
 
@@ -58,27 +61,48 @@ public class CombatScreen implements Screen {
         playerimg = new Texture(Gdx.files.internal("Player.png"));
         enemy = new Texture(Gdx.files.internal("Enemy.png"));
 
+
         batch = new SpriteBatch();
         ehlabel = new Label(String.valueOf(ehealth),skin);
         phlabel = new Label(String.valueOf(phealth),skin);
+        ehtitle = new Label("Enemy Health:", skin);
+        ptitle = new Label("Player Health:", skin);
+
+        ptitle.setFontScale(2);
+        ehtitle.setFontScale(2);
+        phlabel.setFontScale(2);
+        ehlabel.setFontScale(2);
 
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+        table.setDebug(false);
 
-        table.add(pAttack);
-        table.add(spAttack);
-        table.add(flee);
+        Table tHealth = new Table();
+        tHealth.setDebug(false);
+        tHealth.add(ptitle);
+        tHealth.add(ehtitle);
+        tHealth.row();
+        tHealth.add(phlabel);
+        tHealth.add(ehlabel);
+        tHealth.row();
+        tHealth.add().width(500);
+        tHealth.add().width(500);
+        tHealth.setPosition(960, 1000);
+
+        table.add(pAttack).size(200);
+        table.add(spAttack).size(200);
+        table.add(flee).size(200);
 
         table.setPosition(-250,-250);
+        stage.addActor(tHealth);
         stage.addActor(table);
 
-       table.add(phlabel);
+
         //table.add().width(800);
        // sound.play();
         //title = new Label("Combat",skin);
         //table.add(title);
-        table.add(ehlabel);
+
 
         pAttack.addListener(new ChangeListener() {
 
@@ -86,6 +110,8 @@ public class CombatScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 ehealth = p_attack(ehealth, dmgmult);
                 dmgmult = 1;
+
+
 
             }
         });
@@ -98,15 +124,32 @@ public class CombatScreen implements Screen {
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                phealth = phealth-20;
+                phealth = phealth-10;
+                stage.clear();
                 parent.changeScreen(MainGame.APPLICATION);
+
+
             }
         });
     }
+    //public int e_attack(int phealth){
+
+    //}
+
+    public void healthcheck(Player player){
+        if (player.getStructureHealth()<=0){
+            player.structureHealth = 0;
+            parent.changeScreen(MainGame.ENDGAME);
+        }
+    }
     public int p_attack(int enemyHealth, int dmgmult){
         enemyHealth = enemyHealth-(20*dmgmult);
-        if (enemyHealth<0){
+        if (enemyHealth<=0){
             enemyHealth = 0;
+            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
+            parent.getPlayer().UpdateGold(parent.getShip().getGold());
+            parent.changeScreen(parent.APPLICATION);
+
         }
         return enemyHealth;
     }
@@ -126,6 +169,9 @@ public class CombatScreen implements Screen {
             batch.draw(playerimg, 0, 0);
             batch.draw(enemy, 500, 300);
             batch.end();
+            ehlabel.setText(String.valueOf(ehealth));
+            phlabel.setText(String.valueOf(phealth));
+
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
         }
@@ -154,25 +200,25 @@ public class CombatScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
-    public void enemyAttack(){
-        int EnemyCannons = parent.getShip().getNoOfCannons();
-        parent.getPlayer().healthUpdate(EnemyCannons);
-        if(parent.getPlayer().getStructureHealth() == 0){
-            parent.changeScreen(parent.ENDGAME);
-        }
-    }
+//    public void enemyAttack(){
+//        int EnemyCannons = parent.getShip().getNoOfCannons();
+//        parent.getPlayer().healthUpdate(EnemyCannons);
+//        if(parent.getPlayer().getStructureHealth() == 0){
+//            parent.changeScreen(parent.ENDGAME);
+//        }
+//    }
 
-    public void playerAttack(){
-        int PlayerCannons = parent.getPlayer().getNoOfCannons();
-        parent.getPlayer().healthUpdate(PlayerCannons);
-        if(parent.getShip().getStructureHealth() == 0){
-            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
-            parent.getPlayer().UpdateGold(parent.getShip().getGold());
-
-            parent.changeScreen(parent.APPLICATION);
-        }
-    }
+//    public void playerAttack(){
+//        int PlayerCannons = parent.getPlayer().getNoOfCannons();
+//        parent.getShip().healthUpdate(PlayerCannons);
+//        if(parent.getShip().getStructureHealth() == 0){
+//            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
+//            parent.getPlayer().UpdateGold(parent.getShip().getGold());
+//
+//            parent.changeScreen(parent.APPLICATION);
+//        }
+//    }
 }

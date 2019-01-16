@@ -35,7 +35,7 @@ public class MenuScreen implements Screen {
         //Create a table that fills the screen. Everything will go inside this
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+        table.setDebug(false);
         stage.addActor(table);
 
         Skin skin = new Skin(Gdx.files.internal("skin/clean-crispy-ui.json"));
@@ -43,7 +43,7 @@ public class MenuScreen implements Screen {
         //create buttons
         TextButton newGame = new TextButton("New Game", skin);
         TextButton leaderboard = new TextButton("Leaderboard", skin);
-        TextButton preferences = new TextButton("Preferences", skin);
+        //TextButton preferences = new TextButton("Preferences", skin);
         TextButton exit = new TextButton("Exit", skin);
 
 
@@ -52,7 +52,7 @@ public class MenuScreen implements Screen {
         table.row().pad(20,0,20,0);
         table.add(leaderboard).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row();
-        table.add(preferences).fill().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
+        //table.add(preferences).fill().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row().pad(20, 0, 20, 0);
         table.add(exit).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
 
@@ -79,12 +79,12 @@ public class MenuScreen implements Screen {
             }
         });
 
-        preferences.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(MainGame.COMBAT);
-            }
-        });
+//        preferences.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                parent.changeScreen(MainGame.COMBAT);
+//            }
+//        });
     }
 
     @java.lang.Override
