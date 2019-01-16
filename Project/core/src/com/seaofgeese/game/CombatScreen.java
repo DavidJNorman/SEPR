@@ -108,12 +108,22 @@ public class CombatScreen implements Screen {
 
     }
 
-
     public void enemyAttack(){
-
+        int EnemyCannons = parent.getShip().getNoOfCannons();
+        parent.getPlayer().healthUpdate(EnemyCannons);
+        if(parent.getPlayer().getStructureHealth() == 0){
+            parent.changeScreen(parent.ENDGAME);
+        }
     }
 
     public void playerAttack(){
+        int PlayerCannons = parent.getPlayer().getNoOfCannons();
+        parent.getPlayer().healthUpdate(PlayerCannons);
+        if(parent.getShip().getStructureHealth() == 0){
+            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
+            parent.getPlayer().UpdateGold(parent.getShip().getGold());
 
+            parent.changeScreen(parent.APPLICATION);
+        }
     }
 }

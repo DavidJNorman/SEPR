@@ -8,7 +8,7 @@ import com.seaofgeese.game.MainScreen;
 
 
 //Building
-public abstract class Building extends Character {
+public class Building extends Character {
     public IDs id;
 
     public Building(MainGame mainGame){
@@ -16,14 +16,6 @@ public abstract class Building extends Character {
         this.id = IDs.ENEMY;
     }
 
-    public void setVanbrughMinion(){
-        this.idCode = 1;
-        this.gold = 30;
-        this.points = 100;
-        this.noOfCannons = 2;
-        this.maxStructureHealth = 100;
-        this.structureHealth = this.maxStructureHealth;
-    }
 
     public void setVanbrughBoss(){
         this.idCode = 2;
@@ -34,14 +26,6 @@ public abstract class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-    public void setJamesMinion(){
-        this.idCode = 3;
-        this.gold = 60;
-        this.points = 900;
-        this.noOfCannons = 3;
-        this.maxStructureHealth = 150;
-        this.structureHealth = this.maxStructureHealth;
-    }
 
     public void setJamesBoss(){
         this.idCode = 4;
@@ -52,14 +36,6 @@ public abstract class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-    public void setHalifaxMinion(){
-        this.idCode = 5;
-        this.gold = 175;
-        this.points = 3500;
-        this.noOfCannons = 4;
-        this.maxStructureHealth = 150;
-        this.structureHealth = this.maxStructureHealth;
-    }
 
     public void setHalifaxBoss(){
         this.idCode = 6;
@@ -70,6 +46,21 @@ public abstract class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-    protected abstract void defineEnemy();
-    public abstract void startBattle();
+    public void setPhysicsDepartment(){
+        this.idCode = 9;
+        this.gold = 250;
+        this.points = 4000;
+        this.noOfCannons = 4;
+        this.maxStructureHealth = 300;
+        this.structureHealth = this.maxStructureHealth;
+    }
+
+    public void setBiologyDepartment(){
+        this.idCode = 10;
+        this.gold = 300;
+        this.points = 4500;
+        this.noOfCannons = 4;
+        this.maxStructureHealth = 350;
+        this.structureHealth = this.maxStructureHealth;
+    }
 }

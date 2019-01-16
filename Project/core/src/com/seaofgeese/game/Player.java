@@ -30,7 +30,7 @@ public class Player extends Character {
         definePlayer();
     }
 
-    private void UpdatePoints(int PointReward){  //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
+    public void UpdatePoints(int PointReward){  //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
         int CurrentPoints = this.getPoints();
         int UpdatedPoints = CurrentPoints + PointReward;
 
@@ -40,7 +40,7 @@ public class Player extends Character {
         else {this.setPoints(UpdatedPoints);}
     }
 
-    private void UpdateGold(int GoldReward){                    //Increase Gold by value added
+    public void UpdateGold(int GoldReward){                    //Increase Gold by value added
         int CurrentGold = this.getGold();
         int UpdatedGold = CurrentGold + GoldReward;
 
