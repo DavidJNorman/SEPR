@@ -1,8 +1,8 @@
 package com.seaofgeese.game;
 
 public class NonPCharacter extends Character {
-    protected NonPCharacter(IDs id, int gold, int xPos, int yPos, int movePoints) {
-        super();
+    protected NonPCharacter(MainGame game, IDs id, int gold, int xPos, int yPos, int movePoints) {
+        super(game);
         //this.id = id;
        // this.gold = gold;
        // this.xPos = xPos;

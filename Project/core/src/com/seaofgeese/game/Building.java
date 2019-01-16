@@ -9,10 +9,11 @@ import com.seaofgeese.game.MainScreen;
 
 //Building
 public abstract class Building extends Character {
+    public IDs id;
 
-    public Building(){
-        super();
-
+    public Building(MainGame mainGame){
+        super(mainGame);
+        this.id = IDs.ENEMY;
     }
 
     public void setVanbrughMinion(){

@@ -25,6 +25,7 @@ public abstract class Character extends Sprite {
     protected int noOfCannons;
     protected int structureHealth;
     protected int maxStructureHealth;
+    protected MainGame mainGame;
     //protected int sailHealth;
     //protected int cannonHealth;
     //protected int maxSailHealth;
@@ -32,7 +33,8 @@ public abstract class Character extends Sprite {
     //protected int movePoints;
     //protected Map<String, Integer> ammunition;
 
-    protected Character() {
+    protected Character(MainGame mainGame) {
+        this.mainGame = mainGame;
         this.gold = 0;
         this.points = 0;
         this.noOfCannons = 1;
@@ -98,6 +100,29 @@ public abstract class Character extends Sprite {
     public void setMaxStructureHealth(int maxStructureHealth) {
         this.maxStructureHealth = maxStructureHealth;
     }
+
+    public void healthUpdate(int damagetaken){
+        int newhealth = this.structureHealth - damagetaken;
+        if (newhealth <= 0) {
+            this.structureHealth = 0;
+            CombatScreenChange();
+        }
+        else{this.structureHealth = newhealth;}
+    }
+
+    private void CombatScreenChange(){
+        if(this.id == IDs.PLAYER) {
+            mainGame.changeScreen(mainGame.ENDGAME);
+        }
+        if(this.id == IDs.ENEMY || this.id == IDs.ENEMY){
+            mainGame.changeScreen(mainGame.ENDGAME);
+        }
+    }
+
+
+
+
+
 
 /*
     public int getSailHealth() {

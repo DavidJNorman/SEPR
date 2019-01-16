@@ -13,7 +13,7 @@ public abstract class Enemy extends Character {
     public Body b2body;
 
     public Enemy(MainGame mainGame, float x, float y){
-        super();
+        super(mainGame);
         this.gold = 75;
         this.id = IDs.ENEMY;
         this.points = 100;

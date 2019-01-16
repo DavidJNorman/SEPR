@@ -16,7 +16,7 @@ public class Player extends Character {
 
     public Player(MainGame game){
         //player attribute
-        super();
+        super(game);
         this.id = IDs.PLAYER;
         this.gold = 50;
         this.xPos = 50;
