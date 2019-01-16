@@ -17,6 +17,8 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
+
+
     QueststateController QuestControl;
 
     private Integer gold;
@@ -64,6 +66,16 @@ public class Hud implements Disposable{
 
         stage.addActor(table);
 
+    }
+
+    public void update(float delta){
+        timeCount += delta;
+        if(timeCount >= 1){
+            score += 1;
+            timeCount = 0;
+        }
+
+        scoreLabel.setText(String.format("%06d", score));
     }
 
     @Override

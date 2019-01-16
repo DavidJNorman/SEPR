@@ -59,7 +59,7 @@ public class MainScreen implements Screen {
         world.setContactListener(new GameContactListener(parent));
 
         player = parent.getPlayer();
-        ship = new Ship(parent, 60, 60);
+        ship = parent.getShip();
         
 
         new WorldCollisionCreator(this);
@@ -81,6 +81,7 @@ public class MainScreen implements Screen {
             gamecam.update();
 
             renderer.setView(gamecam);
+            hud.update(delta);
 
 
         }

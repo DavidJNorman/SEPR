@@ -25,8 +25,8 @@ public class CombatScreen implements Screen {
     private Stage stage;
 
     //private Label title;
-    //private Label phlabel;
-    //private Label ehlabel;
+    private Label phlabel;
+    private Label ehlabel;
 
     Texture playerimg;
     Texture enemy;
@@ -35,6 +35,7 @@ public class CombatScreen implements Screen {
     //Sound sound;
     int phealth;
     int ehealth;
+    int dmgmult = 1;
 
     public CombatScreen(MainGame mainGame){
         parent = mainGame;
@@ -58,8 +59,8 @@ public class CombatScreen implements Screen {
         enemy = new Texture(Gdx.files.internal("Enemy.png"));
 
         batch = new SpriteBatch();
-        //ehlabel = new Label(String.valueOf(ehealth),skin);
-        //phlabel = new Label(String.valueOf(phealth), skin);
+        ehlabel = new Label(String.valueOf(ehealth),skin);
+        phlabel = new Label(String.valueOf(phealth),skin);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -72,33 +73,47 @@ public class CombatScreen implements Screen {
         table.setPosition(-250,-250);
         stage.addActor(table);
 
-       //table.add(phlabel);
+       table.add(phlabel);
         //table.add().width(800);
        // sound.play();
         //title = new Label("Combat",skin);
         //table.add(title);
-        //table.add(ehlabel);
+        table.add(ehlabel);
 
         pAttack.addListener(new ChangeListener() {
+
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                ehealth = p_attack(ehealth, dmgmult);
+                dmgmult = 1;
 
             }
         });
         spAttack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                dmgmult = p_sAttack(dmgmult);
             }
         });
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                phealth = phealth-20;
+                parent.changeScreen(MainGame.APPLICATION);
             }
         });
     }
-
+    public int p_attack(int enemyHealth, int dmgmult){
+        enemyHealth = enemyHealth-(20*dmgmult);
+        if (enemyHealth<0){
+            enemyHealth = 0;
+        }
+        return enemyHealth;
+    }
+    public int p_sAttack(int dmgmult){
+        dmgmult = dmgmult +1;
+        return dmgmult;
+    }
     @Override
     public void render(float delta) {
     //Clears the screen
