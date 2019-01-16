@@ -29,8 +29,8 @@ public class GameContactListener implements ContactListener {
                 ((StaticInteractiveCollisionObject) collidedObj.getUserData()).collided();
             }
 
-            if(collidedObj.getUserData() instanceof Enemy){
-                ((Enemy)collidedObj.getUserData()).startBattle(mainGame);
+            if(collidedObj.getUserData() instanceof Ship){
+                ((Ship)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
             }
