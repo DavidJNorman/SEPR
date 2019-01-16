@@ -47,7 +47,9 @@ public class Hud implements Disposable{
         goldLabel = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         GOLDLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-//        QuestLabel = new Label("Active Quests:\n-------------------\n" + QuestControl.toString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+       // QuestLabel = new Label("Active Quests:\n-------------------\n" + QuestControl.toString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
         scoreLabel1 = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(scoreLabel1).expandX().padTop(10);

@@ -24,7 +24,7 @@ public abstract class Enemy extends Character {
     }
 
     protected abstract void defineEnemy();
-    public abstract void startBattle();
+    public abstract void startBattle(MainGame mainGame);
 
 
 

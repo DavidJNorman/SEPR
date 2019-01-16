@@ -56,10 +56,10 @@ public class MainScreen implements Screen {
         debugRenderer = new Box2DDebugRenderer();
 
 
-        world.setContactListener(new GameContactListener());
+        world.setContactListener(new GameContactListener(parent));
 
         player = parent.getPlayer();
-//        ship = new Ship(this, 60, 60);
+        ship = new Ship(parent, 60, 60);
         
 
         new WorldCollisionCreator(this);

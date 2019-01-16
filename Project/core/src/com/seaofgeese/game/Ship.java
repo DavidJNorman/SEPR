@@ -7,12 +7,13 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.seaofgeese.game.MainScreen;
 import com.seaofgeese.game.MainGame;
 import com.seaofgeese.game.Enemy;
+import sun.applet.Main;
 
 public class Ship extends Enemy {
     @Override
-    public void startBattle() {
+    public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
-
+        mainGame.changeScreen(MainGame.COMBAT);
     }
 
     @Override
