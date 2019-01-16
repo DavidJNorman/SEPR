@@ -33,7 +33,7 @@ public class Ship extends Character {
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public Ship(MainGame game, float x, float y) {
+    public Ship(MainGame game, int lowerx, int upperx, int lowery, int uppery) {
         super(game);
         this.gold = 100;
         this.id = IDs.ENEMY;
@@ -41,7 +41,7 @@ public class Ship extends Character {
         this.idCode = 7;
         this.noOfCannons = 1;
         this.world = game.getWorld();
-        setPosition(genCoordinate(50,100), genCoordinate(50, 100));
+        setPosition(genCoordinate(lowerx,upperx), genCoordinate(lowery,uppery));
         defineEnemy();
     }
 
