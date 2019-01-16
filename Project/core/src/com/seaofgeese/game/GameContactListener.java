@@ -9,6 +9,11 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.seaofgeese.game.MainGame;
 
 public class GameContactListener implements ContactListener {
+    private MainGame mainGame;
+
+    public GameContactListener(MainGame mainGame){
+        this.mainGame = mainGame;
+    }
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
@@ -25,7 +30,7 @@ public class GameContactListener implements ContactListener {
             }
 
             if(collidedObj.getUserData() instanceof Enemy){
-                ((Enemy)collidedObj.getUserData()).startBattle();
+                ((Enemy)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
             }

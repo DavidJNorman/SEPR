@@ -1,13 +1,9 @@
 package com.seaofgeese.game;
 
 public class Combat {
-    private int turnCounter;
-    private boolean myTurn;
 
-    protected Combat() {
-        this.turnCounter = 1;
-        this.myTurn = true;
-    }
+
+
 
     //TODO decide if methods should be private
 
@@ -15,7 +11,12 @@ public class Combat {
 
     private void updateTurn() {}
 
-    private void attack(String weapon) {}
+    private void attack(String weapon) {
+
+    }
+    private void spAttack(){
+
+        }
 
     private void enemyAttack() {}
 
