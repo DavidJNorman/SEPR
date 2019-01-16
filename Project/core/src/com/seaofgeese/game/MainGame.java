@@ -63,8 +63,8 @@ public class MainGame extends Game {
 		world = new World(new Vector2(0, 0), true);
 
 		player = new Player(this);
-		ship = new Ship(this,60,60);
-		VanbrughCollege = new Building(this);
+    ship = new Ship(this,50,100, 50, 100);
+    VanbrughCollege = new Building(this);
 		JamesCollege = new Building(this);
 		HalifaxCollege = new Building(this);
 		PhysicsDepartment = new Building(this);
