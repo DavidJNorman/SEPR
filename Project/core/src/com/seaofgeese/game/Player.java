@@ -22,13 +22,34 @@ public class Player extends Character {
         this.xPos = 50;
         this.yPos = 50;
         this.movePoints = 10;
-
+        this.idCode = 0;
 
 
         this.world = game.getWorld();
         //define player box2d
         definePlayer();
     }
+
+    private void UpdatePoints(int PointReward){                 //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
+        int CurrentPoints = this.getPoints();   //TODO change it because the gold caps at 999 anyway
+        int UpdatedPoints = CurrentPoints + PointReward;
+
+        if(UpdatedPoints > 999999){
+            this.setPoints(999999);
+        }
+        else {this.setPoints(UpdatedPoints);}
+    }
+
+    private void UpdateGold(int GoldReward){                    //Increase Gold by value added
+        int CurrentGold = this.getGold();
+        int UpdatedGold = CurrentGold + GoldReward;
+
+        if(UpdatedGold > 999){
+            this.setGold(999);
+        }
+        else {this.setGold(UpdatedGold);}
+    }
+
 
     public void definePlayer(){
         //collision

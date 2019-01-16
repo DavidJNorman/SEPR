@@ -20,7 +20,30 @@ public abstract class Enemy extends Character {
         this.world = mainGame.getWorld();
         setPosition(x, y);
     }
+
     protected abstract void defineEnemy();
     public abstract void startBattle();
+
+
+    /*Building
+    public class Building extends Enemy {
+
+        public Building(){
+            super();
+            //TODO find out: do I need several subclasses for each building?
+        }
+
+
+        @Override
+        protected void defineEnemy() {
+
+        }
+
+        @Override
+        public void startBattle() {
+
+        }
+    }
+    */
 
 }

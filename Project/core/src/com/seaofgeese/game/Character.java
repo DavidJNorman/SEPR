@@ -17,7 +17,10 @@ public abstract class Character extends Sprite {
 
     protected IDs id;
 
+    protected int idCode;
+
     protected int gold;
+    protected int points;
     protected int xPos;
     protected int yPos;
     protected int sailHealth;
@@ -31,6 +34,8 @@ public abstract class Character extends Sprite {
     protected Map<String, Integer> ammunition;
 
     protected Character() {
+        this.idCode = idCode;
+        this.points = 0;
         this.maxSailHealth = 100;
         this.maxCannonHealth = 100;
         this.maxStructureHealth = 100;
@@ -40,12 +45,26 @@ public abstract class Character extends Sprite {
         //this.ammunition = new HashMap<>();
     }
 
+    public int getId() {
+        return this.idCode;
+    }
+
+    public void setId(int idToSet) { this.idCode = idToSet; }
+
     public int getGold() {
-        return gold;
+        return this.gold;
     }
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public int getPoints() {
+        return this.points;
+    }
+
+    public void setPoints(int pointsToSet) {
+        this.points = pointsToSet;
     }
 
     public int getxPos() {

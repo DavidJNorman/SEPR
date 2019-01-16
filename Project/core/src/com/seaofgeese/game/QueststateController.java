@@ -2,6 +2,10 @@ package com.seaofgeese.game;
 
 //Author: Benjamin Hassell
 
+import com.badlogic.gdx.Game;
+import sun.applet.Main;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.BufferedReader;
@@ -19,7 +23,8 @@ TODO You should be able to:
 
 */
 public class QueststateController {
-
+    private int winningQuest = 1;
+    private boolean GameWon = false;
     private static Map<Integer, Quest> completedQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> activeQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> unbegunQuests = new HashMap<Integer, Quest>();
@@ -97,9 +102,10 @@ public class QueststateController {
         final int targetPointVal = Combat.getEnemyPointVal();
         final int targetGoldVal = Combat.getEnemyGoldVal();
         UpdateQuests(targetID);             //Runs the main quest updater
-        UpdateGold(targetGoldVal);          //Updates Gold from this one battle
-        UpdatePoints(targetPointVal);       //Updates Points from this one battle
+        MainGame.getPlaer().UpdateGold(targetGoldVal);          //Updates Gold from this one battle TODO figure this shit out
+        MainGame.getPlaer().UpdatePoints(targetPointVal);       //Updates Points from this one battle
     }
+
 
     private void IncrementCurrentAmount(int TargetID, int keyIndex){ //Changes
         Quest testedQuest = activeQuests.get(keyIndex);
@@ -114,10 +120,13 @@ public class QueststateController {
     private void HandInQuests(int Key){ //Removes Quest from active Quest
         Quest currentQuest = activeQuests.get(Key);
         if(currentQuest.getIsComplete()){
-            UpdateGold(currentQuest.getGoldReward());          //Gives user Gold Reward
-            UpdatePoints(currentQuest.getPointsReward());      //Gives user Point Reward
+            MainGame.getPlaer().UpdateGold(currentQuest.getGoldReward());          //Gives user Gold Reward
+            MainGame.getPlaer().UpdatePoints(currentQuest.getPointsReward());      //Gives user Point Reward
             completedQuests.put(Key, currentQuest);
             activeQuests.remove(Key);
+            if(Key == winningQuest){
+                GameWon = true;
+            }
         }
     }
 
@@ -130,41 +139,34 @@ public class QueststateController {
             }
         }
     }
-
-    private void UpdatePoints(int PointReward){                 //Updates the player points by the value passed in TODO Check if this should be in the combat system instead of here
-        int CurrentPoints = ThePlayerInstance.getPoints();
-        int UpdatedPoints = CurrentPoints + PointReward;
-
-        if(UpdatedPoints < CurrentPoints){
-            System.out.println("Overflow has occurred!");
-            return;
-        }
-        else {ThePlayerInstance.setPoints(UpdatedPoints);}
-    }
-
-    private void UpdateGold(int GoldReward){                    //Updates the gold by the value passed in TODO Check if this should be in the combat system instead of here
-        int CurrentGold = ThePlayerInstance.getGold();
-        int UpdatedGold = CurrentGold + GoldReward;
-
-        if(UpdatedGold < CurrentGold){
-            System.out.println("Overflow has occurred!");
-            return;
-        }
-        else {ThePlayerInstance.setGold(UpdatedGold);}
-    }
     */
+    public boolean GameWin(){
+        return GameWon;
+    }
 
 
 
     //ACCESSORS
-    public Map<Integer, Quest> getCompletedQuests() {return completedQuests;}
+    //public Map<Integer, Quest> getCompletedQuests() {return completedQuests;}
 
     public Map<Integer, Quest> getActiveQuests() {return activeQuests;}
 
     public Map<Integer, Quest> getUnbegunQuests() {return unbegunQuests;}
 
 
-
+    //toString()
+    @Override
+    public String toString() {	//So it can be displayed from HUD
+        StringBuilder format = new StringBuilder();
+        for(int inKey: activeQuests.keySet()){
+            Quest myActiveQuest = activeQuests.get(inKey);
+            format.append("Title:").append(myActiveQuest.getQuestTitle()).append("\n").append("Description:").append(myActiveQuest.getQuestDesc())
+                    .append("\n").append("Gold Reward: $").append(myActiveQuest.getGoldReward()).append("\n").append("Progress: ")
+                    .append(myActiveQuest.getCurrentAmount()).append("/").append(myActiveQuest.getTargetAmount()).append("\n")
+                    .append("target Location: ").append(Arrays.toString(myActiveQuest.getTargetLocation())).append("\n\n");
+        }
+        return format.toString();
+    }
 
 
     public static void main(String[] args) {
