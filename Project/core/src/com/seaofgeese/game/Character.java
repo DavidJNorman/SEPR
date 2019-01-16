@@ -18,30 +18,30 @@ public abstract class Character extends Sprite {
     protected IDs id;
 
     protected int idCode;
-
     protected int gold;
     protected int points;
     protected int xPos;
     protected int yPos;
-    protected int sailHealth;
-    protected int cannonHealth;
+    protected int noOfCannons;
     protected int structureHealth;
-    protected int maxSailHealth;
-    protected int maxCannonHealth;
     protected int maxStructureHealth;
-    protected int movePoints;
-
-    protected Map<String, Integer> ammunition;
+    //protected int sailHealth;
+    //protected int cannonHealth;
+    //protected int maxSailHealth;
+    //protected int maxCannonHealth;
+    //protected int movePoints;
+    //protected Map<String, Integer> ammunition;
 
     protected Character() {
-        this.idCode = idCode;
+        this.gold = 0;
         this.points = 0;
-        this.maxSailHealth = 100;
-        this.maxCannonHealth = 100;
+        this.noOfCannons = 1;
         this.maxStructureHealth = 100;
-        this.sailHealth = maxSailHealth;
-        this.cannonHealth = maxCannonHealth;
         this.structureHealth = maxStructureHealth;
+        //this.maxSailHealth = 100;
+        //this.maxCannonHealth = 100;
+        //this.sailHealth = maxSailHealth;
+        //this.cannonHealth = maxCannonHealth;
         //this.ammunition = new HashMap<>();
     }
 
@@ -83,6 +83,23 @@ public abstract class Character extends Sprite {
         this.yPos = yPos;
     }
 
+    public int getStructureHealth() {
+        return structureHealth;
+    }
+
+    public void setStructureHealth(int structureHealth) {
+        this.structureHealth = structureHealth;
+    }
+
+    public int getMaxStructureHealth() {
+        return maxStructureHealth;
+    }
+
+    public void setMaxStructureHealth(int maxStructureHealth) {
+        this.maxStructureHealth = maxStructureHealth;
+    }
+
+/*
     public int getSailHealth() {
         return sailHealth;
     }
@@ -99,13 +116,7 @@ public abstract class Character extends Sprite {
         this.cannonHealth = cannonHealth;
     }
 
-    public int getStructureHealth() {
-        return structureHealth;
-    }
 
-    public void setStructureHealth(int structureHealth) {
-        this.structureHealth = structureHealth;
-    }
 
     public int getMaxSailHealth() {
         return maxSailHealth;
@@ -121,14 +132,6 @@ public abstract class Character extends Sprite {
 
     public void setMaxCannonHealth(int maxCannonHealth) {
         this.maxCannonHealth = maxCannonHealth;
-    }
-
-    public int getMaxStructureHealth() {
-        return maxStructureHealth;
-    }
-
-    public void setMaxStructureHealth(int maxStructureHealth) {
-        this.maxStructureHealth = maxStructureHealth;
     }
 
     public int getMovePoints() {
@@ -152,5 +155,5 @@ public abstract class Character extends Sprite {
             return this.ammunition.get(ammoType);
         } else throw new IllegalArgumentException("Not a valid type of ammunition!");
     }
-
+*/
 }

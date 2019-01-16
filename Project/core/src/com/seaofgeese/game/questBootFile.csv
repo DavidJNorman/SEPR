@@ -5,8 +5,8 @@
 4, "Salty Depths", "Beat the James college Boss!",0,700,800,4,1,false,false,0.00,0.00,0.00,0.00,3
 5, "Murkwater's Territory!", "Battle Halifax college 3 times.",5,700,700,0,3, false, false,0.00,0.00,0.00,0.00,4
 6, "Capt'n Murkwater", "Beat the Halifax college Boss!",6,900,1000,0,1, false, false,0.00,0.00,0.00,0.00,5
-7, "Bandit Beaches", "Defeat 5 pirate ships.",7,200,200,0,5, false, true,0.00,0.00,0.00,0.00,0
-8, "Buckaneer's Bay", "Defeat 7 pirate ships.",7,280,280,0,7, false, true,0.00,0.00,0.00,0.00,2
+7, "Bandit Beaches", "Defeat 1 pirate ships.",7,200,200,0,1, false, true,0.00,0.00,0.00,0.00,0
+8, "Buckaneer's Bay", "Defeat 5 pirate ships.",7,280,280,0,5, false, true,0.00,0.00,0.00,0.00,2
 9, "Brigg's Boardwalk", "Defeat 10 pirate ships.",7,400,400,0,10, false, true,0.00,0.00,0.00,0.00,4
 10, "A tall tale", "Defeat 1 Lake Monsters.",8,300,300,0,1, false, true,0.00,0.00,0.00,0.00,2
 11, "Salted Depths", "Defeat 2 Lake Monsters.",8,620,620,0,2, false, true,0.00,0.00,0.00,0.00,4
