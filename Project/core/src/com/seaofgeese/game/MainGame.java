@@ -75,8 +75,7 @@ public class MainGame extends Game {
 		HalifaxCollege.setHalifaxBoss();
 		PhysicsDepartment.setPhysicsDepartment();
 		BiologyDepartment.setBiologyDepartment();
-		//BuildingArray =
-
+		BuildingArray = new Building[]{VanbrughCollege, JamesCollege, HalifaxCollege, PhysicsDepartment, BiologyDepartment};
 	}
 
 
