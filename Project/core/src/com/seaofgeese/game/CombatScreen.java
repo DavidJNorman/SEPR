@@ -13,10 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.seaofgeese.game.Player;
 
-import javax.xml.soap.Text;
 import java.util.Random;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -59,7 +56,7 @@ public class CombatScreen implements Screen {
         phealth = player.structureHealth;
         instanceTyping();
         if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
-            parent.changeScreen(parent.APPLICATION);
+            parent.changeScreen(parent.GAME);
         }
         //Random random = new Random();
 
@@ -158,7 +155,8 @@ public class CombatScreen implements Screen {
 
                 stage.clear();
 
-                parent.changeScreen(MainGame.APPLICATION);
+                parent.changeScreen(MainGame.GAME);
+
                 healthcheck();
 
             }
@@ -209,7 +207,7 @@ public class CombatScreen implements Screen {
             if((this.MyNewEnemy instanceof Building) && (this.MyNewEnemy.getIdType() == Character.IDs.NEUTRAL)){
                 this.MyNewEnemy.setIdType(Character.IDs.FRIENDLY);
             }
-            parent.changeScreen(parent.APPLICATION);
+            parent.changeScreen(parent.GAME);
 
         }
         return enemyHealth;
@@ -292,7 +290,7 @@ public class CombatScreen implements Screen {
 //            parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
 //            parent.getPlayer().UpdateGold(this.MyNewEnemy.getGold());
 //
-//            parent.changeScreen(parent.APPLICATION);
+//            parent.changeScreen(parent.GAME);
 //        }
 //    }
 }
