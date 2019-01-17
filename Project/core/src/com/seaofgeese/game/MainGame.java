@@ -3,82 +3,72 @@ package com.seaofgeese.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
 
 public class MainGame extends Game {
 
+	//Object for each screen within the application
 	private LoadingScreen loadingScreen;
 	private MenuScreen menuScreen;
-	private MainScreen mainScreen;
+	private MainScreen gameScreen;
 	private EndScreen endScreen;
 	private LeaderboardScreen leaderboardScreen;
 	private PreferencesScreen preferencesScreen;
-	private AppPreferences preferences;
 	private CombatScreen combatScreen;
 
-
-
-	public SpriteBatch batch;
-
-	public static final int V_WIDTH = 400;
-	public static final int V_HEIGHT = 208;
-
-
-
+	//Constants
 	public final static int MENU = 0;
 	public final static int LEADERBOARD = 1;
 	public final static int APPLICATION = 2;
 	public final static int ENDGAME = 3;
 	public final static int PREFERENCES = 4;
 	public final static int COMBAT = 5;
-
-
+	public static final int V_WIDTH = 400;
+	public static final int V_HEIGHT = 208;
 	public static final short DEFAULT_BIT = 1;
 	public static final short PLAYER_BIT = 2;
 	public static final short DESTROY_BIT = 4;
 	public static final short ENEMY_BIT = 8;
 
-
-
+	//Main game class attributes
+	private AppPreferences preferences;
+	public SpriteBatch batch;
 	private World world;
-
 	private Player player;
 	private Ship ship;
-	private Building VanbrughCollege,JamesCollege, HalifaxCollege, PhysicsDepartment, BiologyDepartment;
-	protected Building[] BuildingArray;
+	private Building vanbrughCollege, jamesCollege, halifaxCollege, physicsDepartment, biologyDepartment;
+	protected Building[] buildingArray;
 
 	@Override
+	//Method run first that initialises the application and needed variables/objects
 	public void create() {
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
+
 		preferences = new AppPreferences();
 		batch = new SpriteBatch();
-
 		world = new World(new Vector2(0, 0), true);
 
 		player = new Player(this);
-		ship = new Ship(this,50,100, 50, 100);
-		VanbrughCollege = new Building(this);
-		JamesCollege = new Building(this);
-		HalifaxCollege = new Building(this);
-		PhysicsDepartment = new Building(this);
-		BiologyDepartment = new Building(this);
 
-		VanbrughCollege.setVanbrughBoss();
-		JamesCollege.setJamesBoss();
-		HalifaxCollege.setHalifaxBoss();
-		PhysicsDepartment.setPhysicsDepartment();
-		BiologyDepartment.setBiologyDepartment();
-		BuildingArray = new Building[]{VanbrughCollege, JamesCollege, HalifaxCollege, PhysicsDepartment, BiologyDepartment};
+		ship = new Ship(this,50,100, 50, 100);
+
+		vanbrughCollege = new Building(this);
+		jamesCollege = new Building(this);
+		halifaxCollege = new Building(this);
+		physicsDepartment = new Building(this);
+		biologyDepartment = new Building(this);
+		vanbrughCollege.setVanbrughBoss();
+		jamesCollege.setJamesBoss();
+		halifaxCollege.setHalifaxBoss();
+		physicsDepartment.setPhysicsDepartment();
+		biologyDepartment.setBiologyDepartment();
+		buildingArray = new Building[]{vanbrughCollege, jamesCollege, halifaxCollege, physicsDepartment, biologyDepartment};
 	}
 
-
+	//Method that manages the changing of the current application screen
 	public void changeScreen(int screen){
 		switch(screen){
 			case MENU:
@@ -90,8 +80,8 @@ public class MainGame extends Game {
 				this.setScreen(leaderboardScreen);
 				break;
 			case APPLICATION:
-				if(mainScreen == null) mainScreen = new MainScreen(this);
-				this.setScreen(mainScreen);
+				if(gameScreen == null) gameScreen = new MainScreen(this);
+				this.setScreen(gameScreen);
 				break;
 			case ENDGAME:
 				if(endScreen == null) endScreen = new EndScreen(this);
@@ -104,6 +94,8 @@ public class MainGame extends Game {
 
 		}
 	}
+
+	//A variation on the method changeScreen(int), that also passes a character for combat management
 	public void changeScreen(int screen, Character character) {
 		switch (screen) {
 			case COMBAT:
@@ -112,6 +104,7 @@ public class MainGame extends Game {
 				break;
 		}
 	}
+
 	public World getWorld(){
 		return world;
 	}
@@ -125,16 +118,17 @@ public class MainGame extends Game {
 	}
 
 	public Building[] getBuildingArray(){
-		return BuildingArray;
+		return buildingArray;
 	}
 
 	public Building getBuilding(int i){
-		return BuildingArray[i];
+		return buildingArray[i];
 	}
 
 	public AppPreferences getPreferences(){
 		return this.preferences;
 	}
+
 	@Override
 	public void dispose(){
 		batch.dispose();
