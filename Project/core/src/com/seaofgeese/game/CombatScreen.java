@@ -44,13 +44,15 @@ public class CombatScreen implements Screen {
     int edmgmult = 1;
     Character MyNewEnemy;
     private int enemyChoice;
+    Player player;
 
     public CombatScreen(MainGame mainGame, Character MyNewEnemy){
         this.MyNewEnemy = MyNewEnemy;
         parent = mainGame;
+        player = parent.getPlayer();
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
-        phealth = parent.getPlayer().getStructureHealth();
+        phealth = player.structureHealth;
         instanceTyping();
         if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
             parent.changeScreen(parent.APPLICATION);
@@ -124,7 +126,7 @@ public class CombatScreen implements Screen {
                     healthcheck();
                     edmgmult = 1;
                 }else{
-                    edmgmult = edmgmult+1;
+                    edmgmult = edmgmult*2;
                 }
 
 
@@ -140,15 +142,18 @@ public class CombatScreen implements Screen {
                     healthcheck();
                     edmgmult = 1;
                 }else{
-                    edmgmult = edmgmult+1;
+                    edmgmult = edmgmult*2;
                 }
             }
         });
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                parent.getPlayer().structureHealth = parent.getPlayer().getStructureHealth()-10;
+
+                phealth = phealth-10;
+
                 stage.clear();
+
                 parent.changeScreen(MainGame.APPLICATION);
                 healthcheck();
 
@@ -172,8 +177,10 @@ public class CombatScreen implements Screen {
 
 
     public void healthcheck(){
-        if (parent.getPlayer().getStructureHealth()<=0){
-            parent.getPlayer().setStructureHealth(0);
+
+        if (phealth<=0){
+
+           // Gdx.app.log(String.valueOf(player.getStructureHealth(),String.valueOf(player.getStructureHealth()));
             parent.changeScreen(MainGame.ENDGAME);
         }
     }
@@ -196,7 +203,7 @@ public class CombatScreen implements Screen {
 
 
     public int p_sAttack(int dmgmult){
-        dmgmult = dmgmult +1;
+        dmgmult = dmgmult *2;
         return dmgmult;
     }
 
@@ -218,8 +225,11 @@ public class CombatScreen implements Screen {
             batch.draw(playerimg, 400, 500);
             batch.draw(enemy, 1000, 500);
             batch.end();
+
             ehlabel.setText(String.valueOf(ehealth));
             phlabel.setText(String.valueOf(phealth));
+            player.setStructureHealth(phealth);
+
             enemyChoice = random.nextInt(2);
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
