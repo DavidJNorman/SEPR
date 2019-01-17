@@ -10,7 +10,7 @@ import com.seaofgeese.game.MainGame;
 
 public class GameContactListener implements ContactListener {
     private MainGame mainGame;
-
+    private Ship test;
     public GameContactListener(MainGame mainGame){
         this.mainGame = mainGame;
     }
@@ -18,6 +18,7 @@ public class GameContactListener implements ContactListener {
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
+
 
 
 
@@ -33,6 +34,7 @@ public class GameContactListener implements ContactListener {
                 ((Ship)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
+
             }
         }
     }

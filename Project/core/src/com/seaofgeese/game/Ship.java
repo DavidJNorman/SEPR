@@ -15,7 +15,7 @@ public class Ship extends Character {
 
     public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
-        mainGame.changeScreen(MainGame.COMBAT);
+        mainGame.changeScreen(MainGame.COMBAT, this);
     }
 
     protected void defineEnemy() {
@@ -56,5 +56,6 @@ public class Ship extends Character {
         coordinate = (float)temp;
         return coordinate;
     }
+
 
 }

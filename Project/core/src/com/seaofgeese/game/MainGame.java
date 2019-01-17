@@ -101,8 +101,13 @@ public class MainGame extends Game {
 				if(preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
 				break;
+
+		}
+	}
+	public void changeScreen(int screen, Character character) {
+		switch (screen) {
 			case COMBAT:
-				if(combatScreen == null) combatScreen = new CombatScreen(this, BiologyDepartment);	//TODO Pass enemy into this
+				if (combatScreen == null) combatScreen = new CombatScreen(this, character);    //TODO Pass enemy into this
 				this.setScreen(combatScreen);
 				break;
 		}
