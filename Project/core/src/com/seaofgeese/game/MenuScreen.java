@@ -40,7 +40,7 @@ public class MenuScreen implements Screen {
 
         //create buttons
         TextButton newGame = new TextButton("New Game", skin);
-        TextButton leaderboard = new TextButton("Leaderboard", skin);
+        //TextButton leaderboard = new TextButton("Leaderboard", skin);
         //TextButton preferences = new TextButton("Preferences", skin);
         TextButton exit = new TextButton("Exit", skin);
 
@@ -48,7 +48,7 @@ public class MenuScreen implements Screen {
 
         table.add(newGame).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row().pad(20,0,20,0);
-        table.add(leaderboard).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
+        //table.add(leaderboard).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row();
         //table.add(preferences).fill().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row().pad(20, 0, 20, 0);
@@ -70,17 +70,17 @@ public class MenuScreen implements Screen {
             }
         });
 
-        leaderboard.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                parent.changeScreen(MainGame.LEADERBOARD);
-            }
-        });
+//        leaderboard.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                parent.changeScreen(MainGame.LEADERBOARD);
+//            }
+//        });
 
 //        preferences.addListener(new ChangeListener() {
 //            @Override
 //            public void changed(ChangeEvent event, Actor actor) {
-//                parent.changeScreen(MainGame.COMBAT);
+//                parent.changeScreen(MainGame.ENDGAME);
 //            }
 //        });
     }
