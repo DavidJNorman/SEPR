@@ -4,15 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -45,8 +43,14 @@ public class CombatScreen implements Screen {
     Character MyNewEnemy;
     private int enemyChoice;
     Player player;
+    FileHandle handle = Gdx.files.internal("leaderboardfile.txt");
+    String ldrbrd;
+    String[] test;
 
     public CombatScreen(MainGame mainGame, Character MyNewEnemy){
+        ldrbrd = handle.readString();
+        test = ldrbrd.split(" - ");
+
         this.MyNewEnemy = MyNewEnemy;
         parent = mainGame;
         player = parent.getPlayer();
@@ -57,7 +61,7 @@ public class CombatScreen implements Screen {
         if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
             parent.changeScreen(parent.APPLICATION);
         }
-        Random random = new Random();
+        //Random random = new Random();
 
     }
     @Override
@@ -182,8 +186,18 @@ public class CombatScreen implements Screen {
 
            // Gdx.app.log(String.valueOf(player.getStructureHealth(),String.valueOf(player.getStructureHealth()));
             parent.changeScreen(MainGame.ENDGAME);
+//            for (int i = 1; i<test.length; i+=2){
+//                if (player.getPoints()>Integer.parseInt(test[i])){
+//                    txtUsername = new TextField("", mSkin);
+//                    txtUsername.setMessageText("test");
+//                    txtUsername.setPosition(30, 30);
+//                    mStage.addActor(txtUsername);
+//                    String test = txtUsername.getText();
+//                    System.out.println(test);
+  //              }
+            }
         }
-    }
+    //}
 
 
     public int p_attack(int enemyHealth, int dmgmult){

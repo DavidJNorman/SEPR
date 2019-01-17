@@ -57,6 +57,7 @@ public class MainGame extends Game {
 	public void create() {
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
+
 		preferences = new AppPreferences();
 		batch = new SpriteBatch();
 
