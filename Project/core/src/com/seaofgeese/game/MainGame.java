@@ -21,7 +21,7 @@ public class MainGame extends Game {
 	//Constants
 	public final static int MENU = 0;
 	public final static int LEADERBOARD = 1;
-	public final static int APPLICATION = 2;
+	public final static int GAME = 2;
 	public final static int ENDGAME = 3;
 	public final static int PREFERENCES = 4;
 	public final static int COMBAT = 5;
@@ -79,7 +79,7 @@ public class MainGame extends Game {
 				if(leaderboardScreen == null) leaderboardScreen = new LeaderboardScreen(this);
 				this.setScreen(leaderboardScreen);
 				break;
-			case APPLICATION:
+			case GAME:
 				if(gameScreen == null) gameScreen = new MainScreen(this);
 				this.setScreen(gameScreen);
 				break;
