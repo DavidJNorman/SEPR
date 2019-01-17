@@ -82,7 +82,7 @@ public class MenuScreen implements Screen {
 //        preferences.addListener(new ChangeListener() {
 //            @Override
 //            public void changed(ChangeEvent event, Actor actor) {
-//                parent.changeScreen(MainGame.COMBAT);
+//                parent.changeScreen(MainGame.ENDGAME);
 //            }
 //        });
     }
