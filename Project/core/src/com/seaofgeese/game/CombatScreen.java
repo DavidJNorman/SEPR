@@ -38,13 +38,18 @@ public class CombatScreen implements Screen {
     int phealth;
     int ehealth;
     int dmgmult = 1;
+    Character MyNewEnemy;
 
-    public CombatScreen(MainGame mainGame){
+    public CombatScreen(MainGame mainGame, Character MyNewEnemy){
+        this.MyNewEnemy = MyNewEnemy;
         parent = mainGame;
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
-        phealth = mainGame.getPlayer().getStructureHealth();
-        ehealth = mainGame.getShip().getStructureHealth();
+        phealth = parent.getPlayer().getStructureHealth();
+        instanceTyping();
+        if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
+            parent.changeScreen(parent.APPLICATION);
+        }
 
     }
     @Override
@@ -136,6 +141,17 @@ public class CombatScreen implements Screen {
 
     //}
 
+    public void instanceTyping(){
+        if(this.MyNewEnemy instanceof Building){
+            this.MyNewEnemy = parent.getBuildingArray()[4];                     //TODO: Find out how to find the index
+            ehealth = this.MyNewEnemy.getStructureHealth();
+        }
+        else if(this.MyNewEnemy instanceof Ship){
+            this.MyNewEnemy = parent.getShip();                                  //TODO: Jordan: Will also be in an array
+            ehealth = this.MyNewEnemy.getStructureHealth();
+        }
+    }
+
     public void healthcheck(){
         if (parent.getPlayer().getStructureHealth()<=0){
             parent.getPlayer().setStructureHealth(0);
@@ -146,8 +162,11 @@ public class CombatScreen implements Screen {
         enemyHealth = enemyHealth-(20*dmgmult);
         if (enemyHealth<=0){
             enemyHealth = 0;
-            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
-            parent.getPlayer().UpdateGold(parent.getShip().getGold());
+            parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
+            parent.getPlayer().UpdateGold(this.MyNewEnemy.getGold());
+            if((this.MyNewEnemy instanceof Building) && (this.MyNewEnemy.getIdType() == Character.IDs.NEUTRAL)){
+                this.MyNewEnemy.setIdType(Character.IDs.FRIENDLY);
+            }
             parent.changeScreen(parent.APPLICATION);
 
         }
@@ -204,7 +223,7 @@ public class CombatScreen implements Screen {
     }
 
 //    public void enemyAttack(){
-//        int EnemyCannons = parent.getShip().getNoOfCannons();
+//        int EnemyCannons = this.MyNewEnemy.getNoOfCannons();
 //        parent.getPlayer().healthUpdate(EnemyCannons);
 //        if(parent.getPlayer().getStructureHealth() == 0){
 //            parent.changeScreen(parent.ENDGAME);
@@ -213,10 +232,10 @@ public class CombatScreen implements Screen {
 
 //    public void playerAttack(){
 //        int PlayerCannons = parent.getPlayer().getNoOfCannons();
-//        parent.getShip().healthUpdate(PlayerCannons);
-//        if(parent.getShip().getStructureHealth() == 0){
-//            parent.getPlayer().UpdatePoints(parent.getShip().getPoints());
-//            parent.getPlayer().UpdateGold(parent.getShip().getGold());
+//        this.MyNewEnemy.healthUpdate(PlayerCannons);
+//        if(this.MyNewEnemy.getStructureHealth() == 0){
+//            parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
+//            parent.getPlayer().UpdateGold(this.MyNewEnemy.getGold());
 //
 //            parent.changeScreen(parent.APPLICATION);
 //        }

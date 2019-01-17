@@ -47,6 +47,12 @@ public abstract class Character extends Sprite {
         //this.ammunition = new HashMap<>();
     }
 
+    public IDs getIdType() {
+        return this.id;
+    }
+
+    public void setIdType(IDs id) { this.id = id; }
+
     public int getId() {
         return this.idCode;
     }

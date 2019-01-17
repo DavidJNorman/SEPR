@@ -13,11 +13,12 @@ public class Building extends Character {
 
     public Building(MainGame mainGame){
         super(mainGame);
-        this.id = IDs.ENEMY;
+
     }
 
 
     public void setVanbrughBoss(){
+        this.id = IDs.NEUTRAL;
         this.idCode = 2;
         this.gold = 60;
         this.points = 300;
@@ -28,6 +29,7 @@ public class Building extends Character {
 
 
     public void setJamesBoss(){
+        this.id = IDs.NEUTRAL;
         this.idCode = 4;
         this.gold = 90;
         this.points = 1700;
@@ -38,6 +40,7 @@ public class Building extends Character {
 
 
     public void setHalifaxBoss(){
+        this.id = IDs.NEUTRAL;
         this.idCode = 6;
         this.gold = 250;
         this.points = 5000;
@@ -47,6 +50,7 @@ public class Building extends Character {
     }
 
     public void setPhysicsDepartment(){
+        this.id = IDs.ENEMY;
         this.idCode = 9;
         this.gold = 250;
         this.points = 4000;
@@ -56,6 +60,8 @@ public class Building extends Character {
     }
 
     public void setBiologyDepartment(){
+
+        this.id = IDs.ENEMY;
         this.idCode = 10;
         this.gold = 300;
         this.points = 4500;

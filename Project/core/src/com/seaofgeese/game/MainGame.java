@@ -63,8 +63,8 @@ public class MainGame extends Game {
 		world = new World(new Vector2(0, 0), true);
 
 		player = new Player(this);
-    ship = new Ship(this,50,100, 50, 100);
-    VanbrughCollege = new Building(this);
+		ship = new Ship(this,50,100, 50, 100);
+		VanbrughCollege = new Building(this);
 		JamesCollege = new Building(this);
 		HalifaxCollege = new Building(this);
 		PhysicsDepartment = new Building(this);
@@ -102,7 +102,7 @@ public class MainGame extends Game {
 				this.setScreen(preferencesScreen);
 				break;
 			case COMBAT:
-				if(combatScreen == null) combatScreen = new CombatScreen(this);
+				if(combatScreen == null) combatScreen = new CombatScreen(this, BiologyDepartment);	//TODO Pass enemy into this
 				this.setScreen(combatScreen);
 				break;
 		}
@@ -119,6 +119,13 @@ public class MainGame extends Game {
 		return ship;
 	}
 
+	public Building[] getBuildingArray(){
+		return BuildingArray;
+	}
+
+	public Building getBuilding(int i){
+		return BuildingArray[i];
+	}
 
 	public AppPreferences getPreferences(){
 		return this.preferences;
