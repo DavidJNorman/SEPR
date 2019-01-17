@@ -106,6 +106,9 @@ public class MainScreen implements Screen {
 
     }
 
+    public float getWroldHeight(){
+        return gamePort.getWorldHeight();
+    }
 
     public World getWrold(){
         return world;

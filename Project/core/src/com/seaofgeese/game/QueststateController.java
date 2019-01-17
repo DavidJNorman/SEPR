@@ -2,9 +2,6 @@ package com.seaofgeese.game;
 
 //Author: Benjamin Hassell
 
-import com.badlogic.gdx.Game;
-import sun.applet.Main;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,18 +20,18 @@ TODO You should be able to:
 
 */
 public class QueststateController {
-    //private MainGame maingame;
+    private MainGame maingame;
     private int winningQuest = 1;
     private boolean GameWon = false;
     private static Map<Integer, Quest> completedQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> activeQuests = new HashMap<Integer, Quest>();
     private static Map<Integer, Quest> unbegunQuests = new HashMap<Integer, Quest>();
 
-/*
+
     public QueststateController(MainGame myGame){
         this.maingame = myGame;
     }
-*/
+
     //FILE HANDLING
     public void fileReader() {   //COMPLETE | TESTED
         final String workingDir = System.getProperty("user.dir");
@@ -100,13 +97,13 @@ public class QueststateController {
 
 
 
-    /*
+
     //BATTLE
     public void EndOfBattleFunction(){ //Pass ID into parameters and run our updates after battle.
-        final int targetID = Combat.getEnemyID;
-        final int targetPointVal = Combat.getEnemyPointVal();
-        final int targetGoldVal = Combat.getEnemyGoldVal();
-        UpdateQuests(targetID);             //Runs the main quest updater
+        Character enemy = this.maingame.getCombatScreen().getMyNewEnemy();
+        final int targetPointVal = enemy.getPoints();
+        final int targetGoldVal = enemy.getGold();
+        UpdateQuests(enemy.getId());             //Runs the main quest updater
         this.maingame.getPlayer().UpdateGold(targetGoldVal);          //Updates Gold from this one battle TODO figure this shit out
         this.maingame.getPlayer().UpdatePoints(targetPointVal);       //Updates Points from this one battle
     }
@@ -144,7 +141,7 @@ public class QueststateController {
             }
         }
     }
-    */
+
     public boolean GameWin(){
         return GameWon;
     }
@@ -175,7 +172,7 @@ public class QueststateController {
 
 
     public static void main(String[] args) {
-        QueststateController testInst = new QueststateController();
+        /*QueststateController testInst = new QueststateController();
         testInst.fileReader();
 
         System.out.println("Active Quests\n----------------------");
@@ -185,7 +182,7 @@ public class QueststateController {
         System.out.println("Unbegun Quests\n----------------------");
         for(int keyIndex : testInst.getUnbegunQuests().keySet())
         { System.out.println("Quest ID: " + keyIndex + "\n" + testInst.getUnbegunQuests().get(keyIndex).toString());}
-
+        */
     }
 
 

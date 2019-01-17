@@ -19,7 +19,7 @@ public class Hud implements Disposable{
 
 
 
-    QueststateController QuestControl;
+    //QueststateController QuestControl;
 
     private Integer gold;
     private float timeCount;
@@ -30,11 +30,12 @@ public class Hud implements Disposable{
     private Label GOLDLabel;
     private Label Empty;
 
-    private Label QuestLabel;
+    //private Label QuestLabel;
     private Label scoreLabel1;
     MainGame mainGame;
 
     public Hud(SpriteBatch sb, MainGame mainGame){
+        //QuestControl = new QueststateController(mainGame);
         gold = 0;
         timeCount = 0;
         score = 0;
@@ -47,18 +48,24 @@ public class Hud implements Disposable{
         table.top();
         table.setFillParent(true);
 
+        //Table tableLeft = new Table();
+        //tableLeft.top();
+        //tableLeft.setFillParent(true);
+
         goldLabel = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         GOLDLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
-       // QuestLabel = new Label("Active Quests:\n-------------------\n" + QuestControl.toString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
+        //QuestControl.fileReader();
+        //QuestLabel = new Label("Active Quests:\n-------------------\n" + QuestControl.toString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        //QuestLabel.setFontScale(0.4f);
         scoreLabel1 = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(scoreLabel1).expandX().padTop(10);
-//        table.add(QuestLabel).expandX().padTop(10);
+        //tableLeft.add(QuestLabel).expandX().padTop(10);
         table.add(GOLDLabel).expandX().padTop(10);
 
+        //tableLeft.setPosition(0, 0);
+        //tableLeft.left();
         table.row();
         table.add(scoreLabel).expandX();
         //table.add(Empty).expandX();
@@ -66,6 +73,7 @@ public class Hud implements Disposable{
 
 
         stage.addActor(table);
+        //stage.addActor(tableLeft);
 
     }
 

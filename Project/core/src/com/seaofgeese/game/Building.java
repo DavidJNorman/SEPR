@@ -1,11 +1,5 @@
 package com.seaofgeese.game;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
-import com.seaofgeese.game.MainScreen;
-import com.seaofgeese.game.MainScreen;
-
 
 //Building
 public class Building extends Character {

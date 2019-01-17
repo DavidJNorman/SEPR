@@ -105,6 +105,10 @@ public class MainGame extends Game {
 		}
 	}
 
+	public CombatScreen getCombatScreen(){
+		return combatScreen;
+	}
+
 	public World getWorld(){
 		return world;
 	}
