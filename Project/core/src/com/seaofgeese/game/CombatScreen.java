@@ -19,6 +19,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.seaofgeese.game.Player;
 
 import javax.xml.soap.Text;
+import java.util.Random;
+
+import static com.badlogic.gdx.math.MathUtils.random;
 
 public class CombatScreen implements Screen {
     private MainGame parent;
@@ -38,7 +41,9 @@ public class CombatScreen implements Screen {
     int phealth;
     int ehealth;
     int dmgmult = 1;
+    int edmgmult = 1;
     Character MyNewEnemy;
+    private int enemyChoice;
 
     public CombatScreen(MainGame mainGame, Character MyNewEnemy){
         this.MyNewEnemy = MyNewEnemy;
@@ -50,6 +55,7 @@ public class CombatScreen implements Screen {
         if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
             parent.changeScreen(parent.APPLICATION);
         }
+        Random random = new Random();
 
     }
     @Override
@@ -65,8 +71,6 @@ public class CombatScreen implements Screen {
         background = new Texture(Gdx.files.internal("Background.png"));
         playerimg = new Texture(Gdx.files.internal("Player.png"));
         enemy = new Texture(Gdx.files.internal("Enemy.png"));
-
-
         batch = new SpriteBatch();
         ehlabel = new Label(String.valueOf(ehealth),skin);
         phlabel = new Label(String.valueOf(phealth),skin);
@@ -115,6 +119,13 @@ public class CombatScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 ehealth = p_attack(ehealth, dmgmult);
                 dmgmult = 1;
+                if (enemyChoice==0) {
+                    phealth = e_attack(phealth, edmgmult);
+                    healthcheck();
+                    edmgmult = 1;
+                }else{
+                    edmgmult = edmgmult+1;
+                }
 
 
 
@@ -124,6 +135,13 @@ public class CombatScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 dmgmult = p_sAttack(dmgmult);
+                if(enemyChoice==0) {
+                    phealth = e_attack(phealth, edmgmult);
+                    healthcheck();
+                    edmgmult = 1;
+                }else{
+                    edmgmult = edmgmult+1;
+                }
             }
         });
         flee.addListener(new ChangeListener() {
@@ -152,14 +170,17 @@ public class CombatScreen implements Screen {
         }
     }
 
+
     public void healthcheck(){
         if (parent.getPlayer().getStructureHealth()<=0){
             parent.getPlayer().setStructureHealth(0);
             parent.changeScreen(MainGame.ENDGAME);
         }
     }
+
+
     public int p_attack(int enemyHealth, int dmgmult){
-        enemyHealth = enemyHealth-(20*dmgmult);
+        enemyHealth = enemyHealth-(parent.getPlayer().getNoOfCannons()*dmgmult);
         if (enemyHealth<=0){
             enemyHealth = 0;
             parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
@@ -172,10 +193,18 @@ public class CombatScreen implements Screen {
         }
         return enemyHealth;
     }
+
+
     public int p_sAttack(int dmgmult){
         dmgmult = dmgmult +1;
         return dmgmult;
     }
+
+    public int e_attack(int phealth, int edmgmult){
+        phealth = phealth-(parent.getShip().getNoOfCannons()*edmgmult);
+        return phealth;
+    }
+
     @Override
     public void render(float delta) {
     //Clears the screen
@@ -184,18 +213,20 @@ public class CombatScreen implements Screen {
             //Draws
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
             batch.begin();
+
             batch.draw(background,0,0);
-            batch.draw(playerimg, 0, 0);
-            batch.draw(enemy, 500, 300);
+            batch.draw(playerimg, 400, 500);
+            batch.draw(enemy, 1000, 500);
             batch.end();
             ehlabel.setText(String.valueOf(ehealth));
             phlabel.setText(String.valueOf(phealth));
-
+            enemyChoice = random.nextInt(2);
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
         }
             stage.draw();
     }
+
 
     @Override
     public void resize(int width, int height) {
