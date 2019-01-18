@@ -2,6 +2,7 @@ package com.seaofgeese.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -20,6 +21,7 @@ public class Building extends Character {
     protected TiledMap map;
     private Body body;
     private Fixture fixture;
+    Texture texture;
 
     public Building(MainGame mainGame, int layerIndex) {
         super(mainGame);
@@ -33,6 +35,7 @@ public class Building extends Character {
 
     public void setVanbrughBoss() {
         this.id = IDs.NEUTRAL;
+        this.texture = new Texture(Gdx.files.internal("Vanbrugh.png"));
         this.idCode = 2;
         this.gold = 60;
         this.points = 300;
@@ -44,6 +47,7 @@ public class Building extends Character {
 
     public void setJamesBoss() {
         this.id = IDs.NEUTRAL;
+        this.texture = new Texture(Gdx.files.internal("James.png"));
         this.idCode = 4;
         this.gold = 90;
         this.points = 1700;
@@ -55,6 +59,7 @@ public class Building extends Character {
 
     public void setHalifaxBoss() {
         this.id = IDs.NEUTRAL;
+        this.texture = new Texture(Gdx.files.internal("Halifax.png"));
         this.idCode = 6;
         this.gold = 250;
         this.points = 5000;
@@ -65,6 +70,7 @@ public class Building extends Character {
 
     public void setPhysicsDepartment() {
         this.id = IDs.ENEMY;
+        this.texture = new Texture(Gdx.files.internal("Physics.png"));
         this.idCode = 9;
         this.gold = 250;
         this.points = 4000;
@@ -74,8 +80,8 @@ public class Building extends Character {
     }
 
     public void setBiologyDepartment() {
-
         this.id = IDs.ENEMY;
+        this.texture = new Texture(Gdx.files.internal("Biology.png"));
         this.idCode = 10;
         this.gold = 300;
         this.points = 4500;

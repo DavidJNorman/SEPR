@@ -70,7 +70,11 @@ public class CombatScreen implements Screen {
 
         background = new Texture(Gdx.files.internal("Background.png"));
         playerimg = new Texture(Gdx.files.internal("Player.png"));
-        enemy = new Texture(Gdx.files.internal("Enemy.png"));
+        if (character instanceof Building){
+            enemy = ((Building) character).texture;
+        }else {
+            enemy = new Texture(Gdx.files.internal("Enemy.png"));
+        }
         batch = new SpriteBatch();
         ehlabel = new Label(String.valueOf(character.getStructureHealth()),skin);
         phlabel = new Label(String.valueOf(phealth),skin);
