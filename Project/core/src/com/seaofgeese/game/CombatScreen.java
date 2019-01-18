@@ -19,7 +19,6 @@ public class CombatScreen implements Screen {
     private MainGame parent;
     private Stage stage;
 
-    //private Label title;
     private Label phlabel;
     private Label ehlabel;
     private Label ehtitle;
@@ -45,17 +44,14 @@ public class CombatScreen implements Screen {
         test = ldrbrd.split(" - ");
 
         this.character = character;
-//        Gdx.app.log("Index2: ", Integer.toString(((Ship)this.character).getIndex()));
         parent = mainGame;
         player = parent.getPlayer();
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
         phealth = player.structureHealth;
-        //instanceTyping();
         if(character.getIdType() == Character.IDs.FRIENDLY){
             parent.changeScreen(parent.GAME);
         }
-        //Random random = new Random();
 
     }
     @Override
@@ -110,97 +106,42 @@ public class CombatScreen implements Screen {
         stage.addActor(tHealth);
         stage.addActor(table);
 
-
-        //table.add().width(800);
-       // sound.play();
-        //title = new Label("Combat",skin);
-        //table.add(title);
-
-
         pAttack.addListener(new ChangeListener() {
 
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                character.setStructureHealth(p_attack(character.getStructureHealth(), dmgmult));
+                p_attack();
                 dmgmult = 1;
-                if (enemyChoice==0) {
-                    phealth = e_attack(phealth, edmgmult);
-                    healthcheck();
-                    edmgmult = 1;
-                }else{
-                    edmgmult = edmgmult*2;
-                }
-                Gdx.app.log("0:", Integer.toString(parent.getShip(0).getStructureHealth()));
-                Gdx.app.log("1:", Integer.toString(parent.getShip(1).getStructureHealth()));
-                Gdx.app.log("2:", Integer.toString(parent.getShip(2).getStructureHealth()));
-                Gdx.app.log("3:", Integer.toString(parent.getShip(3).getStructureHealth()));
-
+                e_attack();
             }
         });
         spAttack.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 dmgmult = p_sAttack(dmgmult);
-                if(enemyChoice==0) {
-                    phealth = e_attack(phealth, edmgmult);
-                    healthcheck();
-                    edmgmult = 1;
-                }else{
-                    edmgmult = edmgmult*2;
-                }
+                e_attack();
             }
         });
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
                 phealth = phealth-10;
-
                 stage.clear();
-
                 parent.changeScreen(MainGame.GAME);
-
                 healthcheck();
-
             }
         });
     }
-    //public int e_attack(int phealth){
-
-    //}
-
-   /* public void instanceTyping(){
-        if(this.character instanceof Building){
-            this.character = parent.getBuildingArray()[4];                     //TODO: Find out how to find the index
-            ehealth = this.character.getStructureHealth();
-        }
-        else if(this.character instanceof Ship){
-            ehealth = this.character.getStructureHealth();
-        }
-    }*/
-
 
     public void healthcheck(){
-
         if (phealth<=0){
-
-           // Gdx.app.log(String.valueOf(player.getStructureHealth(),String.valueOf(player.getStructureHealth()));
             parent.changeScreen(MainGame.ENDGAME);
-//            for (int i = 1; i<test.length; i+=2){
-//                if (player.getPoints()>Integer.parseInt(test[i])){
-//                    txtUsername = new TextField("", mSkin);
-//                    txtUsername.setMessageText("test");
-//                    txtUsername.setPosition(30, 30);
-//                    mStage.addActor(txtUsername);
-//                    String test = txtUsername.getText();
-//                    System.out.println(test);
-  //              }
-            }
         }
-    //}
+    }
 
 
-    public int p_attack(int enemyHealth, int dmgmult){
+    public void p_attack(){
+        int enemyHealth = character.getStructureHealth();
         enemyHealth = enemyHealth-(parent.getPlayer().getNoOfCannons()*dmgmult);
         if (enemyHealth<=0){
             enemyHealth = 0;
@@ -209,52 +150,56 @@ public class CombatScreen implements Screen {
             if((this.character instanceof Building) && (((Building) this.character).id == Character.IDs.NEUTRAL)){
                 ((Building) this.character).id = Character.IDs.FRIENDLY;
             }
-
             if(this.character instanceof Ship){
                 parent.getWorld().destroyBody(((Ship) this.character).b2body);
+                parent.setShipToNull(((Ship) this.character).getIndex());
+                parent.fillShipArray();
             }
             parent.changeScreen(parent.GAME);
 
         }
-        return enemyHealth;
+        character.setStructureHealth(enemyHealth);
     }
-
 
     public int p_sAttack(int dmgmult){
         dmgmult = dmgmult *2;
         return dmgmult;
     }
 
-    public int e_attack(int phealth, int edmgmult){
-        phealth = phealth-(character.getNoOfCannons()*edmgmult);
-        return phealth;
+    public void e_attack() {
+        if (enemyChoice == 0) {
+            this.phealth = this.phealth - (character.getNoOfCannons() * edmgmult);
+            healthcheck();
+            this.edmgmult = 1;
+        } else {
+            this.edmgmult = this.edmgmult * 2;
+        }
     }
 
     @Override
     public void render(float delta) {
-    //Clears the screen
-            Gdx.gl.glClearColor(0f, 0f, 0f, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            //Draws
-            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
-            batch.begin();
+        //Clears the screen
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Draws
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
+        batch.begin();
 
-            batch.draw(background,0,0);
-            batch.draw(playerimg, 400, 500);
-            batch.draw(enemy, 1000, 500);
-            batch.end();
+        batch.draw(background,0,0);
+        batch.draw(playerimg, 400, 500);
+        batch.draw(enemy, 1000, 500);
+        batch.end();
 
-            ehlabel.setText(String.valueOf(character.getStructureHealth()));
-            phlabel.setText(String.valueOf(phealth));
-            player.setStructureHealth(phealth);
+        ehlabel.setText(String.valueOf(character.getStructureHealth()));
+        phlabel.setText(String.valueOf(phealth));
+        player.setStructureHealth(phealth);
 
-            enemyChoice = random.nextInt(2);
+        enemyChoice = random.nextInt(2);
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
         }
-            stage.draw();
+        stage.draw();
     }
-
 
     @Override
     public void resize(int width, int height) {
@@ -286,22 +231,4 @@ public class CombatScreen implements Screen {
         return character;
     }
 
-//    public void enemyAttack(){
-//        int EnemyCannons = this.character.getNoOfCannons();
-//        parent.getPlayer().healthUpdate(EnemyCannons);
-//        if(parent.getPlayer().getStructureHealth() == 0){
-//            parent.changeScreen(parent.ENDGAME);
-//        }
-//    }
-
-//    public void playerAttack(){
-//        int PlayerCannons = parent.getPlayer().getNoOfCannons();
-//        this.character.healthUpdate(PlayerCannons);
-//        if(this.character.getStructureHealth() == 0){
-//            parent.getPlayer().UpdatePoints(this.character.getPoints());
-//            parent.getPlayer().UpdateGold(this.character.getGold());
-//
-//            parent.changeScreen(parent.GAME);
-//        }
-//    }
 }
