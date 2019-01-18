@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class Ship extends Character {
     protected World world;
-
     public Body b2body;
+    private int index;
 
     public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
@@ -34,7 +34,7 @@ public class Ship extends Character {
         b2body.createFixture(fixtureDef).setUserData(this);
     }
 
-    public Ship(MainGame game, int lowerx, int upperx, int lowery, int uppery) {
+    public Ship(MainGame game, int index, int lowerx, int upperx, int lowery, int uppery) {
         super(game);
         this.gold = 100;
         this.id = IDs.ENEMY;
@@ -43,6 +43,7 @@ public class Ship extends Character {
         this.idCode = 7;
         this.noOfCannons = 1;
         this.world = game.getWorld();
+        this.index = index;
         setPosition(genCoordinate(lowerx,upperx), genCoordinate(lowery,uppery));
         defineEnemy();
     }
@@ -57,5 +58,9 @@ public class Ship extends Character {
         return coordinate;
     }
 
+    public int getIndex()
+    {
+        return index;
+    }
 
 }

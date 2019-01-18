@@ -37,7 +37,8 @@ public class MainGame extends Game {
 	public SpriteBatch batch;
 	private World world;
 	private Player player;
-	private Ship ship;
+	private Ship[] shipArray;
+	private int totalShips = 10;
 	private Building vanbrughCollege, jamesCollege, halifaxCollege, physicsDepartment, biologyDepartment;
 	protected Building[] buildingArray;
 
@@ -53,7 +54,8 @@ public class MainGame extends Game {
 
 		player = new Player(this);
 
-		ship = new Ship(this,50,100, 50, 100);
+		shipArray = new Ship[4];
+		fillShipArray();
 
 		vanbrughCollege = new Building(this);
 		jamesCollege = new Building(this);
@@ -99,7 +101,7 @@ public class MainGame extends Game {
 	public void changeScreen(int screen, Character character) {
 		switch (screen) {
 			case COMBAT:
-				if (combatScreen == null) combatScreen = new CombatScreen(this, character);    //TODO Pass enemy into this
+				combatScreen = new CombatScreen(this, character);    //TODO Pass enemy into this
 				this.setScreen(combatScreen);
 				break;
 		}
@@ -117,9 +119,60 @@ public class MainGame extends Game {
 		return player;
 	}
 
-	public Ship getShip(){
-		return ship;
+	private boolean checkTotalShips()
+	{
+		boolean b;
+		if(totalShips > 0)
+		{
+			b = true;
+		}
+		else
+		{
+			b = false;
+		}
+		return b;
 	}
+
+	private void fillShipArray() {
+		for(int i = 0; i < 4; i++)
+		{
+			if(checkTotalShips())
+			{
+				if(shipArray[i] == null)
+				{
+					shipArray[i] = new Ship(this, i,50,100,50,100);
+					totalShips = totalShips - 1;
+				}
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	public int getIndexOfShip(Character character) {
+		int index = -1;
+		for(int i = 0; i < 4; i++)
+		{
+			if(shipArray[i].equals(character))
+			{
+				index = i;
+			}
+		}
+		return index;
+	}
+
+	public Ship[] getShipArray()
+	{
+		return shipArray;
+	}
+
+	public Ship getShip(int i)
+	{
+		return shipArray[i];
+	}
+
 
 	public Building[] getBuildingArray(){
 		return buildingArray;
