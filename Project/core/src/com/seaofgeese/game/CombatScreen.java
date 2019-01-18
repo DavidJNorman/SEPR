@@ -3,7 +3,6 @@ package com.seaofgeese.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
-import java.util.Random;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
@@ -34,28 +31,28 @@ public class CombatScreen implements Screen {
     SpriteBatch batch;
     //Sound sound;
     int phealth;
-    int ehealth;
     int dmgmult = 1;
     int edmgmult = 1;
-    Character MyNewEnemy;
+    Character character;
     private int enemyChoice;
     Player player;
     FileHandle handle = Gdx.files.internal("leaderboardfile.txt");
     String ldrbrd;
     String[] test;
 
-    public CombatScreen(MainGame mainGame, Character MyNewEnemy){
+    public CombatScreen(MainGame mainGame, Character character){
         ldrbrd = handle.readString();
         test = ldrbrd.split(" - ");
 
-        this.MyNewEnemy = MyNewEnemy;
+        this.character = character;
+        Gdx.app.log("Index2: ", Integer.toString(((Ship)this.character).getIndex()));
         parent = mainGame;
         player = parent.getPlayer();
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
         phealth = player.structureHealth;
-        instanceTyping();
-        if(MyNewEnemy.getIdType() == Character.IDs.FRIENDLY){
+        //instanceTyping();
+        if(character.getIdType() == Character.IDs.FRIENDLY){
             parent.changeScreen(parent.GAME);
         }
         //Random random = new Random();
@@ -75,7 +72,7 @@ public class CombatScreen implements Screen {
         playerimg = new Texture(Gdx.files.internal("Player.png"));
         enemy = new Texture(Gdx.files.internal("Enemy.png"));
         batch = new SpriteBatch();
-        ehlabel = new Label(String.valueOf(ehealth),skin);
+        ehlabel = new Label(String.valueOf(character.getStructureHealth()),skin);
         phlabel = new Label(String.valueOf(phealth),skin);
         ehtitle = new Label("Enemy Health:", skin);
         ptitle = new Label("Player Health:", skin);
@@ -120,7 +117,7 @@ public class CombatScreen implements Screen {
 
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                ehealth = p_attack(ehealth, dmgmult);
+                character.setStructureHealth(p_attack(character.getStructureHealth(), dmgmult));
                 dmgmult = 1;
                 if (enemyChoice==0) {
                     phealth = e_attack(phealth, edmgmult);
@@ -129,8 +126,10 @@ public class CombatScreen implements Screen {
                 }else{
                     edmgmult = edmgmult*2;
                 }
-
-
+                Gdx.app.log("0:", Integer.toString(parent.getShip(0).getStructureHealth()));
+                Gdx.app.log("1:", Integer.toString(parent.getShip(1).getStructureHealth()));
+                Gdx.app.log("2:", Integer.toString(parent.getShip(2).getStructureHealth()));
+                Gdx.app.log("3:", Integer.toString(parent.getShip(3).getStructureHealth()));
 
             }
         });
@@ -166,16 +165,15 @@ public class CombatScreen implements Screen {
 
     //}
 
-    public void instanceTyping(){
-        if(this.MyNewEnemy instanceof Building){
-            this.MyNewEnemy = parent.getBuildingArray()[4];                     //TODO: Find out how to find the index
-            ehealth = this.MyNewEnemy.getStructureHealth();
+   /* public void instanceTyping(){
+        if(this.character instanceof Building){
+            this.character = parent.getBuildingArray()[4];                     //TODO: Find out how to find the index
+            ehealth = this.character.getStructureHealth();
         }
-        else if(this.MyNewEnemy instanceof Ship){
-            this.MyNewEnemy = parent.getShip();                                  //TODO: Jordan: Will also be in an array
-            ehealth = this.MyNewEnemy.getStructureHealth();
+        else if(this.character instanceof Ship){
+            ehealth = this.character.getStructureHealth();
         }
-    }
+    }*/
 
 
     public void healthcheck(){
@@ -202,10 +200,10 @@ public class CombatScreen implements Screen {
         enemyHealth = enemyHealth-(parent.getPlayer().getNoOfCannons()*dmgmult);
         if (enemyHealth<=0){
             enemyHealth = 0;
-            parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
-            parent.getPlayer().UpdateGold(this.MyNewEnemy.getGold());
-            if((this.MyNewEnemy instanceof Building) && (this.MyNewEnemy.getIdType() == Character.IDs.NEUTRAL)){
-                this.MyNewEnemy.setIdType(Character.IDs.FRIENDLY);
+            parent.getPlayer().UpdatePoints(this.character.getPoints());
+            parent.getPlayer().UpdateGold(this.character.getGold());
+            if((this.character instanceof Building) && (this.character.getIdType() == Character.IDs.NEUTRAL)){
+                this.character.setIdType(Character.IDs.FRIENDLY);
             }
             parent.changeScreen(parent.GAME);
 
@@ -220,7 +218,7 @@ public class CombatScreen implements Screen {
     }
 
     public int e_attack(int phealth, int edmgmult){
-        phealth = phealth-(parent.getShip().getNoOfCannons()*edmgmult);
+        phealth = phealth-(character.getNoOfCannons()*edmgmult);
         return phealth;
     }
 
@@ -238,7 +236,7 @@ public class CombatScreen implements Screen {
             batch.draw(enemy, 1000, 500);
             batch.end();
 
-            ehlabel.setText(String.valueOf(ehealth));
+            ehlabel.setText(String.valueOf(character.getStructureHealth()));
             phlabel.setText(String.valueOf(phealth));
             player.setStructureHealth(phealth);
 
@@ -275,8 +273,13 @@ public class CombatScreen implements Screen {
         stage.dispose();
     }
 
+    public Character getCharacter()
+    {
+        return character;
+    }
+
 //    public void enemyAttack(){
-//        int EnemyCannons = this.MyNewEnemy.getNoOfCannons();
+//        int EnemyCannons = this.character.getNoOfCannons();
 //        parent.getPlayer().healthUpdate(EnemyCannons);
 //        if(parent.getPlayer().getStructureHealth() == 0){
 //            parent.changeScreen(parent.ENDGAME);
@@ -285,10 +288,10 @@ public class CombatScreen implements Screen {
 
 //    public void playerAttack(){
 //        int PlayerCannons = parent.getPlayer().getNoOfCannons();
-//        this.MyNewEnemy.healthUpdate(PlayerCannons);
-//        if(this.MyNewEnemy.getStructureHealth() == 0){
-//            parent.getPlayer().UpdatePoints(this.MyNewEnemy.getPoints());
-//            parent.getPlayer().UpdateGold(this.MyNewEnemy.getGold());
+//        this.character.healthUpdate(PlayerCannons);
+//        if(this.character.getStructureHealth() == 0){
+//            parent.getPlayer().UpdatePoints(this.character.getPoints());
+//            parent.getPlayer().UpdateGold(this.character.getGold());
 //
 //            parent.changeScreen(parent.GAME);
 //        }

@@ -100,7 +100,7 @@ public class QueststateController {
 
     //BATTLE
     public void EndOfBattleFunction(){ //Pass ID into parameters and run our updates after battle.
-        Character enemy = this.maingame.getCombatScreen().getMyNewEnemy();
+        Character enemy = this.maingame.getCombatScreen().getCharacter();
         final int targetPointVal = enemy.getPoints();
         final int targetGoldVal = enemy.getGold();
         UpdateQuests(enemy.getId());             //Runs the main quest updater

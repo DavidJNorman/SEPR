@@ -31,10 +31,10 @@ public class GameContactListener implements ContactListener {
             }
 
             if(collidedObj.getUserData() instanceof Ship){
+                Gdx.app.log("Index", Integer.toString(((Ship)collidedObj.getUserData()).getIndex()));
                 ((Ship)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
-
             }
         }
     }

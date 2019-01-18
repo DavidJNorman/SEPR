@@ -20,7 +20,6 @@ import com.seaofgeese.game.MenuScreen;
 public class MainScreen implements Screen {
     private MainGame parent;
 
-
     private Hud hud;
 
     private OrthographicCamera gamecam;
@@ -34,11 +33,6 @@ public class MainScreen implements Screen {
     private Box2DDebugRenderer debugRenderer;
 
     private Player player;
-
-    private Ship ship;
-
-
-
 
     public MainScreen(MainGame mainGame) {
 
@@ -55,16 +49,11 @@ public class MainScreen implements Screen {
         world = parent.getWorld();
         debugRenderer = new Box2DDebugRenderer();
 
-
         world.setContactListener(new GameContactListener(parent));
 
         player = parent.getPlayer();
-        ship = parent.getShip();
-
 
         new WorldCollisionCreator(this);
-
-
 
     }
 
@@ -103,7 +92,6 @@ public class MainScreen implements Screen {
     @Override
     public void show() {
 
-
     }
 
     public float getWroldHeight(){
@@ -136,9 +124,11 @@ public class MainScreen implements Screen {
 
 
     }
+
     public Player getPlayer(){
         return player;
     }
+
     @Override
     public void resize(int width, int height) {
         gamePort.update(width, height);
