@@ -13,6 +13,20 @@ public class Ship extends Character {
     public Body b2body;
     private int index;
 
+    public Ship(MainGame game, int index, int lowerx, int upperx, int lowery, int uppery) {
+        super(game);
+        this.gold = 100;
+        this.id = IDs.ENEMY;
+        this.structureHealth = 100;
+        this.points = 100;
+        this.idCode = 7;
+        this.noOfCannons = 1;
+        this.world = game.getWorld();
+        this.index = index;
+        setPosition(genCoordinate(lowerx,upperx), genCoordinate(lowery,uppery));
+        defineEnemy();
+    }
+
     public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
         mainGame.changeScreen(MainGame.COMBAT, this);
@@ -32,20 +46,6 @@ public class Ship extends Character {
         fixtureDef.filter.maskBits = MainGame.DEFAULT_BIT | MainGame.ENEMY_BIT | MainGame.PLAYER_BIT;
 
         b2body.createFixture(fixtureDef).setUserData(this);
-    }
-
-    public Ship(MainGame game, int index, int lowerx, int upperx, int lowery, int uppery) {
-        super(game);
-        this.gold = 100;
-        this.id = IDs.ENEMY;
-        this.structureHealth = 100;
-        this.points = 100;
-        this.idCode = 7;
-        this.noOfCannons = 1;
-        this.world = game.getWorld();
-        this.index = index;
-        setPosition(genCoordinate(lowerx,upperx), genCoordinate(lowery,uppery));
-        defineEnemy();
     }
 
     public float genCoordinate(int lower, int upper)

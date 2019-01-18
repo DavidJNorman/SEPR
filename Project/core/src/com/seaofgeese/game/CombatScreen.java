@@ -49,9 +49,6 @@ public class CombatScreen implements Screen {
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
         phealth = player.structureHealth;
-        if(character.getIdType() == Character.IDs.FRIENDLY){
-            parent.changeScreen(parent.GAME);
-        }
 
     }
     @Override
@@ -149,6 +146,10 @@ public class CombatScreen implements Screen {
             parent.getPlayer().UpdateGold(this.character.getGold());
             if((this.character instanceof Building) && (((Building) this.character).id == Character.IDs.NEUTRAL)){
                 ((Building) this.character).id = Character.IDs.FRIENDLY;
+                if(((Building) this.character).idCode == 6){
+                    parent.changeScreen(parent.WINGAME);    //This doesn't work if you call it statically.
+                    return;
+                }
             }
             if(this.character instanceof Ship){
                 parent.getWorld().destroyBody(((Ship) this.character).b2body);
@@ -159,6 +160,9 @@ public class CombatScreen implements Screen {
 
         }
         character.setStructureHealth(enemyHealth);
+        if (enemyHealth<=0) {
+            resetCollegeHealth();
+        }
     }
 
     public int p_sAttack(int dmgmult){
@@ -173,6 +177,17 @@ public class CombatScreen implements Screen {
             this.edmgmult = 1;
         } else {
             this.edmgmult = this.edmgmult * 2;
+        }
+    }
+
+    public void resetCollegeHealth(){
+        if((this.character instanceof Building) && (((Building) this.character).id == Character.IDs.ENEMY)){
+            if(((Building) this.character).idCode == 9){
+                ((Building) this.character).structureHealth = 300; //TODO this doesn't assign it again
+            }
+            else if(((Building) this.character).idCode == 10){
+                ((Building) this.character).structureHealth = 350; //TODO this doesn't assign it again
+            }
         }
     }
 

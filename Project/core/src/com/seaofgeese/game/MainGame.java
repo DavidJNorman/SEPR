@@ -19,6 +19,7 @@ public class MainGame extends Game {
 	private LeaderboardScreen leaderboardScreen;
 	private PreferencesScreen preferencesScreen;
 	private CombatScreen combatScreen;
+	private WinScreen winScreen;
 
 	//Constants
 	public final static int MENU = 0;
@@ -27,6 +28,7 @@ public class MainGame extends Game {
 	public final static int ENDGAME = 3;
 	public final static int PREFERENCES = 4;
 	public final static int COMBAT = 5;
+	public final static int WINGAME = 6;
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public static final short DEFAULT_BIT = 1;
@@ -100,6 +102,10 @@ public class MainGame extends Game {
 			case PREFERENCES:
 				if(preferencesScreen == null) preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
+				break;
+			case WINGAME:
+				if(winScreen == null) winScreen = new WinScreen(this);
+				this.setScreen(winScreen);
 				break;
 
 		}

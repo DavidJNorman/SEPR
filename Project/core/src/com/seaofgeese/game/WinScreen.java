@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class EndScreen implements Screen {
+ class WinScreen implements Screen {
     private MainGame parent;
     private Stage stage;
     Texture end;
     SpriteBatch batch;
-    public EndScreen(MainGame mainGame){
+    public WinScreen(MainGame mainGame){
 
         parent = mainGame;
         stage = new Stage(new ScreenViewport());
@@ -23,7 +23,7 @@ public class EndScreen implements Screen {
     public void show() {
         stage.clear();
         Gdx.input.setInputProcessor(stage);
-        end = new Texture(Gdx.files.internal("YouLose.png"));
+        end = new Texture(Gdx.files.internal("victory.png"));
         batch = new SpriteBatch();
     }
 
