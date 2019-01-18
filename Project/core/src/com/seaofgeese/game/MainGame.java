@@ -141,7 +141,7 @@ public class MainGame extends Game {
 		return b;
 	}
 
-	private void fillShipArray() {
+	public void fillShipArray() {
 		for(int i = 0; i < 4; i++)
 		{
 			if(checkTotalShips())
@@ -159,28 +159,14 @@ public class MainGame extends Game {
 		}
 	}
 
-	public int getIndexOfShip(Character character) {
-		int index = -1;
-		for(int i = 0; i < 4; i++)
-		{
-			if(shipArray[i].equals(character))
-			{
-				index = i;
-			}
-		}
-		return index;
-	}
-
-	public Ship[] getShipArray()
-	{
-		return shipArray;
+	public void setShipToNull(int index){
+		shipArray[index] = null;
 	}
 
 	public Ship getShip(int i)
 	{
 		return shipArray[i];
 	}
-
 
 	public Building[] getBuildingArray(){
 		return buildingArray;
@@ -203,5 +189,3 @@ public class MainGame extends Game {
 		batch.dispose();
 	}
 }
-
-
