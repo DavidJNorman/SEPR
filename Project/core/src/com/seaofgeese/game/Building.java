@@ -1,17 +1,37 @@
 package com.seaofgeese.game;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+
 //Building
 public class Building extends Character {
     public IDs id;
+    protected World world;
+    protected TiledMap map;
+    private Body body;
+    private Fixture fixture;
 
-    public Building(MainGame mainGame){
+    public Building(MainGame mainGame, int layerIndex) {
         super(mainGame);
+        this.world = mainGame.getWorld();
+        this.map = mainGame.getMap();
+        defineBuilding(layerIndex);
+
 
     }
 
 
-    public void setVanbrughBoss(){
+    public void setVanbrughBoss() {
         this.id = IDs.NEUTRAL;
         this.idCode = 2;
         this.gold = 60;
@@ -22,7 +42,7 @@ public class Building extends Character {
     }
 
 
-    public void setJamesBoss(){
+    public void setJamesBoss() {
         this.id = IDs.NEUTRAL;
         this.idCode = 4;
         this.gold = 90;
@@ -33,7 +53,7 @@ public class Building extends Character {
     }
 
 
-    public void setHalifaxBoss(){
+    public void setHalifaxBoss() {
         this.id = IDs.NEUTRAL;
         this.idCode = 6;
         this.gold = 250;
@@ -43,7 +63,7 @@ public class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-    public void setPhysicsDepartment(){
+    public void setPhysicsDepartment() {
         this.id = IDs.ENEMY;
         this.idCode = 9;
         this.gold = 250;
@@ -53,7 +73,7 @@ public class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-    public void setBiologyDepartment(){
+    public void setBiologyDepartment() {
 
         this.id = IDs.ENEMY;
         this.idCode = 10;
@@ -62,5 +82,28 @@ public class Building extends Character {
         this.noOfCannons = 4;
         this.maxStructureHealth = 350;
         this.structureHealth = this.maxStructureHealth;
+    }
+
+    public void defineBuilding(int layerIndex) {
+        for (MapObject object : map.getLayers().get(layerIndex).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            BodyDef bDef = new BodyDef();
+            PolygonShape shape = new PolygonShape();
+            FixtureDef fDef = new FixtureDef();
+
+            bDef.type = BodyDef.BodyType.StaticBody;
+            bDef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+            body = world.createBody(bDef);
+
+            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
+            fDef.shape = shape;
+            fixture = body.createFixture(fDef);
+            fixture.setUserData(this);
+        }
+    }
+    public void startBattle(MainGame mainGame) {
+        Gdx.app.log("Enemy","StartBattle");
+        mainGame.changeScreen(MainGame.COMBAT, this);
     }
 }

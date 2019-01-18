@@ -66,7 +66,7 @@ public class Player extends Character {
         fixtureDef.filter.categoryBits = MainGame.PLAYER_BIT;
         fixtureDef.filter.maskBits = MainGame.DEFAULT_BIT | MainGame.ENEMY_BIT;
 
-        b2body.createFixture(fixtureDef).setUserData("Player");
+        b2body.createFixture(fixtureDef).setUserData(this);
 
 
 

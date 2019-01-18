@@ -11,6 +11,7 @@ import com.seaofgeese.game.MainGame;
 public class GameContactListener implements ContactListener {
     private MainGame mainGame;
     private Ship test;
+    Fixture collidedObj;
     public GameContactListener(MainGame mainGame){
         this.mainGame = mainGame;
     }
@@ -22,9 +23,9 @@ public class GameContactListener implements ContactListener {
 
 
 
-        if(fixA.getUserData() == "Player" || fixB.getUserData() == "Player"){
-            Fixture player = fixA.getUserData() == "Player" ? fixA : fixB;
-            Fixture collidedObj = fixA == player ? fixB : fixA;
+        if(fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player){
+            Fixture player = fixA.getUserData() instanceof Player ? fixA : fixB;
+            collidedObj = fixA == player ? fixB : fixA;
 
             if(collidedObj.getUserData() instanceof StaticInteractiveCollisionObject){
                 ((StaticInteractiveCollisionObject) collidedObj.getUserData()).collided();
@@ -32,9 +33,18 @@ public class GameContactListener implements ContactListener {
 
             if(collidedObj.getUserData() instanceof Ship){
                 Gdx.app.log("Index", Integer.toString(((Ship)collidedObj.getUserData()).getIndex()));
+
                 ((Ship)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
+            }
+
+            if(collidedObj.getUserData() instanceof Building){
+                if((((Building)collidedObj.getUserData()).id != Character.IDs.FRIENDLY)){
+                    ((Building)collidedObj.getUserData()).startBattle(mainGame);
+                }else{
+                    ((Player)player.getUserData()).structureHealth = ((Player)player.getUserData()).maxStructureHealth;
+                }
             }
         }
     }

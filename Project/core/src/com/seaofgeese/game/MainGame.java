@@ -3,6 +3,8 @@ package com.seaofgeese.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -42,6 +44,9 @@ public class MainGame extends Game {
 	private Building vanbrughCollege, jamesCollege, halifaxCollege, physicsDepartment, biologyDepartment;
 	protected Building[] buildingArray;
 
+	private TiledMap map;
+	private TmxMapLoader mapLoader;
+
 	@Override
 	//Method run first that initialises the application and needed variables/objects
 	public void create() {
@@ -52,16 +57,19 @@ public class MainGame extends Game {
 		batch = new SpriteBatch();
 		world = new World(new Vector2(0, 0), true);
 
+		mapLoader = new TmxMapLoader();
+		map = mapLoader.load("map1.tmx");
+
 		player = new Player(this);
 
 		shipArray = new Ship[4];
 		fillShipArray();
 
-		vanbrughCollege = new Building(this);
-		jamesCollege = new Building(this);
-		halifaxCollege = new Building(this);
-		physicsDepartment = new Building(this);
-		biologyDepartment = new Building(this);
+		vanbrughCollege = new Building(this,3);
+		jamesCollege = new Building(this,4);
+		halifaxCollege = new Building(this,7);
+		physicsDepartment = new Building(this,5);
+		biologyDepartment = new Building(this,6);
 		vanbrughCollege.setVanbrughBoss();
 		jamesCollege.setJamesBoss();
 		halifaxCollege.setHalifaxBoss();
@@ -184,6 +192,10 @@ public class MainGame extends Game {
 
 	public AppPreferences getPreferences(){
 		return this.preferences;
+	}
+
+	public TiledMap getMap(){
+		return map;
 	}
 
 	@Override

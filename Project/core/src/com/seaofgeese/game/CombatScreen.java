@@ -45,7 +45,7 @@ public class CombatScreen implements Screen {
         test = ldrbrd.split(" - ");
 
         this.character = character;
-        Gdx.app.log("Index2: ", Integer.toString(((Ship)this.character).getIndex()));
+//        Gdx.app.log("Index2: ", Integer.toString(((Ship)this.character).getIndex()));
         parent = mainGame;
         player = parent.getPlayer();
         stage = new Stage(new ScreenViewport());
@@ -202,8 +202,12 @@ public class CombatScreen implements Screen {
             enemyHealth = 0;
             parent.getPlayer().UpdatePoints(this.character.getPoints());
             parent.getPlayer().UpdateGold(this.character.getGold());
-            if((this.character instanceof Building) && (this.character.getIdType() == Character.IDs.NEUTRAL)){
-                this.character.setIdType(Character.IDs.FRIENDLY);
+            if((this.character instanceof Building) && (((Building) this.character).id == Character.IDs.NEUTRAL)){
+                ((Building) this.character).id = Character.IDs.FRIENDLY;
+            }
+
+            if(this.character instanceof Ship){
+                parent.getWorld().destroyBody(((Ship) this.character).b2body);
             }
             parent.changeScreen(parent.GAME);
 

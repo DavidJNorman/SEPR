@@ -10,7 +10,7 @@ public class DesktopLauncher {
 		config.foregroundFPS = 60;
 		config.width = 1920;
 		config.height = 1080;
-		config.fullscreen = false;
+		config.fullscreen = true;
 		new LwjglApplication(new MainGame(), config);
 	}
 }
