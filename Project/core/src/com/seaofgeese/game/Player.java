@@ -2,6 +2,7 @@ package com.seaofgeese.game;
 
 
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -11,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Player extends Character {
     public World world;
     public Body b2body;
+
+    protected Texture texture;
 
     public Player(MainGame game){
         //player attribute
@@ -25,6 +28,8 @@ public class Player extends Character {
 
 
         this.world = game.getWorld();
+
+        this.texture = new Texture("badlogic.jpg");
         //define player box2d
         definePlayer();
     }
@@ -67,6 +72,11 @@ public class Player extends Character {
         b2body.createFixture(fixtureDef).setUserData(this);
 
 
+
+    }
+
+    public void update(float delta){
+        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
 
     }
 

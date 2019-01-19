@@ -71,6 +71,7 @@ public class MainScreen implements Screen {
 
             renderer.setView(gamecam);
             hud.update(delta);
+            player.update(delta);
 
 
         }
@@ -116,6 +117,12 @@ public class MainScreen implements Screen {
         renderer.render();
 
         debugRenderer.render(world, gamecam.combined);
+
+        parent.batch.setProjectionMatrix(gamecam.combined);
+        parent.batch.begin();
+        parent.batch.draw(player.texture,player.b2body.getPosition().x - 6,player.b2body.getPosition().y - 6, 16,16);
+        parent.batch.end();
+
         parent.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
