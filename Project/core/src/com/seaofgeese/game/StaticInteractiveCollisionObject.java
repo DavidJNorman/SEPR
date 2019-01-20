@@ -23,7 +23,7 @@ public abstract class StaticInteractiveCollisionObject {
     protected Fixture fixture;
 
     StaticInteractiveCollisionObject(MainScreen screen, Rectangle rect){
-        this.world = screen.getWrold();
+        this.world = screen.getWorld();
         this.map = screen.getMap();
         this.rect = rect;
 

@@ -1,6 +1,5 @@
 package com.seaofgeese.game;
 
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -8,8 +7,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-
 public class MainGame extends Game {
+
+	private Constant constant = new Constant();
 
 	//Object for each screen within the application
 	private LoadingScreen loadingScreen;
@@ -42,7 +42,7 @@ public class MainGame extends Game {
 	private World world;
 	private Player player;
 	private Ship[] shipArray;
-	private int totalShips = 10;
+	private int totalShips;
 	private Building vanbrughCollege, jamesCollege, halifaxCollege, physicsDepartment, biologyDepartment;
 	protected Building[] buildingArray;
 
@@ -64,7 +64,8 @@ public class MainGame extends Game {
 
 		player = new Player(this);
 
-		shipArray = new Ship[4];
+		totalShips = constant.maxShips;
+		shipArray = new Ship[constant.shipSpawnNumber];
 		fillShipArray();
 
 		vanbrughCollege = new Building(this,3);
@@ -133,6 +134,7 @@ public class MainGame extends Game {
 		return player;
 	}
 
+	//Method that checks if the totalShips variable is greater than 0
 	private boolean checkTotalShips()
 	{
 		boolean b;
@@ -147,8 +149,9 @@ public class MainGame extends Game {
 		return b;
 	}
 
+	//If checkTotalShips() returns true then find the next null value in shipArray and create a new Ship
 	public void fillShipArray() {
-		for(int i = 0; i < 4; i++)
+		for(int i = 0; i < constant.shipSpawnNumber; i++)
 		{
 			if(checkTotalShips())
 			{
