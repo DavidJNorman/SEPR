@@ -10,8 +10,8 @@ import com.seaofgeese.game.MainGame;
 
 public class GameContactListener implements ContactListener {
     private MainGame mainGame;
-    private Ship test;
     Fixture collidedObj;
+
     public GameContactListener(MainGame mainGame){
         this.mainGame = mainGame;
     }
@@ -19,9 +19,6 @@ public class GameContactListener implements ContactListener {
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
-
-
-
 
         if(fixA.getUserData() instanceof Player || fixB.getUserData() instanceof Player){
             Fixture player = fixA.getUserData() instanceof Player ? fixA : fixB;

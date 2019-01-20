@@ -47,7 +47,7 @@ public class Ship extends Character {
 
         FixtureDef fixtureDef = new FixtureDef();
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(6);
+        circleShape.setRadius(8);
         fixtureDef.shape =circleShape;
         fixtureDef.filter.categoryBits = MainGame.ENEMY_BIT;
         fixtureDef.filter.maskBits = MainGame.DEFAULT_BIT | MainGame.ENEMY_BIT | MainGame.PLAYER_BIT;

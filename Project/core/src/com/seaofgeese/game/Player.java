@@ -72,7 +72,7 @@ public class Player extends Character {
 
         FixtureDef fixtureDef = new FixtureDef();
         CircleShape circleShape = new CircleShape();
-        circleShape.setRadius(6);
+        circleShape.setRadius(8);
         fixtureDef.shape =circleShape;
         fixtureDef.filter.categoryBits = MainGame.PLAYER_BIT;
         fixtureDef.filter.maskBits = MainGame.DEFAULT_BIT | MainGame.ENEMY_BIT;
@@ -83,52 +83,37 @@ public class Player extends Character {
 
     }
 
-    public void update(float delta){
-//        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
-        System.out.print(this.b2body.getLinearVelocity()+" ");
+    public float calculateRotation(float x, float y)
+    {
+        float degrees = 0;
+        double rads = 0;
 
-
-
-
-
-
-
-
-
-    }
-
-    public double getDirection() {
-
-        float xVelocity = b2body.getLinearVelocity().x;
-        float yVelocity = b2body.getLinearVelocity().y;
-        float relativedifference = Math.abs(Math.abs(xVelocity) - Math.abs(yVelocity));
-        float condition = 20;
-
-
-        if (xVelocity == 0 && yVelocity == 0 ||yVelocity > 0 && relativedifference >= condition) {
-            degree = 0;
-        } else if (xVelocity > 0 && yVelocity > 0 && relativedifference < condition) {
-            degree = -45;
-        } else if (xVelocity < 0 && yVelocity > 0 && relativedifference < condition) {
-            degree = 45;
-        } else if(xVelocity < 0 && yVelocity < 0 && relativedifference < condition){
-            degree = 135;
-        }else if(xVelocity > 0 && yVelocity < 0 && relativedifference < condition){
-            degree = -135;
-        }else if(xVelocity > 0 && relativedifference >= condition){
-            degree = -90;
-        }else if(xVelocity < 0 && relativedifference >= condition){
-            degree = 90;
-        }else if(yVelocity < 0 && relativedifference >= condition){
-            degree = 180;
+        if((x == 0) && (y > 0)) {
+            degrees = 0;
+        } else if((x > 0) && (y == 0)) {
+            degrees = 90;
+        } else if((x == 0) && (y < 0)) {
+            degrees = 180;
+        } else if((x < 0) && (y == 0)) {
+            degrees = 270;
+        } else if((x > 0) && (y > 0)) {
+            rads = Math.atan(x/y);
+            degrees = (float)(Math.toDegrees(rads));
+        } else if((x > 0) && (y < 0)) {
+            rads = Math.atan((-y)/x);
+            degrees = (float)(Math.toDegrees(rads)) + 90;
+        } else if((x < 0) && (y < 0)) {
+            rads = Math.atan((-x)/(-y));
+            degrees = (float)(Math.toDegrees(rads)) + 180;
+        } else if((x < 0) && (y > 0)) {
+            rads = Math.atan(y/(-x));
+            degrees = (float)(Math.toDegrees(rads)) + 270;
         }
-        return degree;
 
+        return degrees;
     }
 
-
-
-    }
+}
 
 
 
