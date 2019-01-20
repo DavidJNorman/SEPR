@@ -109,7 +109,7 @@ public class MainScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        debugRenderer.render(world, gamecam.combined);
+        //debugRenderer.render(world, gamecam.combined);
 
         parent.batch.setProjectionMatrix(gamecam.combined);
         parent.batch.begin();
