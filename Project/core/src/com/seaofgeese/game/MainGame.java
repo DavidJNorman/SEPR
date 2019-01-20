@@ -194,4 +194,8 @@ public class MainGame extends Game {
 	public void dispose(){
 		batch.dispose();
 	}
+
+	public int getShipArrayLength(){
+		return shipArray.length;
+	}
 }

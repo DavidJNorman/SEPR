@@ -72,6 +72,9 @@ public class MainScreen implements Screen {
             renderer.setView(gamecam);
             hud.update(delta);
             player.update(delta);
+            for(int i = 0; i < parent.getShipArrayLength(); i++){
+                parent.getShip(i).update(delta);
+            }
 
 
         }
@@ -120,7 +123,14 @@ public class MainScreen implements Screen {
 
         parent.batch.setProjectionMatrix(gamecam.combined);
         parent.batch.begin();
-        parent.batch.draw(player.texture,player.b2body.getPosition().x - 6,player.b2body.getPosition().y - 6, 16,16);
+        parent.batch.draw(player.textureregion,player.b2body.getPosition().x - 6,player.b2body.getPosition().y - 6,8,8, 16,16,1,1,(float)player.getDirection());
+
+        for(int i = 0; i < parent.getShipArrayLength(); i++){
+            parent.batch.draw(parent.getShip(i).texture, parent.getShip(i).b2body.getPosition().x - 6,
+                    parent.getShip(i).b2body.getPosition().y - 6, 16, 16);
+        }
+
+
         parent.batch.end();
 
         parent.batch.setProjectionMatrix(hud.stage.getCamera().combined);

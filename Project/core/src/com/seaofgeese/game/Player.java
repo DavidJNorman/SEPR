@@ -3,6 +3,8 @@ package com.seaofgeese.game;
 
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -12,6 +14,11 @@ import com.badlogic.gdx.physics.box2d.World;
 public class Player extends Character {
     public World world;
     public Body b2body;
+    private float degree;
+
+
+
+    protected TextureRegion textureregion;
 
     protected Texture texture;
 
@@ -28,8 +35,9 @@ public class Player extends Character {
 
 
         this.world = game.getWorld();
+        this.texture = new Texture("boat.png");
 
-        this.texture = new Texture("badlogic.jpg");
+        this.textureregion = new TextureRegion(texture);
         //define player box2d
         definePlayer();
     }
@@ -76,10 +84,52 @@ public class Player extends Character {
     }
 
     public void update(float delta){
-        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+//        setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+        System.out.print(this.b2body.getLinearVelocity()+" ");
+
+
+
+
+
+
+
+
+
+    }
+
+    public double getDirection() {
+
+        float xVelocity = b2body.getLinearVelocity().x;
+        float yVelocity = b2body.getLinearVelocity().y;
+        float relativedifference = Math.abs(Math.abs(xVelocity) - Math.abs(yVelocity));
+        float condition = 20;
+
+
+        if (xVelocity == 0 && yVelocity == 0 ||yVelocity > 0 && relativedifference >= condition) {
+            degree = 0;
+        } else if (xVelocity > 0 && yVelocity > 0 && relativedifference < condition) {
+            degree = -45;
+        } else if (xVelocity < 0 && yVelocity > 0 && relativedifference < condition) {
+            degree = 45;
+        } else if(xVelocity < 0 && yVelocity < 0 && relativedifference < condition){
+            degree = 135;
+        }else if(xVelocity > 0 && yVelocity < 0 && relativedifference < condition){
+            degree = -135;
+        }else if(xVelocity > 0 && relativedifference >= condition){
+            degree = -90;
+        }else if(xVelocity < 0 && relativedifference >= condition){
+            degree = 90;
+        }else if(yVelocity < 0 && relativedifference >= condition){
+            degree = 180;
+        }
+        return degree;
 
     }
 
 
 
-}
+    }
+
+
+
+
