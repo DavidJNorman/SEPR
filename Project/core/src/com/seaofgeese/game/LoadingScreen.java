@@ -11,12 +11,17 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class LoadingScreen implements Screen {
 
-    private MainGame parent; //a field to store out orchestrator
+    private Constant constant = new Constant();
+
+    //Class Attributes
+    private MainGame parent;
     private Stage stage;
-    Texture logo;
+    private Texture logo;
     SpriteBatch batch;
     long startTime;
 
+    //Class constructor
+    //Params: Takes MainGame to use as an out operator
     public LoadingScreen(MainGame mainGame){
         parent = mainGame;
         stage = new Stage(new ScreenViewport());
@@ -42,7 +47,7 @@ public class LoadingScreen implements Screen {
         batch.end();
         stage.draw();
 
-        if(TimeUtils.timeSinceMillis(startTime) > 5000){
+        if(TimeUtils.timeSinceMillis(startTime) > constant.loadingScreenActiveTime){
             parent.changeScreen(MainGame.MENU);
         }
     }

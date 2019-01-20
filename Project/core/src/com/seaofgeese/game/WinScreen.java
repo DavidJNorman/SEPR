@@ -10,15 +10,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
  class WinScreen implements Screen {
+
     private MainGame parent;
     private Stage stage;
     Texture end;
     SpriteBatch batch;
+
     public WinScreen(MainGame mainGame){
 
         parent = mainGame;
         stage = new Stage(new ScreenViewport());
     }
+
     @Override
     public void show() {
         stage.clear();

@@ -29,7 +29,6 @@ public class CombatScreen implements Screen {
     Texture background;
     SpriteBatch batch;
     //Sound sound;
-    int phealth;
     int dmgmult = 1;
     int edmgmult = 1;
     Character character;
@@ -48,9 +47,8 @@ public class CombatScreen implements Screen {
         player = parent.getPlayer();
         stage = new Stage(new ScreenViewport());
         //sound = Gdx.audio.newSound(Gdx.files.internal("music.mp3"));
-        phealth = player.structureHealth;
-
     }
+
     @Override
     public void show() {
         stage.clear();
@@ -70,7 +68,7 @@ public class CombatScreen implements Screen {
         }
         batch = new SpriteBatch();
         ehlabel = new Label(String.valueOf(character.getStructureHealth()),skin);
-        phlabel = new Label(String.valueOf(phealth),skin);
+        phlabel = new Label(String.valueOf(player.getStructureHealth()),skin);
         ehtitle = new Label("Enemy Health:", skin);
         ptitle = new Label("Player Health:", skin);
 
@@ -103,6 +101,7 @@ public class CombatScreen implements Screen {
         stage.addActor(tHealth);
         stage.addActor(table);
 
+        //Listeners for each combat button
         pAttack.addListener(new ChangeListener() {
 
             @Override
@@ -122,7 +121,7 @@ public class CombatScreen implements Screen {
         flee.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                phealth = phealth-10;
+                player.setStructureHealth(player.getStructureHealth() - 10);
                 stage.clear();
                 parent.changeScreen(MainGame.GAME);
                 healthcheck();
@@ -130,13 +129,14 @@ public class CombatScreen implements Screen {
         });
     }
 
+    //Check players health, go to endgame if <= 0
     public void healthcheck(){
-        if (phealth<=0){
+        if (player.getStructureHealth()<=0){
             parent.changeScreen(MainGame.ENDGAME);
         }
     }
 
-
+    //Player attack method, calculate attack then handle if enemy is beaten
     public void p_attack(){
         int enemyHealth = character.getStructureHealth();
         enemyHealth = enemyHealth-(parent.getPlayer().getNoOfCannons()*dmgmult);
@@ -161,18 +161,20 @@ public class CombatScreen implements Screen {
         }
         character.setStructureHealth(enemyHealth);
         if (enemyHealth<=0) {
-            resetCollegeHealth();
+            resetDepartmentHealth();
         }
     }
 
+    //Player special attack increase dmg multiplier
     public int p_sAttack(int dmgmult){
         dmgmult = dmgmult *2;
         return dmgmult;
     }
 
+    //Enemy attack method
     public void e_attack() {
         if (enemyChoice == 0) {
-            this.phealth = this.phealth - (character.getNoOfCannons() * edmgmult);
+            player.setStructureHealth(player.getStructureHealth() - (character.getNoOfCannons() * edmgmult));
             healthcheck();
             this.edmgmult = 1;
         } else {
@@ -180,7 +182,8 @@ public class CombatScreen implements Screen {
         }
     }
 
-    public void resetCollegeHealth(){
+    //Function to reset department health
+    public void resetDepartmentHealth(){
         if((this.character instanceof Building) && (((Building) this.character).id == Character.IDs.ENEMY)){
             if(((Building) this.character).idCode == 9){
                 ((Building) this.character).structureHealth = 300; //TODO this doesn't assign it again
@@ -206,8 +209,7 @@ public class CombatScreen implements Screen {
         batch.end();
 
         ehlabel.setText(String.valueOf(character.getStructureHealth()));
-        phlabel.setText(String.valueOf(phealth));
-        player.setStructureHealth(phealth);
+        phlabel.setText(String.valueOf(player.getStructureHealth()));
 
         enemyChoice = random.nextInt(2);
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){

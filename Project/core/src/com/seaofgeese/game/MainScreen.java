@@ -18,25 +18,21 @@ import com.seaofgeese.game.MenuScreen;
 
 
 public class MainScreen implements Screen {
+
+    private Constant constant = new Constant();
+
     private MainGame parent;
-
     private Hud hud;
-
     private OrthographicCamera gamecam;
     private Viewport gamePort;
-
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-
     private World world;
     private Box2DDebugRenderer debugRenderer;
-
     private Player player;
-    private float playerRotation;
 
     public MainScreen(MainGame mainGame) {
-
         parent = mainGame;
         gamecam = new OrthographicCamera();
         gamePort = new FitViewport(MainGame.V_WIDTH, MainGame.V_HEIGHT, gamecam);
@@ -53,45 +49,43 @@ public class MainScreen implements Screen {
         world.setContactListener(new GameContactListener(parent));
 
         player = parent.getPlayer();
-        playerRotation = 0;
 
         new WorldCollisionCreator(this);
+    }
+
+    public void update(float delta){
+        world.step(Gdx.graphics.getDeltaTime(), 6,2);
+
+        handleInput(delta);
+
+        gamecam.position.x = player.b2body.getPosition().x;
+        gamecam.position.y = player.b2body.getPosition().y;
+
+        gamecam.update();
+
+        renderer.setView(gamecam);
+        hud.update(delta);
+        for(int i = 0; i < parent.getShipArrayLength(); i++){
+            parent.getShip(i).update(delta);
+        }
+
 
     }
 
-
-
-        public void update(float delta){
-            world.step(Gdx.graphics.getDeltaTime(), 6,2);
-
-            handleInput(delta);
-
-            gamecam.position.x = player.b2body.getPosition().x;
-            gamecam.position.y = player.b2body.getPosition().y;
-
-            gamecam.update();
-
-            renderer.setView(gamecam);
-            hud.update(delta);
-            for(int i = 0; i < parent.getShipArrayLength(); i++){
-                parent.getShip(i).update(delta);
-            }
-
-
+    //Method that handles user input
+    public void handleInput(float delta){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y < constant.maxSpeed){
+            player.b2body.applyLinearImpulse(new Vector2(0, constant.speedIncrement), player.b2body.getWorldCenter(), true);
         }
-        public void handleInput(float delta){
-            if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && player.b2body.getLinearVelocity().y <= 40){
-                player.b2body.applyLinearImpulse(new Vector2(0, 10), player.b2body.getWorldCenter(), true);
-            }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y >= -40){
-                player.b2body.applyLinearImpulse(new Vector2(0, -10), player.b2body.getWorldCenter(), true);
-            }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -40){
-                player.b2body.applyLinearImpulse(new Vector2(-10, 0), player.b2body.getWorldCenter(), true);
-            }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 40) {
-                player.b2body.applyLinearImpulse(new Vector2(10, 0), player.b2body.getWorldCenter(), true);
-            }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && player.b2body.getLinearVelocity().y > -constant.maxSpeed){
+            player.b2body.applyLinearImpulse(new Vector2(0, -constant.speedIncrement), player.b2body.getWorldCenter(), true);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x > -constant.maxSpeed){
+            player.b2body.applyLinearImpulse(new Vector2(-constant.speedIncrement, 0), player.b2body.getWorldCenter(), true);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x < constant.maxSpeed) {
+            player.b2body.applyLinearImpulse(new Vector2(constant.speedIncrement, 0), player.b2body.getWorldCenter(), true);
+        }
     }
 
     @Override
@@ -99,11 +93,7 @@ public class MainScreen implements Screen {
 
     }
 
-    public float getWroldHeight(){
-        return gamePort.getWorldHeight();
-    }
-
-    public World getWrold(){
+    public World getWorld(){
         return world;
     }
 
@@ -115,29 +105,37 @@ public class MainScreen implements Screen {
     public void render(float delta) {
         update(delta);
 
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(54/255f, 99/255f, 101/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-
         debugRenderer.render(world, gamecam.combined);
 
         parent.batch.setProjectionMatrix(gamecam.combined);
         parent.batch.begin();
 
+        //Calculate and set the players rotation before draw
         float x = player.b2body.getLinearVelocity().x;
         float y = player.b2body.getLinearVelocity().y;
         if((x != 0) || (y != 0)) {
-            setPlayerRotation(player.calculateRotation(x, y));
+            player.setPlayerRotation(player.calculateRotation(x, y));
         }
 
-        parent.batch.draw(player.textureregion,player.b2body.getPosition().x - 8,player.b2body.getPosition().y - 8,8,8, 16,16,1,1, -(this.playerRotation));
+        //Draw players texture
+        parent.batch.draw(player.textureRegion,player.b2body.getPosition().x - constant.characterCollisionRadius
+                ,player.b2body.getPosition().y - constant.characterCollisionRadius
+                ,constant.characterCollisionRadius,constant.characterCollisionRadius, constant.characterTextureSize
+                ,constant.characterTextureSize,1,1, -(player.getPlayerRotation()));
 
+        //Draw enemy ships textures
         for(int i = 0; i < parent.getShipArrayLength(); i++){
-            parent.batch.draw(parent.getShip(i).texture, parent.getShip(i).b2body.getPosition().x - 8,
-                    parent.getShip(i).b2body.getPosition().y - 8, 16, 16);
+            parent.batch.draw(parent.getShip(i).textureRegion
+                    , parent.getShip(i).b2body.getPosition().x - constant.characterCollisionRadius
+                    , parent.getShip(i).b2body.getPosition().y - constant.characterCollisionRadius
+                    , constant.characterCollisionRadius, constant.characterCollisionRadius
+                    , constant.characterTextureSize, constant.characterTextureSize, 1, 1
+                    , parent.getShip(i).getShipRotation());
         }
-
 
         parent.batch.end();
 
@@ -146,12 +144,6 @@ public class MainScreen implements Screen {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
         }
-
-
-    }
-
-    public Player getPlayer(){
-        return player;
     }
 
     @Override
@@ -181,11 +173,6 @@ public class MainScreen implements Screen {
         map.dispose();
         renderer.dispose();
         hud.dispose();
-    }
-
-    private void setPlayerRotation(float rotation)
-    {
-        this.playerRotation = rotation;
     }
 
 }

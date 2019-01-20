@@ -1,6 +1,5 @@
 package com.seaofgeese.game;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,19 +9,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-
-
 public class MenuScreen implements Screen {
+
     private Stage stage;
     private MainGame parent;
-
 
     public MenuScreen(MainGame mainGame){
         parent = mainGame;
 
         /// Create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-
 
     }
     @java.lang.Override
@@ -48,20 +44,15 @@ public class MenuScreen implements Screen {
 
         table.add(newGame).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row().pad(20,0,20,0);
+        //Currently Unused
         //table.add(leaderboard).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row();
+        //Currently Unused
         //table.add(preferences).fill().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
         table.row().pad(20, 0, 20, 0);
         table.add(exit).fillX().uniformX().width(Value.percentWidth(.50F, table)).height(Value.percentHeight(.15F, table));
 
         //Create button listeners
-        exit.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-            }
-        });
-
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -70,19 +61,27 @@ public class MenuScreen implements Screen {
             }
         });
 
-//        leaderboard.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                parent.changeScreen(MainGame.LEADERBOARD);
-//            }
-//        });
+        exit.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Gdx.app.exit();
+            }
+        });
 
-//        preferences.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                parent.changeScreen(MainGame.ENDGAME);
-//            }
-//        });
+        //Unused Listeners
+/*        leaderboard.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(MainGame.LEADERBOARD);
+            }
+        });
+
+        preferences.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.changeScreen(MainGame.ENDGAME);
+            }
+        });*/
     }
 
     @java.lang.Override

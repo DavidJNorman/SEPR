@@ -28,10 +28,7 @@ public class Building extends Character {
         this.world = mainGame.getWorld();
         this.map = mainGame.getMap();
         defineBuilding(layerIndex);
-
-
     }
-
 
     public void setVanbrughBoss() {
         this.id = IDs.NEUTRAL;
@@ -44,7 +41,6 @@ public class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
-
     public void setJamesBoss() {
         this.id = IDs.NEUTRAL;
         this.texture = new Texture(Gdx.files.internal("James.png"));
@@ -55,7 +51,6 @@ public class Building extends Character {
         this.maxStructureHealth = 250;
         this.structureHealth = this.maxStructureHealth;
     }
-
 
     public void setHalifaxBoss() {
         this.id = IDs.NEUTRAL;
@@ -90,6 +85,7 @@ public class Building extends Character {
         this.structureHealth = this.maxStructureHealth;
     }
 
+    //Method that defines buildings box2d
     public void defineBuilding(int layerIndex) {
         for (MapObject object : map.getLayers().get(layerIndex).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
@@ -108,6 +104,8 @@ public class Building extends Character {
             fixture.setUserData(this);
         }
     }
+
+    //Mehtod that handles the start of combat
     public void startBattle(MainGame mainGame) {
         Gdx.app.log("Enemy","StartBattle");
         mainGame.changeScreen(MainGame.COMBAT, this);

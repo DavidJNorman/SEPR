@@ -172,7 +172,9 @@ public class QueststateController {
 
 
     public static void main(String[] args) {
-        /*QueststateController testInst = new QueststateController();
+        /*
+        MainGame myMainGame = new MainGame();
+        QueststateController testInst = new QueststateController(myMainGame);
         testInst.fileReader();
 
         System.out.println("Active Quests\n----------------------");

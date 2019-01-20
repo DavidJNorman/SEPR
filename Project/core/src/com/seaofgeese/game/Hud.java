@@ -17,24 +17,23 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-
-
     //QueststateController QuestControl;
 
     private Integer gold;
     private float timeCount;
     private Integer score;
 
+    private Label goldValue;
+    private Label scoreValue;
     private Label goldLabel;
     private Label scoreLabel;
-    private Label GOLDLabel;
-    private Label Empty;
 
     //private Label QuestLabel;
-    private Label scoreLabel1;
+
     MainGame mainGame;
 
     public Hud(SpriteBatch sb, MainGame mainGame){
+
         //QuestControl = new QueststateController(mainGame);
         gold = 0;
         timeCount = 0;
@@ -48,33 +47,24 @@ public class Hud implements Disposable{
         table.top();
         table.setFillParent(true);
 
-        //Table tableLeft = new Table();
-        //tableLeft.top();
-        //tableLeft.setFillParent(true);
+        goldValue = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreValue =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        goldLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        goldLabel = new Label(String.format("%03d", gold), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        GOLDLabel = new Label("GOLD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         //QuestControl.fileReader();
         //QuestLabel = new Label("Active Quests:\n-------------------\n" + QuestControl.toString(), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         //QuestLabel.setFontScale(0.4f);
-        scoreLabel1 = new Label("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(scoreLabel1).expandX().padTop(10);
-        //tableLeft.add(QuestLabel).expandX().padTop(10);
-        table.add(GOLDLabel).expandX().padTop(10);
+        table.add(scoreLabel).expandX().padTop(10);
+        table.add(goldLabel).expandX().padTop(10);
 
-        //tableLeft.setPosition(0, 0);
-        //tableLeft.left();
         table.row();
-        table.add(scoreLabel).expandX();
-        //table.add(Empty).expandX();
-        table.add(goldLabel).expandX();
+        table.add(scoreValue).expandX();
+        table.add(goldValue).expandX();
 
 
         stage.addActor(table);
-        //stage.addActor(tableLeft);
-
     }
 
     public void update(float delta){
@@ -84,9 +74,8 @@ public class Hud implements Disposable{
             timeCount = 0;
         }
 
-        //scoreLabel.setText(String.format("%06d", score));
-        scoreLabel.setText(String.format("%06d", mainGame.getPlayer().getPoints()));
-        goldLabel.setText(String.format("%03d", mainGame.getPlayer().getGold()));
+        scoreValue.setText(String.format("%06d", mainGame.getPlayer().getPoints()));
+        goldValue.setText(String.format("%03d", mainGame.getPlayer().getGold()));
     }
 
     @Override
