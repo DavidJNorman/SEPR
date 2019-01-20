@@ -17,8 +17,6 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-
-
     //QueststateController QuestControl;
 
     private Integer gold;
@@ -29,7 +27,7 @@ public class Hud implements Disposable{
     private Label scoreValue;
     private Label goldLabel;
     private Label scoreLabel;
-    
+
     //private Label QuestLabel;
 
     MainGame mainGame;
@@ -67,8 +65,6 @@ public class Hud implements Disposable{
 
 
         stage.addActor(table);
-        //stage.addActor(tableLeft);
-
     }
 
     public void update(float delta){
@@ -78,7 +74,6 @@ public class Hud implements Disposable{
             timeCount = 0;
         }
 
-        //scoreLabel.setText(String.format("%06d", score));
         scoreValue.setText(String.format("%06d", mainGame.getPlayer().getPoints()));
         goldValue.setText(String.format("%03d", mainGame.getPlayer().getGold()));
     }

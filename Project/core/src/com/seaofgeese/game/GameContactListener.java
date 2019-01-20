@@ -15,6 +15,8 @@ public class GameContactListener implements ContactListener {
     public GameContactListener(MainGame mainGame){
         this.mainGame = mainGame;
     }
+
+    //Handle contact between two fixtures
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
@@ -24,18 +26,16 @@ public class GameContactListener implements ContactListener {
             Fixture player = fixA.getUserData() instanceof Player ? fixA : fixB;
             collidedObj = fixA == player ? fixB : fixA;
 
+            //Check if collided object is an instanceof an Object and handle appropriately
             if(collidedObj.getUserData() instanceof StaticInteractiveCollisionObject){
                 ((StaticInteractiveCollisionObject) collidedObj.getUserData()).collided();
             }
-
             if(collidedObj.getUserData() instanceof Ship){
                 Gdx.app.log("Index", Integer.toString(((Ship)collidedObj.getUserData()).getIndex()));
-
                 ((Ship)collidedObj.getUserData()).startBattle(mainGame);
                 player.getBody().setLinearVelocity(0,0);
                 collidedObj.getBody().setLinearVelocity(0,0);
             }
-
             if(collidedObj.getUserData() instanceof Building){
                 if((((Building)collidedObj.getUserData()).id != Character.IDs.FRIENDLY)){
                     ((Building)collidedObj.getUserData()).startBattle(mainGame);

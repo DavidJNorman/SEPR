@@ -11,13 +11,10 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.math.Rectangle;
 
-
-
 public abstract class StaticInteractiveCollisionObject {
 
     protected World world;
     protected TiledMap map;
-    protected TiledMapTile tile;
     protected Body body;
     protected Rectangle rect;
     protected Fixture fixture;
