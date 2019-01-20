@@ -10,15 +10,17 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class EndScreen implements Screen {
+
     private MainGame parent;
     private Stage stage;
     Texture end;
     SpriteBatch batch;
-    public EndScreen(MainGame mainGame){
 
+    public EndScreen(MainGame mainGame){
         parent = mainGame;
         stage = new Stage(new ScreenViewport());
     }
+
     @Override
     public void show() {
         stage.clear();

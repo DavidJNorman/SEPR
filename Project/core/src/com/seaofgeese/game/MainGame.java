@@ -29,8 +29,8 @@ public class MainGame extends Game {
 	public final static int PREFERENCES = 4;
 	public final static int COMBAT = 5;
 	public final static int WINGAME = 6;
-	public static final int V_WIDTH = 400;
-	public static final int V_HEIGHT = 208;
+	public static final int V_WIDTH = 600;
+	public static final int V_HEIGHT = 312;
 	public static final short DEFAULT_BIT = 1;
 	public static final short PLAYER_BIT = 2;
 	public static final short DESTROY_BIT = 4;
